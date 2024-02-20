@@ -1,50 +1,82 @@
-const init = () => {
-  const firstElement = getAllElements()[0];
-  firstElement.setAttribute("nav-selected", "true");
-  firstElement.setAttribute("nav-index", "0");
-  firstElement.focus();
-};
+var classBefore = "idk";
 
-const getAllElements = () => document.querySelectorAll('[nav-selectable]');
+var activeTab;
 
-const getCurrentElement = () => document.querySelector('[nav-selected=true]');
-
-const getTheIndexOfTheSelectedElement = current => {
-  const currentElement = current || getCurrentElement();
-  return currentElement ? parseInt(currentElement.getAttribute('nav-index')) : 0;
+export function miFade() {
+  document.getElementById("home").style.opacity = "1";
 }
-
-const getCurrentItem = () => {
-  const item = getCurrentElement();
-  const index = getTheIndexOfTheSelectedElement(item);
-  return [item, index];
+export function kitchen() {
+  document.getElementById("kitchen").style.display = "block";
+  document.getElementById("home").style.display = "none";
+  document.getElementById("home").style.opacity = "0";
 }
-
-const selectElement = selectElement => {
-  [].forEach.call(getAllElements(), (element, index) => {
-    const selectThisElement = element === selectElement;
-    element.setAttribute("nav-selected", selectThisElement);
-    element.setAttribute("nav-index", index);
-    if (element.nodeName === 'INPUT') {
-      selectThisElement ? element.focus() : element.blur();
-    }
-  });
+export function home() {
+  document.getElementById("home").style.display = "flex";
+  document.getElementById("kitchen").style.display = "none";
+  setTimeout(miFade, 50);
 }
+export function openSelection(evt, userSelection, choosenClass) {
+  var i, tabcontent, tablinks;
+  activeTab = userSelection;
+  tabcontent = document.getElementsByClassName("tabcontent");
 
-const Down = () => {
-  const allElements = getAllElements();
-  const currentIndex = getTheIndexOfTheSelectedElement();
-  const goToFirstElement = currentIndex + 1 > allElements.length - 1;
-  const setIndex = goToFirstElement ? 0 : currentIndex + 1;
-  selectElement(allElements[setIndex] || allElements[0]);
-};
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  var x = document.querySelector("#opNav");
+  x.classList.remove(classBefore);
+  x.classList.add(choosenClass);
+  document.querySelector("#opNav span").innerHTML = userSelection;
+  document.getElementById(userSelection).style.display = "block";
+  evt.currentTarget.className += " active";
+  classBefore = choosenClass;
+}
+export function openNav() {
+  document.getElementById("mySidenav").style.width = "100%";
+  document.getElementById(activeTab).style.display = "none";
+}
+export function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById(activeTab).style.display = "block";
+}
+/**
+ * TEST NAVIGATION
+ */
 
-const Up = () => {
-  const allElements = getAllElements();
-  const currentIndex = getTheIndexOfTheSelectedElement();
-  const goToLastElement = currentIndex === 0;
-  const setIndex = goToLastElement ? allElements.length - 1 : currentIndex - 1;
-  selectElement(allElements[setIndex] || allElements[0]);
-};
+export function nav(move) {
+  const currentIndex = document.activeElement.tabIndex;
+  const next = currentIndex + move;
+  const items = document.querySelectorAll("#opKitchen .tablinks");
+  const targetElement = items[next];
 
-export default { init, Up, Down, getCurrentItem };
+  const currentIndexTwo = document.activeElement.tabIndex;
+  const nextTwo = currentIndexTwo + move;
+  const itemsTwo = document.querySelectorAll(".tab .tablinks");
+  const targetElementTwo = itemsTwo[nextTwo];
+
+  const currentIndexThree = document.activeElement.tabIndex;
+  const nextThree = currentIndexThree + move;
+  const itemsThree = document.querySelectorAll(".listChoice");
+  const targetElementThree = itemsThree[nextThree];
+
+  if (targetElement) {
+    targetElement.focus();
+  }
+  if (targetElementTwo) {
+    targetElementTwo.focus();
+  }
+  if (targetElementThree) {
+    targetElementThree.focus();
+  }
+}
+export function showContent(eltFocused) {
+  if (eltFocused) {
+    // const content = eltFocused.textContent;
+    //console.log("Content of focused element: ", content);
+    eltFocused.click();
+  }
+}
