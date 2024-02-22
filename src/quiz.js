@@ -3,13 +3,13 @@ var questions = [
     question: "Blablabla",
     choices: ["Earth", "Barrel", "Battery", "Bottle"],
     correctAnswer: "Bottle",
-    information: "Some text",
+    someInformation: "Aza dakadaka tsony fa avereno ampiasaina",
   },
   {
     question: "Hehehe hbcjervnrihbh hfrbvbruvb hgrfuhbrhfhur byfbur",
     choices: ["Earth", "Forest", "Faucet", "Love"],
     correctAnswer: "Love",
-    information: "Eto be resaska kely",
+    someInformation: "Tiako be",
   },
 ];
 let currentQuestion = 0;
@@ -63,7 +63,7 @@ function displayQuestion() {
 function handleAnswerClick(elt) {
   const chosenAnswer = elt.getAttribute("alt");
   const correctAnswer = questions[currentQuestion].correctAnswer;
-  const someInformation = questions[currentQuestion].information;
+  const someInformation = questions[currentQuestion].someInformation;
   if (chosenAnswer === correctAnswer) {
     displayModalAnswer("Marina", someInformation);
     score++;
@@ -81,21 +81,21 @@ function handleAnswerClick(elt) {
     setTimeout(showFinalScore, 2000);
     setTimeout(() => {
       emitConfetti(score * 10);
-    }, 1000);
+    }, 2000);
   }
   updateScore();
 }
 
 function showFinalScore() {
-  const finalScoreMessage = `Nahavoavaly  fanontaniana ${score} tamin'ireo fanontaniana ${
+  const finalScoreMessage = `<span>Nahavoavaly  fanontaniana ${score} tamin'ireo fanontaniana ${
     questions.length
-  } ianao!`;
+  } ianao!<span>`;
   document.querySelector(".score").innerHTML = finalScoreMessage;
   document.querySelector(".quiz-box").classList.add("hidden");
 }
 
 function updateScore() {
-  document.querySelector(".score span").textContent = score;
+  document.querySelector(".score span").innerHTML = score;
 }
 function updateNbQuestion() {
   document.querySelector(
@@ -122,11 +122,10 @@ function emitConfetti(numConfetti) {
   }
 }
 
-function displayModalAnswer(text, currentInformation) {
+function displayModalAnswer(text, someInformation) {
   document.getElementById("myModal").style.display = "block";
-  document.querySelector(
-    ".result"
-  ).textContent = `${text} <br/> ${currentInformation} `;
+  document.querySelector(".result").innerHTML =
+    text + "<br/> " + someInformation;
 }
 function closeModalAnswer() {
   document.getElementById("myModal").style.display = "none";
