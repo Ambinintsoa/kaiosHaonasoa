@@ -1,18 +1,21 @@
 <template>
   <div id="home">
-    <p>Hello world</p>
-    <div id="opKitchen">
-      <p class="tablinks fanontaniana" tabindex="0">
-        <i class="fas fa-question"></i><span>Fanontaniana</span>
+    <!-- <p>Hello world</p> -->
+    <div id="opKitchen" @click="openkitchen">
+      <p class="tablinks qOne" tabindex="0" @click="selectMenu">
+        <i class="fas fa-question"></i><span>Toetr'andro</span>
       </p>
-      <p class="tablinks fianarana" tabindex="1">
-        <span>Mianatra</span><i class="fas fa-search"></i>
+      <p class="tablinks qTwo" tabindex="1" @click="selectMenu">
+        <span>Fiovan'ny toetr'andro</span><i class="fas fa-search"></i>
       </p>
-      <p class="tablinks tsaraHoFantatra" tabindex="2">
-        <i class="fas fa-globe"></i><span>Mahay</span>
+      <p class="tablinks qThree" tabindex="2" @click="selectMenu">
+        <i class="fas fa-globe"></i><span>Anton'ny fiovan'ny toetr'andro</span>
+      </p>
+      <p class="tablinks qFour" tabindex="2" @click="selectMenu">
+        <i class="fas fa-globe"></i><span>Vahaolana</span>
       </p>
     </div>
-    <div id="footer">Bonjour, c'est nous</div>
+    <!-- <div id="footer">Bonjour, c'est nous</div> -->
   </div>
 </template>
 
@@ -21,13 +24,19 @@ export default {
   name: "Home",
   data() {
     return {
-      listTablinks: document.getElementsByClassName("tablinks"),
-      openKitchen: document.getElementById("opKitchen"),
+      notShowHome: () => {},
     };
   },
 
   mounted() {},
-  methods: {},
+  methods: {
+    selectMenu(evt) {
+      this.$emit("selectMenu", [evt, evt.currentTarget.innerText]);
+    },
+    openkitchen() {
+      this.$emit("openkitchen");
+    },
+  },
 };
 </script>
 

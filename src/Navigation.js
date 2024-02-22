@@ -15,7 +15,7 @@ export function home() {
   document.getElementById("kitchen").style.display = "none";
   setTimeout(miFade, 50);
 }
-export function openSelection(evt, userSelection, choosenClass) {
+export function openSelection(evt, userSelection, choosenClass, textContent) {
   var i, tabcontent, tablinks;
   activeTab = userSelection;
   tabcontent = document.getElementsByClassName("tabcontent");
@@ -30,7 +30,7 @@ export function openSelection(evt, userSelection, choosenClass) {
   var x = document.querySelector("#opNav");
   x.classList.remove(classBefore);
   x.classList.add(choosenClass);
-  document.querySelector("#opNav span").innerHTML = userSelection;
+  document.querySelector("#opNav span").innerHTML = textContent;
   document.getElementById(userSelection).style.display = "block";
   evt.currentTarget.className += " active";
   classBefore = choosenClass;

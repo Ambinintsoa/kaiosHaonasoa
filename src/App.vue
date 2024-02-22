@@ -1,8 +1,12 @@
 <template>
   <div id="app">
     <!-- <Softkey :softkeys.sync="softkeys" /> -->
-    <Home />
-    <kitchen />
+    <Home @selectMenu="selectMenu" @openkitchen="displaykitchen" />
+    <kitchen
+      @openNav="openMenu"
+      @closeNav="closeMenu"
+      @selectMenu="selectMenu"
+    />
   </div>
 </template>
 
@@ -18,6 +22,7 @@ import {
   showContent,
   nav,
 } from "./Navigation";
+import { handleAnswerClick, startStat, displayQuestion } from "./quiz";
 export default {
   name: "app",
   components: {
@@ -26,38 +31,8 @@ export default {
   },
   data: () => ({}),
   mounted() {
-    var softkeyCallback;
-    window.addEventListener("load", function() {
-      document.activeElement.addEventListener("keydown", handleKeydown);
-      Kitchen.data().openMenu.addEventListener("click", function() {
-        openNav();
-      });
-      Kitchen.data().closeMenu.addEventListener("click", function() {
-        closeNav();
-      });
-      var tabcontent = Home.data().listTablinks;
-      for (let i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].addEventListener("click", function(event) {
-          let text = event.currentTarget.innerText;
-          if (text === "Fanontaniana") {
-            // startStat();
-            // displayQuestion();
-            openSelection(event, "Fanontaniana", "fanontaniana");
-          } else if (text === "Mianatra") {
-            openSelection(event, "Mianatra", "fianarana");
-          } else if (text === "Mahay") {
-            openSelection(event, "Mahay", "tsaraHoFantatra");
-          } else {
-            home();
-          }
-          closeNav();
-        });
-      }
-      Home.data().openKitchen.addEventListener("click", function() {
-        kitchen();
-      });
-    });
-    softkeyCallback = {
+    document.activeElement.addEventListener("keydown", handleKeydown);
+    const softkeyCallback = {
       left: function() {
         openNav();
       },
@@ -101,11 +76,40 @@ export default {
   beforeDestroy() {
     window.removeEventListener("keydown", this.onKeyDown);
   },
-  methods: {},
+  methods: {
+    openMenu() {
+      openNav();
+    },
+    closeMenu() {
+      closeNav();
+    },
+    selectMenu(data) {
+      var text = data[1];
+      var event = data[0];
+      if (text === "Toetr'andro") {
+        startStat();
+        displayQuestion();
+        openSelection(event, "qOne", "qOne", text);
+      } else if (text === "Fiovan'ny toetr'andro") {
+        openSelection(event, "qTwo", "qTwo", text);
+      } else if (text === "Anton'ny fiovan'ny toetr'andro") {
+        openSelection(event, "qThree", "qThree", text);
+      } else if (text === "Vahaolana") {
+        openSelection(event, "qFour", "qFour", text);
+      } else {
+        home();
+      }
+      closeNav();
+    },
+    displaykitchen() {
+      kitchen();
+    },
+  },
 };
 </script>
 
 <style>
+@import "../public/assets/fontawesome-5/css/all.css";
 body {
   font-family: "Lato", sans-serif;
   padding: 0;
@@ -157,19 +161,18 @@ body {
   justify-content: space-around;
   align-items: center;
   padding: 4px 10px 4px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 200;
   letter-spacing: 1px;
   outline: 0;
-  border: 1px solid black;
+  border: 1px solid rgb(54, 53, 53);
   cursor: pointer;
   position: relative;
   background-color: rgba(0, 0, 0, 0);
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  width: 120px;
-  font-weight: 200;
+  width: 150px;
 }
 #opKitchen .tablinks:after {
   content: "";
@@ -194,22 +197,22 @@ body {
   margin: 0;
   color: white;
 }
-.fanontaniana::after {
+.qOne::after {
   background-color: #8ecae6;
 }
-.fianarana::after {
+.qTwo::after {
   background-color: #ffafcc;
 }
-.tsaraHoFantatra::after {
+.qThree::after {
   background-color: #3ab795;
 }
-.fanontaniana {
+.qOne {
   background-color: #8ecae6;
 }
-.fianarana {
+.qTwo {
   background-color: #ffafcc;
 }
-.tsaraHoFantatra {
+.qThree {
   background-color: #3ab795;
 }
 #kitchen {
@@ -376,7 +379,7 @@ body {
 .choices li:focus {
   box-shadow: 2px 8px 4px -6px rgba(0, 0, 0, 0.3);
   transform: translate3d(2px, 2px, 0);
-  transform: scale(1.5, 1.5);
+  transform: scale(1.2, 1.2);
 }
 .choices li:hover {
   box-shadow: 2px 8px 8px -5px rgba(0, 0, 0, 0.3);
@@ -399,6 +402,7 @@ body {
   text-align: center;
   padding: 2px;
   font-size: 13px;
+  margin-top: 10px;
 }
 
 .current-level {
@@ -413,5 +417,35 @@ body {
 
 .hidden {
   display: none;
+}
+
+/* Hevitra taingina*/
+
+#confetti-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.confetti {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  transform: scale(0);
+  animation-fill-mode: both;
+  animation-timing-function: ease-out;
+}
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg) scale(0);
+  }
 }
 </style>
