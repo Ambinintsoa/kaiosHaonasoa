@@ -72,13 +72,19 @@
 
       <p class="score">Isa: <span>0</span></p>
     </div>
+    <div id="qFour" class="tabcontent">
+      <Actuality />
+    </div>
   </div>
 </template>
 
 <script>
+import Actuality from "./Actuality.vue";
 export default {
   name: "Kitchen",
-
+  components: {
+    Actuality,
+  },
   data() {
     return {
       listTablinks: [
