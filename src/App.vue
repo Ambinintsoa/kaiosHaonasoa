@@ -120,6 +120,7 @@ body {
   margin: 0;
   background-color: white;
 }
+
 :focus {
   outline: none;
 }

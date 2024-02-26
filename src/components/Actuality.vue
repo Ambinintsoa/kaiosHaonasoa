@@ -10,20 +10,32 @@
     <div class="slider">
       <div class="slide">
         <div class="content ">
-          <h3>Contenu de l'onglet 1</h3>
           <p>Ceci est le contenu de l'onglet 1.</p>
         </div>
       </div>
       <div class="slide">
         <div class="content">
-          <h3>Contenu de l'onglet 2</h3>
           <p>Ceci est le contenu de l'onglet 2.</p>
         </div>
       </div>
       <div class="slide">
         <div class="content">
-          <h3>Contenu de l'onglet 3</h3>
-          <p>Ceci est le contenu de l'onglet 3.</p>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Praesentium non accusantium dicta excepturi tempore, cumque eos
+            delectus aut, saepe quaerat sunt amet velit eum fuga maiores quas!
+            Repellat, eum esse? Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Dolorem id vitae reprehenderit mollitia
+            repellendus optio quidem obcaecati! Itaque odit aliquid harum
+            placeat illo, ab laudantium neque, molestiae deserunt vero mollitia?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid sed
+            eaque officiis nisi, perferendis quasi odit? Explicabo quod nesciunt
+            vel itaque, ab aliquam nihil minima ullam hic quibusdam quia? Totam?
+            Ceci est le contenu de l'onglet 3. Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Mollitia dolorem veritatis similique
+            illo ipsa praesentium, nulla ratione suscipit aperiam est. Suscipit
+            dolore quae, sapiente unde saepe deleniti obcaecati harum voluptas.
+          </p>
         </div>
       </div>
     </div>
@@ -46,15 +58,23 @@ export default {
   },
   methods: {
     handleKeydown(evt) {
-      if (evt.key === "ArrowRight") {
-        this.moveSlide(1);
-      } else if (evt.key === "ArrowLeft") {
-        this.moveSlide(-1);
+      var containerSlide = document.querySelector(".slider-container");
+      if (containerSlide) {
+        if (evt.key === "ArrowRight") {
+          this.moveSlide(1);
+        } else if (evt.key === "ArrowLeft") {
+          this.moveSlide(-1);
+        } else if (evt.key === "ArrowUp") {
+          containerSlide.scrollTop -= 20;
+        } else if (evt.key === "ArrowDown") {
+          containerSlide.scrollTop += 20;
+        }
       }
     },
     moveSlide(n) {
       this.slideIndex += n;
       this.showSlides();
+      document.querySelector(".slider-container").scrollTop = 0;
     },
 
     currentSlide(n) {
@@ -94,11 +114,10 @@ export default {
 
 <style scoped>
 .slider-container {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid red;
+  overflow: auto;
   height: 260px;
-  width: 240px;
+  scrollbar-color: #009b7735 rgba(128, 128, 128, 0);
+  scrollbar-width: 5px;
 }
 
 .slider {
@@ -108,7 +127,7 @@ export default {
 .tabbar {
   position: absolute;
   height: 2px;
-  background-color: blue;
+  background-color: #009b77;
   transition: transform 0.3s ease;
 }
 
@@ -118,11 +137,6 @@ export default {
 }
 
 .content {
-  padding: 20px;
-}
-
-.content h3 {
-  margin-top: 0;
 }
 
 .nav {
@@ -130,11 +144,11 @@ export default {
 }
 
 .tablink.active {
-  color: blue;
+  color: #009b77;
 }
 .slider-container {
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .tablink {

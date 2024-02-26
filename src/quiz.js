@@ -63,6 +63,7 @@ function displayQuestion() {
 function handleAnswerClick(elt) {
   const chosenAnswer = elt.getAttribute("alt");
   const correctAnswer = questions[currentQuestion].correctAnswer;
+  console.log(correctAnswer);
   const someInformation = questions[currentQuestion].someInformation;
   if (chosenAnswer === correctAnswer) {
     displayModalAnswer("Marina", someInformation);
