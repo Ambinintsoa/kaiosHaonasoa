@@ -127,8 +127,8 @@ function displayModalAnswer(text, someInformation) {
   document.querySelector(".result").innerHTML =
     text + "<br/> " + someInformation;
 }
-function closeModalAnswer() {
+ function  closeModalAnswer() {
   document.getElementById("myModal").style.display = "none";
 }
 
-export { handleAnswerClick, startStat, displayQuestion };
+export { handleAnswerClick,shuffleArray, startStat, displayQuestion,showFinalScore,displayModalAnswer,closeModalAnswer,emitConfetti,updateNbQuestion,updateScore };
