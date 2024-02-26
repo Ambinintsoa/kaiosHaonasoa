@@ -58,8 +58,8 @@ function startStatTrueFalse() {
   document.querySelector(".quiz-box").classList.remove("hidden");
   document.querySelector(".result").textContent = "";
   shuffleArray(questions);
-  // updateScore();
-  // updateNbQuestion();
+  updateScore();
+  updateNbQuestion();
 }
 function handleAnswerClickTrueFalse(elt) {
   const chosenAnswer = elt.getAttribute("alt");

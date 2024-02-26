@@ -64,7 +64,9 @@ export function nav(move) {
   const targetElementThree = itemsThree[nextThree];
 
   const currentIndexFour = document.activeElement.tabIndex;
-  const nextFour = currentIndexFour + move;
+  var nextFour = currentIndexFour + move;
+  if (nextFour >= 2) nextFour = 1;
+  if (nextFour === -1) nextFour = 0;
   const itemsFour = document.querySelectorAll(".listChoiceTrueFalse");
   const targetElementFour = itemsFour[nextFour];
 
