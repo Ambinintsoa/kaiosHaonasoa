@@ -23,7 +23,11 @@ import {
   nav,
 } from "./Navigation";
 import { handleAnswerClick, startStat, displayQuestion } from "./quiz";
-import { displayQuestionTrueFalse,handleAnswerClickTrueFalse,startStatTrueFalse } from "./truefalse";
+import {
+  displayQuestionTrueFalse,
+  handleAnswerClickTrueFalse,
+  startStatTrueFalse,
+} from "./truefalse";
 export default {
   name: "app",
   components: {
@@ -39,10 +43,11 @@ export default {
       },
       center: function() {
         const focusedElement = document.activeElement;
-        if (focusedElement.classList.contains("listChoice") ) {
+        if (focusedElement.classList.contains("listChoice")) {
           handleAnswerClick(focusedElement.firstChild);
-        }
-        if(focusedElement.classList.contains("listChoiceTrueFalse")){
+        } else if (focusedElement.classList.contains("listChoiceTrueFalse")) {
+          console.log(focusedElement.firstChild);
+          console.log("hello");
           handleAnswerClickTrueFalse(focusedElement.firstChild);
         }
         showContent(focusedElement);
@@ -403,17 +408,21 @@ body {
 .truefalseAnswer li img {
   width: 20%;
 }
+.truefalseAnswer li:focus {
+  border-radius: 50%;
+  border: 1px solid red;
+}
 
-#questionImg img{
+#questionImg img {
   width: 80%;
   margin: 10%;
 }
-#questionContent{
+#questionContent {
   text-align: center;
 }
-.truefalseAnswer li{
+.truefalseAnswer li {
   margin: 10%;
-display: inline;
+  display: inline;
 }
 .result {
   font-weight: bold;

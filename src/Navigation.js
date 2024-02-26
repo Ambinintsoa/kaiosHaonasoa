@@ -63,6 +63,11 @@ export function nav(move) {
   const itemsThree = document.querySelectorAll(".listChoice");
   const targetElementThree = itemsThree[nextThree];
 
+  const currentIndexFour = document.activeElement.tabIndex;
+  const nextFour = currentIndexFour + move;
+  const itemsFour = document.querySelectorAll(".listChoiceTrueFalse");
+  const targetElementFour = itemsFour[nextFour];
+
   if (targetElement) {
     targetElement.focus();
   }
@@ -71,6 +76,9 @@ export function nav(move) {
   }
   if (targetElementThree) {
     targetElementThree.focus();
+  }
+  if (targetElementFour) {
+    targetElementFour.focus();
   }
 }
 export function showContent(eltFocused) {

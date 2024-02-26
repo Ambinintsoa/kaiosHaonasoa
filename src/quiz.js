@@ -63,7 +63,6 @@ function displayQuestion() {
 function handleAnswerClick(elt) {
   const chosenAnswer = elt.getAttribute("alt");
   const correctAnswer = questions[currentQuestion].correctAnswer;
-  console.log(correctAnswer);
   const someInformation = questions[currentQuestion].someInformation;
   if (chosenAnswer === correctAnswer) {
     displayModalAnswer("Marina", someInformation);
@@ -128,8 +127,18 @@ function displayModalAnswer(text, someInformation) {
   document.querySelector(".result").innerHTML =
     text + "<br/> " + someInformation;
 }
- function  closeModalAnswer() {
+function closeModalAnswer() {
   document.getElementById("myModal").style.display = "none";
 }
-
-export { handleAnswerClick,shuffleArray, startStat, displayQuestion,showFinalScore,displayModalAnswer,closeModalAnswer,emitConfetti,updateNbQuestion,updateScore };
+export {
+  handleAnswerClick,
+  shuffleArray,
+  startStat,
+  displayQuestion,
+  showFinalScore,
+  displayModalAnswer,
+  closeModalAnswer,
+  emitConfetti,
+  updateNbQuestion,
+  updateScore,
+};

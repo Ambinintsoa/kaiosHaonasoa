@@ -12,7 +12,7 @@
         <i class="fas fa-globe"></i><span>Anton'ny fiovan'ny toetr'andro</span>
       </p>
       <p class="tablinks qFour" tabindex="3" @click="selectMenu">
-        </i><span>Vahaolana</span><i class="fas fa-globe"></i>
+        <span>Vahaolana</span><i class="fas fa-globe"></i>
       </p>
     </div>
     <!-- <div id="footer">Bonjour, c'est nous</div> -->
