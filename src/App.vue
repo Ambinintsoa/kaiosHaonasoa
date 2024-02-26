@@ -118,6 +118,7 @@ body {
   justify-content: center;
   align-items: center;
   margin: 0;
+  background-color: white;
 }
 :focus {
   outline: none;
