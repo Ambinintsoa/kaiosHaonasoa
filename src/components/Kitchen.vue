@@ -52,8 +52,25 @@
       </audio> -->
     </div>
     <div id="qThree" class="tabcontent">
-      <h3>Tokyo</h3>
-      <p>Hoho</p>
+      <div class="quiz-box">
+        <p class="question" id="questionContent"></p>
+        <div id="questionImg"></div>
+        <ul class="truefalseAnswer"></ul>
+
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <div class="modal-body">
+              <p class="result"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="progress-bar">
+        <div id="confetti-container"></div>
+        <span class="current-level">Fanontaniana</span>
+      </div>
+
+      <p class="score">Isa: <span>0</span></p>
     </div>
     <div id="qFour" class="tabcontent">
       <Actuality />

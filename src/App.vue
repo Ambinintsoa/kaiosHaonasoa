@@ -23,6 +23,7 @@ import {
   nav,
 } from "./Navigation";
 import { handleAnswerClick, startStat, displayQuestion } from "./quiz";
+import { displayQuestionTrueFalse,handleAnswerClickTrueFalse,startStatTrueFalse } from "./truefalse";
 export default {
   name: "app",
   components: {
@@ -38,8 +39,11 @@ export default {
       },
       center: function() {
         const focusedElement = document.activeElement;
-        if (focusedElement.classList.contains("listChoice")) {
+        if (focusedElement.classList.contains("listChoice") ) {
           handleAnswerClick(focusedElement.firstChild);
+        }
+        if(focusedElement.classList.contains("listChoiceTrueFalse")){
+          handleAnswerClickTrueFalse(focusedElement.firstChild);
         }
         showContent(focusedElement);
       },
@@ -93,6 +97,8 @@ export default {
       } else if (text === "Fiovan'ny toetr'andro") {
         openSelection(event, "qTwo", "qTwo", text);
       } else if (text === "Anton'ny fiovan'ny toetr'andro") {
+        startStatTrueFalse();
+        displayQuestionTrueFalse();
         openSelection(event, "qThree", "qThree", text);
       } else if (text === "Vahaolana") {
         openSelection(event, "qFour", "qFour", text);
@@ -117,6 +123,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #fff;
   margin: 0;
   background-color: white;
 }
@@ -392,6 +399,21 @@ body {
 }
 .choices li img {
   width: 100%;
+}
+.truefalseAnswer li img {
+  width: 20%;
+}
+
+#questionImg img{
+  width: 80%;
+  margin: 10%;
+}
+#questionContent{
+  text-align: center;
+}
+.truefalseAnswer li{
+  margin: 10%;
+display: inline;
 }
 .result {
   font-weight: bold;
