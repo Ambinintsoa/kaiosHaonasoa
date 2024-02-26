@@ -55,13 +55,19 @@
       <h3>Tokyo</h3>
       <p>Hoho</p>
     </div>
+    <div id="qFour" class="tabcontent">
+      <Actuality />
+    </div>
   </div>
 </template>
 
 <script>
+import Actuality from "./Actuality.vue";
 export default {
   name: "Kitchen",
-
+  components: {
+    Actuality,
+  },
   data() {
     return {
       listTablinks: [

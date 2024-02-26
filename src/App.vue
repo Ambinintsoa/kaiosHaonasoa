@@ -161,9 +161,7 @@ body {
   justify-content: space-around;
   align-items: center;
   padding: 4px 10px 4px;
-  font-size: 12px;
-  font-weight: 200;
-  letter-spacing: 1px;
+  font-size: 11px;
   outline: 0;
   border: 1px solid rgb(54, 53, 53);
   cursor: pointer;
@@ -201,19 +199,26 @@ body {
   background-color: #8ecae6;
 }
 .qTwo::after {
-  background-color: #ffafcc;
+  background-color: #ff95bc;
 }
 .qThree::after {
   background-color: #3ab795;
 }
+.qFour::after {
+  background-color: #d78af1;
+}
+
 .qOne {
   background-color: #8ecae6;
 }
 .qTwo {
-  background-color: #ffafcc;
+  background-color: #ff95bc;
 }
 .qThree {
   background-color: #3ab795;
+}
+.qFour {
+  background-color: #d78af1;
 }
 #kitchen {
   display: none;
@@ -236,7 +241,7 @@ body {
 }
 
 #clNav {
-  color: #818181;
+  color: red;
   transition: 0.3s;
   display: block;
   margin-right: -20px;
@@ -256,9 +261,7 @@ body {
   margin-left: 50px;
 }
 #opNav {
-  padding: 6px;
   cursor: pointer;
-  margin-top: -8px;
   opacity: 0.9;
   display: flex;
   flex-direction: row;

@@ -87,10 +87,10 @@ function handleAnswerClick(elt) {
 }
 
 function showFinalScore() {
-  const finalScoreMessage = `<span>Nahavoavaly  fanontaniana ${score} tamin'ireo fanontaniana ${
+  const finalScoreMessage = `nahavoavaly  fanontaniana ${score} tamin'ireo fanontaniana ${
     questions.length
-  } ianao!<span>`;
-  document.querySelector(".score").innerHTML = finalScoreMessage;
+  } ianao!`;
+  document.querySelector(".score span").innerHTML = finalScoreMessage;
   document.querySelector(".quiz-box").classList.add("hidden");
 }
 

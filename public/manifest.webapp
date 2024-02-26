@@ -1,22 +1,24 @@
 {
   "version": "1.0.0",
-  "name": "My first Vue App for KaiOS",
-  "description": "Simple example of a to-do list",
+  "name": "Anatra",
+  "description": "Projet de developpement rural",
   "type": "web",
   "launch_path": "/index.html",
-  "icons": {
-    "56": "/assets/icons/kaios_56.png",
-    "112": "/assets/icons/kaios_112.png"
+   "icons": {
+    "16": "/assets/icons/feuille16.png",
+    "48": "/assets/icons/feuille48.png",
+    "60": "/assets/icons/feuille60.png",
+    "128": "/assets/icons/feuille128.png"
   },
   "developer": {
-    "name": "KaiOS Team",
-    "url": "https://www.kaiostech.com"
+    "name": "Akoho team",
+    "url": ""
   },
   "locales": {
     "en-US": {
-      "name": "My first Vue App for KaiOS",
-      "subtitle": "Simple example of a to-do list",
-      "description": "Simple example of a to-do list"
+      "name": "Anatra/Ampela mijoro",
+      "subtitle": "",
+      "description": "Educational project"
     }
   },
   "default_locale": "en-US"
