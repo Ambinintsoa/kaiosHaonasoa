@@ -46,8 +46,6 @@ export default {
         if (focusedElement.classList.contains("listChoice")) {
           handleAnswerClick(focusedElement.firstChild);
         } else if (focusedElement.classList.contains("listChoiceTrueFalse")) {
-          console.log(focusedElement.firstChild);
-          console.log("hello");
           handleAnswerClickTrueFalse(focusedElement.firstChild);
         }
         showContent(focusedElement);
