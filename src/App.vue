@@ -24,9 +24,9 @@ import {
 } from "./Navigation";
 import { handleAnswerClick, startStat, displayQuestion } from "./quiz";
 import {
-  displayQuestionTrueFalse,
+  // displayQuestionTrueFalse,
   handleAnswerClickTrueFalse,
-  startStatTrueFalse,
+  // startStatTrueFalse,
 } from "./truefalse";
 export default {
   name: "app",
@@ -100,8 +100,8 @@ export default {
       } else if (text === "Fiovan'ny toetr'andro") {
         openSelection(event, "qTwo", "qTwo", text);
       } else if (text === "Anton'ny fiovan'ny toetr'andro") {
-        startStatTrueFalse();
-        displayQuestionTrueFalse();
+        // startStatTrueFalse();
+        // displayQuestionTrueFalse();
         openSelection(event, "qThree", "qThree", text);
       } else if (text === "Vahaolana") {
         openSelection(event, "qFour", "qFour", text);

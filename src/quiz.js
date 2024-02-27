@@ -28,7 +28,7 @@ function startStat() {
   document.querySelector(".result").textContent = "";
   shuffleArray(questions);
   updateScore();
-  updateNbQuestion();
+  updateNbQuestion(questions);
 }
 // c'est sale mais bon
 function displayQuestion() {
@@ -76,7 +76,7 @@ function handleAnswerClick(elt) {
   currentQuestion++;
   if (currentQuestion < questions.length) {
     setTimeout(displayQuestion, 2000); // Delay before next question
-    updateNbQuestion();
+    updateNbQuestion(questions);
   } else {
     setTimeout(showFinalScore, 2000);
     setTimeout(() => {
@@ -97,10 +97,10 @@ function showFinalScore() {
 function updateScore() {
   document.querySelector(".score span").innerHTML = score;
 }
-function updateNbQuestion() {
+function updateNbQuestion(questionsMark) {
   document.querySelector(
     ".current-level"
-  ).textContent = `Fanontaniana ${currentQuestion + 1}/${questions.length}`;
+  ).textContent = `Fanontaniana ${currentQuestion + 1}/${questionsMark.length}`;
 }
 function emitConfetti(numConfetti) {
   const confettiContainer = document.getElementById("confetti-container");
