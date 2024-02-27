@@ -79,9 +79,9 @@ function handleAnswerClick(elt) {
     updateNbQuestion(questions);
   } else {
     setTimeout(showFinalScore, 2000);
-    setTimeout(() => {
-      emitConfetti(score * 10);
-    }, 2000);
+    // setTimeout(() => {
+    //   emitConfetti(score * 10);
+    // }, 2000);
   }
   updateScore();
 }

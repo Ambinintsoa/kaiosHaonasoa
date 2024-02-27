@@ -49,26 +49,29 @@ export function closeNav() {
 
 export function nav(move) {
   const currentIndex = document.activeElement.tabIndex;
-  const next = currentIndex + move;
+  var next = currentIndex + move;
+  next %= 4;
   const items = document.querySelectorAll("#opKitchen .tablinks");
   const targetElement = items[next];
 
   const currentIndexTwo = document.activeElement.tabIndex;
-  const nextTwo = currentIndexTwo + move;
+  var nextTwo = currentIndexTwo + move;
+  nextTwo %= 5;
   const itemsTwo = document.querySelectorAll(".tab .tablinks");
   const targetElementTwo = itemsTwo[nextTwo];
 
   const currentIndexThree = document.activeElement.tabIndex;
-  const nextThree = currentIndexThree + move;
+  var nextThree = currentIndexThree + move;
+  nextThree %= 4;
   const itemsThree = document.querySelectorAll(".listChoice");
   const targetElementThree = itemsThree[nextThree];
 
-  const currentIndexFour = document.activeElement.tabIndex;
-  var nextFour = currentIndexFour + move;
-  if (nextFour >= 2) nextFour = 1;
-  if (nextFour === -1) nextFour = 0;
-  const itemsFour = document.querySelectorAll(".listChoiceTrueFalse");
-  const targetElementFour = itemsFour[nextFour];
+  // const currentIndexFour = document.activeElement.tabIndex;
+  // var nextFour = currentIndexFour + move;
+  // if (nextFour >= 2) nextFour = 1;
+  // if (nextFour === -1) nextFour = 0;
+  // const itemsFour = document.querySelectorAll(".listChoiceTrueFalse");
+  // const targetElementFour = itemsFour[nextFour];
 
   if (targetElement) {
     targetElement.focus();
@@ -79,9 +82,9 @@ export function nav(move) {
   if (targetElementThree) {
     targetElementThree.focus();
   }
-  if (targetElementFour) {
-    targetElementFour.focus();
-  }
+  // if (targetElementFour) {
+  //   targetElementFour.focus();
+  // }
 }
 export function showContent(eltFocused) {
   if (eltFocused) {

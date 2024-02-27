@@ -1,16 +1,27 @@
-
 <template>
-    <div class="container">
+  <div class="container">
     <img :src="currentImageSrc" alt="Game Image" />
     <div class="buttons">
-      <button :class="{ selected: currentAnswer === true }" @click="setCurrentAnswer(true)">
-        <img src='assets/gif/true.gif'>
+      <button
+        class="truefalse"
+        :class="{ selected: currentAnswer === true }"
+        @click="setCurrentAnswer(true)"
+        tabindex="0"
+      >
+        <img src="assets/gif/true.gif" />
       </button>
-      <button :class="{ selected: currentAnswer === false }" @click="setCurrentAnswer(false)">
-        <img src='assets/gif/false.gif'>
+      <button
+        class="truefalse"
+        :class="{ selected: currentAnswer === false }"
+        @click="setCurrentAnswer(false)"
+        tabindex="1"
+      >
+        <img src="assets/gif/false.gif" />
       </button>
     </div>
-    <p class="score_true_false">Isa: <span>{{ score }}</span></p>
+    <p class="score_true_false">
+      Isa: <span>{{ score }}</span>
+    </p>
     <div class="popup" style="display: none;">
       <p class="popup__text"></p>
     </div>
@@ -44,27 +55,35 @@ export default {
   },
   computed: {
     currentImageSrc() {
-      return `/assets/requestImg/${this.questionsTrueFalse[this.currentImageIndex].image}`;
+      return `/assets/requestImg/${
+        this.questionsTrueFalse[this.currentImageIndex].image
+      }`;
     },
   },
   mounted() {
-      document.addEventListener("keydown", (evt) => {
+    document.addEventListener("keydown", (evt) => {
       this.handleKeydown(evt);
     });
-    },
+  },
   methods: {
     handleKeydown(evt) {
-      evt.stopPropagation(); 
+      evt.stopPropagation();
       // console.log(evt.key);
       var containerSlide = document.querySelector(".container");
+
       if (containerSlide) {
         if (evt.key === "ArrowRight") {
           this.currentAnswer = false;
+          this.nav(1);
         } else if (evt.key === "ArrowLeft") {
           this.currentAnswer = true;
+          this.nav(-1);
+        } else if (evt.key === "Enter") {
+          const focusedElement = document.activeElement;
+          if (focusedElement.classList.contains("truefalse")) {
+            this.checkAnswer();
+          }
         }
-      } else if(evt.key === 'Enter') {
-        this.checkAnswer();
       }
     },
     setCurrentAnswer(answer) {
@@ -72,7 +91,9 @@ export default {
     },
 
     checkAnswer() {
-      const correctAnswer = this.questionsTrueFalse[this.currentImageIndex].correctAnswer === "true";
+      const correctAnswer =
+        this.questionsTrueFalse[this.currentImageIndex].correctAnswer ===
+        "true";
       if (this.currentAnswer === correctAnswer) {
         this.score += 1;
         this.updateScore();
@@ -83,9 +104,9 @@ export default {
       this.moveToNextImage();
     },
     finalScore() {
-      const finalScoreMessage = `nahavoavaly fanontaniana ${this.score} tamin'ireo fanontaniana ${
-        this.questionsTrueFalse.length
-      } ianao!`;
+      const finalScoreMessage = `nahavoavaly fanontaniana ${
+        this.score
+      } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
       setTimeout(() => {
         document.querySelector(".popup").style.display = "block";
         document.body.classList.add("blur-background");
@@ -110,10 +131,24 @@ export default {
     updateScore() {
       document.querySelector(".score_true_false span").innerHTML = this.score;
     },
+    nav(move) {
+      const currentIndex = document.activeElement.tabIndex;
+      var nextF = currentIndex + move;
+      if (nextF >= 2) nextF = 1;
+      if (nextF === -1) nextF = 0;
+      const items = document.querySelectorAll(".buttons button");
+      const targetElement = items[nextF];
+      if (targetElement) {
+        targetElement.focus();
+      }
+    },
   },
 };
 </script>
 <style scoped>
+.truefalse:focus {
+  border: 1px solid black;
+}
 .buttons {
   display: flex;
   justify-content: center;
@@ -140,7 +175,7 @@ img {
 }
 
 body {
-  color: #00031E;
+  color: #00031e;
   font-family: Inter, sans-serif;
   font-size: 12px;
 }
@@ -157,11 +192,10 @@ body {
   align-items: center;
   padding-top: 2%;
   border-radius: 20px;
-  background: #FFF;
+  background: #fff;
   text-align: center;
   font-size: 4%;
 }
-
 
 .popup__text {
   max-width: 100%;
@@ -169,7 +203,7 @@ body {
   padding-bottom: 5%;
   color: #777;
   font-weight: 400;
- 
+
   line-height: 150%; /* 24px */
 }
 
@@ -181,17 +215,16 @@ body {
 
 .btn {
   padding: 10px 30px;
-  color: #FFF;
+  color: #fff;
   font-weight: 500;
   border: none;
   border-radius: 7px;
-  background: #027FFF;
+  background: #027fff;
   cursor: pointer;
 }
 
 .btn:focus {
-  outline: 2px dashed #027FFF;
+  outline: 2px dashed #027fff;
   outline-offset: 5px;
 }
-
 </style>

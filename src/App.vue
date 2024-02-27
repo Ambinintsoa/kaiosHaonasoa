@@ -23,11 +23,11 @@ import {
   nav,
 } from "./Navigation";
 import { handleAnswerClick, startStat, displayQuestion } from "./quiz";
-import {
-  // displayQuestionTrueFalse,
-  handleAnswerClickTrueFalse,
-  // startStatTrueFalse,
-} from "./truefalse";
+// import {
+//   displayQuestionTrueFalse,
+//   handleAnswerClickTrueFalse,
+//   startStatTrueFalse,
+// } from "./truefalse";
 export default {
   name: "app",
   components: {
@@ -45,9 +45,10 @@ export default {
         const focusedElement = document.activeElement;
         if (focusedElement.classList.contains("listChoice")) {
           handleAnswerClick(focusedElement.firstChild);
-        } else if (focusedElement.classList.contains("listChoiceTrueFalse")) {
-          handleAnswerClickTrueFalse(focusedElement.firstChild);
         }
+        // else if (focusedElement.classList.contains("listChoiceTrueFalse")) {
+        //   handleAnswerClickTrueFalse(focusedElement.firstChild);
+        // }
         showContent(focusedElement);
       },
       right: function() {
