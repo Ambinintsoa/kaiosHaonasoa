@@ -57,12 +57,6 @@ export default {
         case "ArrowDown":
           nav(1);
           break;
-        case "ArrowRight":
-          nav(2);
-          break;
-        case "ArrowLeft":
-          nav(-2);
-          break;
         case "SoftLeft":
           softkeyCallback.left();
           break;
@@ -337,7 +331,6 @@ body {
   height: 230px;
   margin-top: -8px;
 }
-
 
 .progress-bar {
   width: 100%;

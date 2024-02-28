@@ -53,7 +53,7 @@ export default {
     Actuality,
     TrueFalse,
     Quiz,
-},
+  },
   data() {
     return {
       listTablinks: [

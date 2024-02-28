@@ -1,22 +1,30 @@
 <template>
-    <div  class="quiz-box">
-        <p  id="viewquestion" class="question">
-            Hehehe hbcjervnrihbh hfrbvbruvb hgrfuhbrhfhur byfbur
-        </p>
-        <ul  class="choices">
-            <div>
-                <li tabindex="0" class="listChoice"><img src="assets/PNG/Earth.png" alt="Earth"></li>
-                <li tabindex="1" class="listChoice"><img src="assets/PNG/Forest.png" alt="Forest"></li>
-                </div><div>
-                <li tabindex="2" class="listChoice"><img src="assets/PNG/Faucet.png" alt="Faucet"></li>
-                <li tabindex="3" class="listChoice"><img src="assets/PNG/Love.png" alt="Love"></li>
-            </div>
-        </ul>
-        <p class="score score_quiz">
+  <div class="quiz-box">
+    <p id="viewquestion" class="question">
+      Hehehe hbcjervnrihbh hfrbvbruvb hgrfuhbrhfhur byfbur
+    </p>
+    <ul class="choices">
+      <div>
+        <li tabindex="0" class="listChoice">
+          <img src="assets/PNG/Earth.png" alt="Earth" />
+        </li>
+        <li tabindex="1" class="listChoice">
+          <img src="assets/PNG/Forest.png" alt="Forest" />
+        </li>
+      </div>
+      <div>
+        <li tabindex="2" class="listChoice">
+          <img src="assets/PNG/Faucet.png" alt="Faucet" />
+        </li>
+        <li tabindex="3" class="listChoice">
+          <img src="assets/PNG/Love.png" alt="Love" />
+        </li>
+      </div>
+    </ul>
+    <p class="score score_quiz">
       Isa: <span>{{ score }}</span>
     </p>
-        </div>
-
+  </div>
 </template>
 <script>
 export default {
@@ -24,16 +32,16 @@ export default {
     return {
       questionsTrueFalse: [
         {
-            question: "Blablabla",
-    choices: ["Earth", "Barrel", "Battery", "Bottle"],
-    correctAnswer: "Bottle",
-    someInformation: "Aza dakadaka tsony fa avereno ampiasaina",
+          question: "Blablabla",
+          choices: ["Earth", "Barrel", "Battery", "Bottle"],
+          correctAnswer: "Bottle",
+          someInformation: "Aza dakadaka tsony fa avereno ampiasaina",
         },
         {
-            question: "Hehehe hbcjervnrihbh hfrbvbruvb hgrfuhbrhfhur byfbur",
-    choices: ["Earth", "Forest", "Faucet", "Love"],
-    correctAnswer: "Love",
-    someInformation: "Tiako be",
+          question: "Hehehe hbcjervnrihbh hfrbvbruvb hgrfuhbrhfhur byfbur",
+          choices: ["Earth", "Forest", "Faucet", "Love"],
+          correctAnswer: "Love",
+          someInformation: "Tiako be",
         },
       ],
       currentAnswer: null,
@@ -50,20 +58,18 @@ export default {
     handleKeydown(evt) {
       evt.stopPropagation();
       // console.log(evt.key);
-      var containerSlide = document.querySelector(".quiz-box");
-       
-      if (containerSlide) {
+      // var containerSlide = document.querySelector(".quiz-box");
+      var activeTab = document.querySelector("#opNav");
+      if (activeTab.classList.contains("qOne")) {
         if (evt.key === "ArrowRight") {
           this.nav(2);
         } else if (evt.key === "ArrowLeft") {
           this.nav(-2);
-        } 
-        else if (evt.key === "ArrowUp") {
+        } else if (evt.key === "ArrowUp") {
           this.nav(-1);
-        }
-        else if (evt.key === "ArrowDown") {
+        } else if (evt.key === "ArrowDown") {
           this.nav(1);
-        }else if (evt.key === "Enter") {
+        } else if (evt.key === "Enter") {
           const focusedElement = document.activeElement;
           if (focusedElement.classList.contains("truefalse")) {
             this.checkAnswer();
@@ -93,7 +99,7 @@ export default {
         this.score
       } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
       alert(finalScoreMessage);
-    }, 
+    },
     moveToNextImage() {
       this.currentAnswer = null;
       if (this.currentImageIndex < this.questionsTrueFalse.length - 1) {
@@ -108,23 +114,22 @@ export default {
       document.querySelector(".score_quiz span").innerHTML = this.score;
     },
     nav(move) {
-       
-    const currentIndexThree = document.activeElement.tabIndex;
-    console.log(currentIndexThree);
-  var nextThree = currentIndexThree + move;
-
-  nextThree %= 4;
-  console.log(nextThree);
-  const itemsThree = document.querySelectorAll(".listChoice");
-  const targetElementThree = itemsThree[nextThree];
-  if (targetElementThree) {
-    targetElementThree.focus();
-  }
+      const currentIndexThree = document.activeElement.tabIndex;
+      var nextThree = currentIndexThree + move;
+      const itemsThree = document.querySelectorAll(".listChoice");
+      //mety doly reo na le if na le mod na tsy asiana ara
+      // if (nextThree >= 4) nextThree = 3;
+      // if (nextThree < 0) nextThree = 0;
+      // nextThree %= 4;
+      const targetElementThree = itemsThree[nextThree];
+      if (targetElementThree) {
+        targetElementThree.focus();
+      }
     },
   },
 };
 </script>
-<style >
+<style>
 .choices li {
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;

@@ -48,19 +48,31 @@ export function closeNav() {
  */
 
 export function nav(move) {
-  const currentIndex = document.activeElement.tabIndex;
-  var next = currentIndex + move;
-  next %= 4;
-  const items = document.querySelectorAll("#opKitchen .tablinks");
-  const targetElement = items[next];
+  //refa home active de ty no gestion ny navigation
+  if (document.getElementById("home").style.display != "none") {
+    console.log("navigation.js nav home != none");
+    const currentIndex = document.activeElement.tabIndex;
+    var next = currentIndex + move;
+    next %= 4;
+    const items = document.querySelectorAll("#opKitchen .tablinks");
+    const targetElement = items[next];
+    if (targetElement) {
+      targetElement.focus();
+    }
+  }
+  //refa mySidenav misokatra de ty no gestion ny navigation
+  if (document.getElementById("mySidenav").style.width == "100%") {
+    console.log("navigation.js nav mySidenav == 100%");
 
-  const currentIndexTwo = document.activeElement.tabIndex;
-  var nextTwo = currentIndexTwo + move;
-  nextTwo %= 5;
-  const itemsTwo = document.querySelectorAll(".tab .tablinks");
-  const targetElementTwo = itemsTwo[nextTwo];
-
-
+    const currentIndexTwo = document.activeElement.tabIndex;
+    var nextTwo = currentIndexTwo + move;
+    nextTwo %= 5;
+    const itemsTwo = document.querySelectorAll(".tab .tablinks");
+    const targetElementTwo = itemsTwo[nextTwo];
+    if (targetElementTwo) {
+      targetElementTwo.focus();
+    }
+  }
 
   // const currentIndexFour = document.activeElement.tabIndex;
   // var nextFour = currentIndexFour + move;
@@ -68,13 +80,6 @@ export function nav(move) {
   // if (nextFour === -1) nextFour = 0;
   // const itemsFour = document.querySelectorAll(".listChoiceTrueFalse");
   // const targetElementFour = itemsFour[nextFour];
-
-  if (targetElement) {
-    targetElement.focus();
-  }
-  if (targetElementTwo) {
-    targetElementTwo.focus();
-  }
 }
 export function showContent(eltFocused) {
   if (eltFocused) {

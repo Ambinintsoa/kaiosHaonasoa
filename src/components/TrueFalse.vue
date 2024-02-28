@@ -66,9 +66,10 @@ export default {
     handleKeydown(evt) {
       evt.stopPropagation();
       // console.log(evt.key);
-      var containerSlide = document.querySelector(".container");
+      // var containerSlide = document.querySelector(".container");
+      var activeTab = document.querySelector("#opNav");
 
-      if (containerSlide) {
+      if (activeTab.classList.contains("qThree")) {
         if (evt.key === "ArrowRight") {
           this.currentAnswer = false;
           this.nav(1);
@@ -105,7 +106,7 @@ export default {
         this.score
       } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
       alert(finalScoreMessage);
-    }, 
+    },
     moveToNextImage() {
       this.currentAnswer = null;
       if (this.currentImageIndex < this.questionsTrueFalse.length - 1) {
@@ -121,6 +122,7 @@ export default {
     },
     nav(move) {
       const currentIndex = document.activeElement.tabIndex;
+
       var nextF = currentIndex + move;
       if (nextF >= 2) nextF = 1;
       if (nextF === -1) nextF = 0;
@@ -150,9 +152,9 @@ button {
 img {
   width: 80%;
   margin-left: 10%;
-  margin-top:10%;
+  margin-top: 10%;
 }
-button img{
+button img {
   width: 20px;
 }
 * {
@@ -213,7 +215,7 @@ body {
   outline: 2px dashed #027fff;
   outline-offset: 10px;
 }
-.truefalse:focus{
+.truefalse:focus {
   outline: 1px solid #6f6f6f;
   outline-offset: 5px;
 }
