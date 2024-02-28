@@ -60,11 +60,7 @@ export function nav(move) {
   const itemsTwo = document.querySelectorAll(".tab .tablinks");
   const targetElementTwo = itemsTwo[nextTwo];
 
-  const currentIndexThree = document.activeElement.tabIndex;
-  var nextThree = currentIndexThree + move;
-  nextThree %= 4;
-  const itemsThree = document.querySelectorAll(".listChoice");
-  const targetElementThree = itemsThree[nextThree];
+
 
   // const currentIndexFour = document.activeElement.tabIndex;
   // var nextFour = currentIndexFour + move;
@@ -79,12 +75,6 @@ export function nav(move) {
   if (targetElementTwo) {
     targetElementTwo.focus();
   }
-  if (targetElementThree) {
-    targetElementThree.focus();
-  }
-  // if (targetElementFour) {
-  //   targetElementFour.focus();
-  // }
 }
 export function showContent(eltFocused) {
   if (eltFocused) {

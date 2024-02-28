@@ -22,7 +22,7 @@ import {
   showContent,
   nav,
 } from "./Navigation";
-import { handleAnswerClick, startStat, displayQuestion } from "./quiz";
+// import { handleAnswerClick, startStat, displayQuestion } from "./quiz";
 // import {
 //   displayQuestionTrueFalse,
 //   handleAnswerClickTrueFalse,
@@ -43,12 +43,6 @@ export default {
       },
       center: function() {
         const focusedElement = document.activeElement;
-        if (focusedElement.classList.contains("listChoice")) {
-          handleAnswerClick(focusedElement.firstChild);
-        }
-        // else if (focusedElement.classList.contains("listChoiceTrueFalse")) {
-        //   handleAnswerClickTrueFalse(focusedElement.firstChild);
-        // }
         showContent(focusedElement);
       },
       right: function() {
@@ -95,14 +89,10 @@ export default {
       var text = data[1];
       var event = data[0];
       if (text === "Toetr'andro") {
-        startStat();
-        displayQuestion();
         openSelection(event, "qOne", "qOne", text);
       } else if (text === "Fiovan'ny toetr'andro") {
         openSelection(event, "qTwo", "qTwo", text);
       } else if (text === "Anton'ny fiovan'ny toetr'andro") {
-        // startStatTrueFalse();
-        // displayQuestionTrueFalse();
         openSelection(event, "qThree", "qThree", text);
       } else if (text === "Vahaolana") {
         openSelection(event, "qFour", "qFour", text);
@@ -342,92 +332,12 @@ body {
   background-color: #ddd;
 }
 .tabcontent {
-  display: none;
   padding: 6px 12px;
   border-top: none;
   height: 230px;
   margin-top: -8px;
 }
-/*
-  Fanontaniana
-*/
-.question {
-  font-weight: bold;
-  font-size: 12px;
-}
 
-.choices {
-  list-style: none;
-  padding: 0;
-  margin-top: -10px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  height: 130px;
-}
-.choices > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: 10px;
-}
-.choices li {
-  background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
-  box-sizing: border-box;
-  cursor: pointer;
-  display: inline-block;
-  outline: none;
-  padding: 0.3rem;
-  transition: all 200ms ease-in-out;
-  border-bottom-left-radius: 15px 255px;
-  border-bottom-right-radius: 225px 15px;
-  border-top-left-radius: 255px 15px;
-  border-top-right-radius: 15px 225px;
-  touch-action: manipulation;
-  width: 60px;
-  border: 0.5px solid rgba(128, 128, 128, 0.315);
-  margin-top: 10px;
-}
-
-.choices li:focus {
-  box-shadow: 2px 8px 4px -6px rgba(0, 0, 0, 0.3);
-  transform: translate3d(2px, 2px, 0);
-  transform: scale(1.2, 1.2);
-}
-.choices li:hover {
-  box-shadow: 2px 8px 8px -5px rgba(0, 0, 0, 0.3);
-  transform: translate3d(0, 2px, 0);
-}
-.choices li img {
-  width: 100%;
-}
-.truefalseAnswer li img {
-  width: 20%;
-}
-.truefalseAnswer li:focus {
-  border-radius: 50%;
-  border: 1px solid red;
-}
-
-#questionImg img {
-  width: 80%;
-  margin: 10%;
-}
-#questionContent {
-  text-align: center;
-}
-.truefalseAnswer li {
-  margin: 10%;
-  display: inline;
-}
-.result {
-  font-weight: bold;
-  font-size: 10px;
-  color: rebeccapurple;
-}
 
 .progress-bar {
   width: 100%;
@@ -446,6 +356,7 @@ body {
 
 .score {
   margin-top: 10px;
+  margin-left: 10%;
   font-size: 12px;
   text-align: center;
 }

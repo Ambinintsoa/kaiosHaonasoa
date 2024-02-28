@@ -19,12 +19,9 @@
         <img src="assets/gif/false.gif" />
       </button>
     </div>
-    <p class="score_true_false">
+    <p class="score score_true_false">
       Isa: <span>{{ score }}</span>
     </p>
-    <div class="popup" style="display: none;">
-      <p class="popup__text"></p>
-    </div>
   </div>
 </template>
 
@@ -97,9 +94,9 @@ export default {
       if (this.currentAnswer === correctAnswer) {
         this.score += 1;
         this.updateScore();
-        alert("Vrai !");
+        alert("Marina !");
       } else {
-        alert("Faux !");
+        alert("Diso !");
       }
       this.moveToNextImage();
     },
@@ -107,17 +104,8 @@ export default {
       const finalScoreMessage = `nahavoavaly fanontaniana ${
         this.score
       } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
-      setTimeout(() => {
-        document.querySelector(".popup").style.display = "block";
-        document.body.classList.add("blur-background");
-        document.querySelector(".popup__text").innerHTML = finalScoreMessage;
-      }, 200);
-
-      setTimeout(() => {
-        document.body.classList.remove("blur-background");
-        document.querySelector(".popup").style.display = "none";
-      }, 5000);
-    },
+      alert(finalScoreMessage);
+    }, 
     moveToNextImage() {
       this.currentAnswer = null;
       if (this.currentImageIndex < this.questionsTrueFalse.length - 1) {
@@ -146,9 +134,6 @@ export default {
 };
 </script>
 <style scoped>
-.truefalse:focus {
-  border: 1px solid black;
-}
 .buttons {
   display: flex;
   justify-content: center;
@@ -156,17 +141,20 @@ export default {
 }
 
 button {
-  padding: 10px 20px;
+  padding: 5px 10px;
   margin: 20%;
   /* font-size: 16px; */
   cursor: pointer;
 }
 
 img {
-  width: 100%;
-  margin-top: 30%;
+  width: 80%;
+  margin-left: 10%;
+  margin-top:10%;
 }
-
+button img{
+  width: 20px;
+}
 * {
   margin: 0;
   padding: 0;
@@ -181,7 +169,7 @@ body {
 }
 
 .popup {
-  width: 12%;
+  width: 50%;
   padding: 2%;
   margin: 1.2%;
   position: absolute;
@@ -194,7 +182,6 @@ body {
   border-radius: 20px;
   background: #fff;
   text-align: center;
-  font-size: 4%;
 }
 
 .popup__text {
@@ -203,7 +190,6 @@ body {
   padding-bottom: 5%;
   color: #777;
   font-weight: 400;
-
   line-height: 150%; /* 24px */
 }
 
@@ -225,6 +211,10 @@ body {
 
 .btn:focus {
   outline: 2px dashed #027fff;
+  outline-offset: 10px;
+}
+.truefalse:focus{
+  outline: 1px solid #6f6f6f;
   outline-offset: 5px;
 }
 </style>

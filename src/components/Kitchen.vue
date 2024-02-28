@@ -18,24 +18,7 @@
       <span></span>
     </div>
     <div id="qOne" class="tabcontent">
-      <div class="quiz-box">
-        <p class="question" id="viewquestion"></p>
-        <ul class="choices"></ul>
-
-        <div id="myModal" class="modal">
-          <div class="modal-content">
-            <div class="modal-body">
-              <p class="result"></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="progress-bar">
-        <div id="confetti-container"></div>
-        <span class="current-level">Fanontaniana</span>
-      </div>
-
-      <p class="score">Isa: <span>0</span></p>
+      <Quiz />
     </div>
 
     <div id="qTwo" class="tabcontent">
@@ -52,7 +35,7 @@
       </audio> -->
     </div>
     <div id="qThree" class="tabcontent">
-      <Game />
+      <TrueFalse />
     </div>
     <div id="qFour" class="tabcontent">
       <Actuality />
@@ -62,13 +45,15 @@
 
 <script>
 import Actuality from "./Actuality.vue";
-import Game from "./Game.vue";
+import Quiz from "./Quiz.vue";
+import TrueFalse from "./TrueFalse.vue";
 export default {
   name: "Kitchen",
   components: {
     Actuality,
-    Game,
-  },
+    TrueFalse,
+    Quiz,
+},
   data() {
     return {
       listTablinks: [
