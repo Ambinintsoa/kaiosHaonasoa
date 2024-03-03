@@ -5,21 +5,16 @@
     </p>
     <ul class="choices">
       <div>
-        <li tabindex="0" class="listChoice">
-          <img src="assets/PNG/Earth.png" alt="Earth" />
-        </li>
-        <li tabindex="1" class="listChoice">
-          <img src="assets/PNG/Forest.png" alt="Forest" />
-        </li>
-      </div>
-      <div>
-        <li tabindex="2" class="listChoice">
-          <img src="assets/PNG/Faucet.png" alt="Faucet" />
-        </li>
-        <li tabindex="3" class="listChoice">
-          <img src="assets/PNG/Love.png" alt="Love" />
-        </li>
-      </div>
+    <div v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices" :key="index" v-if="index % 2 === 0">
+      <li :tabindex="index" class="listChoice" :class="{ selected: currentAnswer === true }" @click="setCurrentAnswer(true)">
+        <img :src="'assets/PNG/' + name + '.png'" :alt="name" />
+      </li>
+
+      <li :tabindex="index + 1" class="listChoice" :class="{ selected: currentAnswer === true }" @click="setCurrentAnswer(true)">
+        <img :src="'assets/PNG/' + questionsTrueFalse[currentImageIndex].choices[index + 1] + '.png'" :alt="questionsTrueFalse[currentImageIndex].choices[index + 1]" />
+      </li>
+    </div>
+  </div>
     </ul>
     <p class="score score_quiz">
       Isa: <span>{{ score }}</span>
@@ -71,7 +66,7 @@ export default {
           this.nav(1);
         } else if (evt.key === "Enter") {
           const focusedElement = document.activeElement;
-          if (focusedElement.classList.contains("truefalse")) {
+          if (focusedElement.classList.contains("listChoice")) {
             this.checkAnswer();
           }
         }

@@ -2,21 +2,17 @@
   <div class="container">
     <img :src="currentImageSrc" alt="Game Image" />
     <div class="buttons">
+
+
+
       <button
+      v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices" :key="name"
         class="truefalse"
-        :class="{ selected: currentAnswer === true }"
-        @click="setCurrentAnswer(true)"
-        tabindex="0"
+        :class="{ selected: currentAnswer === name }"
+        @click="setCurrentAnswer(name)"
+       :tabindex="index"
       >
-        <img src="assets/gif/true.gif" />
-      </button>
-      <button
-        class="truefalse"
-        :class="{ selected: currentAnswer === false }"
-        @click="setCurrentAnswer(false)"
-        tabindex="1"
-      >
-        <img src="assets/gif/false.gif" />
+        <img :src="'assets/gif/'+name+'.gif'" />
       </button>
     </div>
     <p class="score score_true_false">
@@ -33,14 +29,14 @@ export default {
         {
           question: "Doro tanety",
           image: "doro_tanety.jpg",
-          choices: ["true", "false"],
+          choices: [true,false],
           correctAnswer: "false",
           someInformation: "Aza dakadaka tsony fa avereno ampiasaina",
         },
         {
           question: "Hehehe hbcjervnrihbh hfrbvbruvb hgrfuhbrhfhur byfbur",
           image: "reboisement.jpg",
-          choices: ["true", "false"],
+          choices: [true,false],
           correctAnswer: "true",
           someInformation: "Aza dakadaka tsony fa avereno ampiasaina",
         },
