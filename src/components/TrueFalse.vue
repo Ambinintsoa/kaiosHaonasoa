@@ -2,17 +2,15 @@
   <div class="container">
     <img :src="currentImageSrc" alt="Game Image" />
     <div class="buttons">
-
-
-
       <button
-      v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices" :key="name"
+        v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices"
+        :key="name"
         class="truefalse"
         :class="{ selected: currentAnswer === name }"
         @click="setCurrentAnswer(name)"
-       :tabindex="index"
+        :tabindex="index"
       >
-        <img :src="'assets/gif/'+name+'.gif'" />
+        <img :src="'assets/gif/' + name + '.gif'" />
       </button>
     </div>
     <p class="score score_true_false">
@@ -29,14 +27,14 @@ export default {
         {
           question: "Doro tanety",
           image: "doro_tanety.jpg",
-          choices: [true,false],
+          choices: [true, false],
           correctAnswer: "false",
           someInformation: "Aza dakadaka tsony fa avereno ampiasaina",
         },
         {
           question: "Hehehe hbcjervnrihbh hfrbvbruvb hgrfuhbrhfhur byfbur",
           image: "reboisement.jpg",
-          choices: [true,false],
+          choices: [true, false],
           correctAnswer: "true",
           someInformation: "Aza dakadaka tsony fa avereno ampiasaina",
         },
@@ -165,7 +163,7 @@ body {
   font-family: Inter, sans-serif;
   font-size: 12px;
 }
-
+/*
 .popup {
   width: 50%;
   padding: 2%;
@@ -188,7 +186,7 @@ body {
   padding-bottom: 5%;
   color: #777;
   font-weight: 400;
-  line-height: 150%; /* 24px */
+  line-height: 150%; /* 24px 
 }
 
 .popup__action {
@@ -196,23 +194,32 @@ body {
   gap: 16px;
   align-items: center;
 }
-
-.btn {
-  padding: 10px 30px;
-  color: #fff;
-  font-weight: 500;
-  border: none;
-  border-radius: 7px;
-  background: #027fff;
+*/
+.truefalse {
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
+  box-sizing: border-box;
   cursor: pointer;
-}
-
-.btn:focus {
-  outline: 2px dashed #027fff;
-  outline-offset: 10px;
+  display: inline-block;
+  outline: none;
+  padding: 0.3rem;
+  transition: all 200ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  touch-action: manipulation;
+  border: 0.5px solid rgba(128, 128, 128, 0.315);
+  margin-top: 10px;
+  padding: 5px;
+  transform: scale(1.4, 1.2);
 }
 .truefalse:focus {
-  outline: 1px solid #6f6f6f;
-  outline-offset: 5px;
+  box-shadow: 2px 8px 4px -6px rgba(0, 0, 0, 0.3);
+  transform: translate3d(2px, 2px, 0);
+  transform: scale(1.6, 1.4);
+}
+.truefalse img {
+  width: 100%;
 }
 </style>

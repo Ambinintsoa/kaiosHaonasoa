@@ -5,16 +5,37 @@
     </p>
     <ul class="choices">
       <div>
-    <div v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices" :key="index" v-if="index % 2 === 0">
-      <li :tabindex="index" class="listChoice" :class="{ selected: currentAnswer === true }" @click="setCurrentAnswer(true)">
-        <img :src="'assets/PNG/' + name + '.png'" :alt="name" />
-      </li>
+        <div
+          v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices"
+          :key="index"
+          v-if="index % 2 === 0"
+        >
+          <li
+            :tabindex="index"
+            class="listChoice"
+            :class="{ selected: currentAnswer === true }"
+            @click="setCurrentAnswer(true)"
+          >
+            <img :src="'assets/PNG/' + name + '.png'" :alt="name" />
+          </li>
 
-      <li :tabindex="index + 1" class="listChoice" :class="{ selected: currentAnswer === true }" @click="setCurrentAnswer(true)">
-        <img :src="'assets/PNG/' + questionsTrueFalse[currentImageIndex].choices[index + 1] + '.png'" :alt="questionsTrueFalse[currentImageIndex].choices[index + 1]" />
-      </li>
-    </div>
-  </div>
+          <li
+            :tabindex="index + 1"
+            class="listChoice"
+            :class="{ selected: currentAnswer === true }"
+            @click="setCurrentAnswer(true)"
+          >
+            <img
+              :src="
+                'assets/PNG/' +
+                  questionsTrueFalse[currentImageIndex].choices[index + 1] +
+                  '.png'
+              "
+              :alt="questionsTrueFalse[currentImageIndex].choices[index + 1]"
+            />
+          </li>
+        </div>
+      </div>
     </ul>
     <p class="score score_quiz">
       Isa: <span>{{ score }}</span>
@@ -57,13 +78,13 @@ export default {
       var activeTab = document.querySelector("#opNav");
       if (activeTab.classList.contains("qOne")) {
         if (evt.key === "ArrowRight") {
-          this.nav(2);
-        } else if (evt.key === "ArrowLeft") {
-          this.nav(-2);
-        } else if (evt.key === "ArrowUp") {
-          this.nav(-1);
-        } else if (evt.key === "ArrowDown") {
           this.nav(1);
+        } else if (evt.key === "ArrowLeft") {
+          this.nav(-1);
+        } else if (evt.key === "ArrowUp") {
+          this.nav(-2);
+        } else if (evt.key === "ArrowDown") {
+          this.nav(2);
         } else if (evt.key === "Enter") {
           const focusedElement = document.activeElement;
           if (focusedElement.classList.contains("listChoice")) {
@@ -109,16 +130,18 @@ export default {
       document.querySelector(".score_quiz span").innerHTML = this.score;
     },
     nav(move) {
-      const currentIndexThree = document.activeElement.tabIndex;
-      var nextThree = currentIndexThree + move;
-      const itemsThree = document.querySelectorAll(".listChoice");
-      //mety doly reo na le if na le mod na tsy asiana ara
-      // if (nextThree >= 4) nextThree = 3;
-      // if (nextThree < 0) nextThree = 0;
-      // nextThree %= 4;
-      const targetElementThree = itemsThree[nextThree];
-      if (targetElementThree) {
-        targetElementThree.focus();
+      if (document.querySelector(".quizGame.one.activeQuiz")) {
+        const currentIndexThree = document.activeElement.tabIndex;
+        var nextThree = currentIndexThree + move;
+        const itemsThree = document.querySelectorAll(".listChoice");
+        //mety doly reo na le if na le mod na tsy asiana ara
+        // if (nextThree >= 4) nextThree = 3;
+        // if (nextThree < 0) nextThree = 0;
+        // nextThree %= 4;
+        const targetElementThree = itemsThree[nextThree];
+        if (targetElementThree) {
+          targetElementThree.focus();
+        }
       }
     },
   },

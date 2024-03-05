@@ -38,6 +38,19 @@ export function openSelection(evt, userSelection, choosenClass, textContent) {
 export function openNav() {
   document.getElementById("mySidenav").style.width = "100%";
   document.getElementById(activeTab).style.display = "none";
+  //bon l'important c'est que ca marche
+  var itemsQuiz = document.querySelectorAll(".quizGame");
+  for (let i = 0; i < itemsQuiz.length; i++) {
+    itemsQuiz[i].className = itemsQuiz[i].className.replace(" activeQuiz", "");
+  }
+  var containerSelectorQuiz = document.querySelector(".selectorMenuQuiz");
+  var containerQuiz = document.querySelector(".containerQuiz");
+  if (containerQuiz.classList.contains("activeQuiz")) {
+    containerQuiz.classList.remove("activeQuiz");
+  }
+  if (!containerSelectorQuiz.classList.contains("activeQuiz")) {
+    containerSelectorQuiz.classList.add("activeQuiz");
+  }
 }
 export function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
@@ -50,7 +63,7 @@ export function closeNav() {
 export function nav(move) {
   //refa home active de ty no gestion ny navigation
   if (document.getElementById("home").style.display != "none") {
-    console.log("navigation.js nav home != none");
+    // console.log("navigation.js nav home != none");
     const currentIndex = document.activeElement.tabIndex;
     var next = currentIndex + move;
     next %= 4;
@@ -62,7 +75,7 @@ export function nav(move) {
   }
   //refa mySidenav misokatra de ty no gestion ny navigation
   if (document.getElementById("mySidenav").style.width == "100%") {
-    console.log("navigation.js nav mySidenav == 100%");
+    // console.log("navigation.js nav mySidenav == 100%");
 
     const currentIndexTwo = document.activeElement.tabIndex;
     var nextTwo = currentIndexTwo + move;

@@ -18,21 +18,11 @@
       <span></span>
     </div>
     <div id="qOne" class="tabcontent">
-      <Quiz />
+      <SelectGame />
     </div>
 
     <div id="qTwo" class="tabcontent">
-      <h3>Mianatra</h3>
-      <button onclick="playSound()">Écouter le son</button>
-      <button onclick="stopSound()">Arrêter le son</button>
-      <!-- 
-      <audio id="myAudio">
-        <source
-          src="Rudimental - These Days (feat. Jess Glynne, Macklemore & Dan Caplen) [Official Video] (192 kbps).mp3"
-          type="audio/mpeg"
-        />
-        Tsy mazaka le phone
-      </audio> -->
+      Hello
     </div>
     <div id="qThree" class="tabcontent">
       <TrueFalse />
@@ -45,14 +35,14 @@
 
 <script>
 import Actuality from "./Actuality.vue";
-import Quiz from "./Quiz.vue";
+import SelectGame from "./SelectGame.vue";
 import TrueFalse from "./TrueFalse.vue";
 export default {
   name: "Kitchen",
   components: {
     Actuality,
     TrueFalse,
-    Quiz,
+    SelectGame,
   },
   data() {
     return {
