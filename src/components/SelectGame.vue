@@ -1,6 +1,6 @@
 <template>
   <div id="selectionThreeGame ">
-    <div class="selectorMenuQuiz activeQuiz">
+    <div class="selectorMenuQuiz activeQuiz" v>
       <p
         class="selectorGame"
         v-for="quiz in listQuiz"
@@ -13,16 +13,18 @@
     <div class="containerQuiz ">
       <div class="quizGame one"><QuizImage /></div>
       <div class="quizGame two">Quiz 2</div>
-      <div class="quizGame three">Quiz 3</div>
+      <div class="quizGame three"><Calendar /></div>
     </div>
   </div>
 </template>
 
 <script>
 import QuizImage from "./QuizImage.vue";
+import Calendar from "./Calendar.vue";
 export default {
   components: {
     QuizImage,
+    Calendar,
   },
   data() {
     return {

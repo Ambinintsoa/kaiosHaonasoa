@@ -51,6 +51,23 @@ export function openNav() {
   if (!containerSelectorQuiz.classList.contains("activeQuiz")) {
     containerSelectorQuiz.classList.add("activeQuiz");
   }
+  //antony
+
+  var itemsAntony = document.querySelectorAll(".antonyGame");
+  for (let i = 0; i < itemsAntony.length; i++) {
+    itemsAntony[i].className = itemsAntony[i].className.replace(
+      " activeAntony",
+      ""
+    );
+  }
+  var containerSelectorAntony = document.querySelector(".selectorMenuAntony");
+  var containerAntony = document.querySelector(".containerAntony");
+  if (containerAntony.classList.contains("activeAntony")) {
+    containerQuiz.classList.remove("activeAntony");
+  }
+  if (!containerSelectorAntony.classList.contains("activeAntony")) {
+    containerSelectorAntony.classList.add("activeAntony");
+  }
 }
 export function closeNav() {
   document.getElementById("mySidenav").style.width = "0";

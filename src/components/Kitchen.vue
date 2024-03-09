@@ -22,10 +22,11 @@
     </div>
 
     <div id="qTwo" class="tabcontent">
-      Hello
+      <Weather />
     </div>
     <div id="qThree" class="tabcontent">
-      <TrueFalse />
+      <SelectAntony />
+      <!--<TrueFalse />-->
     </div>
     <div id="qFour" class="tabcontent">
       <Actuality />
@@ -36,13 +37,15 @@
 <script>
 import Actuality from "./Actuality.vue";
 import SelectGame from "./SelectGame.vue";
-import TrueFalse from "./TrueFalse.vue";
+import SelectAntony from "./SelectAntony.vue";
+import Weather from "./Weather.vue";
 export default {
   name: "Kitchen",
   components: {
     Actuality,
-    TrueFalse,
+    SelectAntony,
     SelectGame,
+    Weather,
   },
   data() {
     return {

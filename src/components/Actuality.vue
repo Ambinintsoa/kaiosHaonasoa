@@ -136,8 +136,6 @@ export default {
   width: 100%;
 }
 
-.content {
-}
 
 .nav {
   text-align: center;

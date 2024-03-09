@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- <Softkey :softkeys.sync="softkeys" /> -->
     <Home @selectMenu="selectMenu" @openkitchen="displaykitchen" />
     <kitchen
       @openNav="openMenu"
@@ -22,12 +21,7 @@ import {
   showContent,
   nav,
 } from "./Navigation";
-// import { handleAnswerClick, startStat, displayQuestion } from "./quiz";
-// import {
-//   displayQuestionTrueFalse,
-//   handleAnswerClickTrueFalse,
-//   startStatTrueFalse,
-// } from "./truefalse";
+
 export default {
   name: "app",
   components: {
@@ -150,9 +144,7 @@ body {
   margin-top: -10px;
   padding: 5px;
 }
-#footer {
-  /* border: 1px solid yellow; */
-}
+
 #opKitchen .tablinks {
   display: flex;
   justify-content: space-around;
