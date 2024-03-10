@@ -1,6 +1,6 @@
 <template>
   <div class="card-game">
-    <div>{{ currentQuestion.weather }}</div>
+    <div class="title-question">{{ currentQuestion.weather }}</div>
     <div class="cards-container" id="cards-container">
       <div
         v-for="(card, i) in currentQuestion.choices"
@@ -21,17 +21,17 @@ export default {
     return {
       questions: [
         {
-          weather: "Fahavaratra",
+          weather: "Inona no mamaritra ny fahavaratra?",
           choices: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
           responses: ["1", "2", "3"],
         },
         {
-          weather: "Lohataona",
+          weather: "Inona no mamaritra ny lohataona?",
           choices: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
           responses: ["1", "2", "3"],
         },
         {
-          weather: "Lohataona 2",
+          weather: "Inona no mamaritra ny ririnina?",
           choices: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
           responses: ["1", "2", "3"],
         },
@@ -133,6 +133,10 @@ export default {
 </script>
 
 <style scoped>
+.title-question {
+  height: 50px;
+  font-size: 12px;
+}
 #cards-container {
   display: flex;
   height: 200px;
