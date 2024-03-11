@@ -4,11 +4,12 @@
     <div class="cards-container" id="cards-container">
       <div
         v-for="(card, i) in currentQuestion.choices"
-        :key="card"
+        :key="i"
         :tabindex="i"
         class="cards"
       >
-        <input type="checkbox" /><u>{{ card }}</u
+        <input type="checkbox" /><u
+          ><img :src="'assets/PNG/' + card" :alt="card"/></u
         ><b></b>
       </div>
     </div>
@@ -22,18 +23,48 @@ export default {
       questions: [
         {
           weather: "Inona no mamaritra ny fahavaratra?",
-          choices: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
-          responses: ["1", "2", "3"],
+          choices: [
+            "Ocean.png",
+            "Forest.png",
+            "Product.png",
+            "Waste.png",
+            "Waste.png",
+            "Waste.png",
+            "Waste.png",
+            "Waste.png",
+            "Waste.png",
+          ],
+          responses: ["Product.png", "Ocean.png", "Forest.png"],
         },
         {
           weather: "Inona no mamaritra ny lohataona?",
-          choices: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
-          responses: ["1", "2", "3"],
+          choices: [
+            "Ocean.png",
+            "Product.png",
+            "Forest.png",
+            "Waste.png",
+            "Waste.png",
+            "Waste.png",
+            "Waste.png",
+            "Waste.png",
+            "Waste.png",
+          ],
+          responses: ["Ocean.png", "Product.png", "Forest.png"],
         },
         {
           weather: "Inona no mamaritra ny ririnina?",
-          choices: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
-          responses: ["1", "2", "3"],
+          choices: [
+            "Ocean.png",
+            "Product.png",
+            "Forest.png",
+            "Waste.png",
+            "Waste.png",
+            "Waste.png",
+            "Waste.png",
+            "Waste.png",
+            "Waste.png",
+          ],
+          responses: ["Ocean.png", "Product.png", "Forest.png"],
         },
       ],
       currentQuestionIndex: 0,
@@ -92,7 +123,7 @@ export default {
       }
     },
     clickOnCard(evt) {
-      var cardValue = evt.target.childNodes[1].textContent;
+      var cardValue = evt.target.childNodes[1].firstChild.getAttribute("alt");
       var cardElement = evt.target.childNodes[0];
       cardElement.checked = true;
       setTimeout(() => {
@@ -217,6 +248,9 @@ export default {
   transform: translateX(160%) rotateY(-180deg);
   transform-origin: -30% center;
   box-shadow: 130px 30px 40px -20px rgba(0, 0, 0, 0);
+}
+.cards img {
+  width: 100%;
 }
 .cards > input:checked + u {
   transform: translateX(0%) rotateY(0deg);
