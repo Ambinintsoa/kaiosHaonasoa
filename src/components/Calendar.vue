@@ -1,46 +1,38 @@
 <template>
   <div id="calendar-container">
-    <div v-if="currentQuestionIndex < questions.length">
-      <div id="container-question">
-        <h5>{{ currentQuestion.questionText }}</h5>
-        <div class="custom-select">
-          <form id="form">
-            <h3>{{ pastDays }}</h3>
-            <div id="container-monthBefore" class="container-month">
-              <select v-model="mth_before_response_one" class="monthBefore frm-navigation" id="mth-before-one"
-                tabindex="0">
-                <option disabled value="">Volana</option>
-                <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
-              </select>
-              <span>-</span>
-              <select v-model="mth_before_response_two" class="monthBefore frm-navigation" id="mth-before-two"
-                tabindex="1">
-                <option disabled value="">Volana</option>
-                <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
-              </select>
-            </div>
-            <h3>{{ presentDays }}</h3>
-            <div id="container-monthToday" class="container-month">
-              <select v-model="mth_today_response_one" class="monthToday frm-navigation" id="mth-today-one"
-                tabindex="2">
-                <option disabled value="">Volana</option>
-                <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
-              </select>
-              <span> - </span>
-              <select v-model="mth_today_response_two" class="monthToday frm-navigation" id="mth-today-two"
-                tabindex="3">
-                <option disabled value="">Volana</option>
-                <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
-              </select>
-            </div>
-            <input class="btn default frm-navigation" type="button" value="OK">
-          </form>
-        </div>
+    <div id="container-question">
+      <h5>{{ currentQuestion.questionText }}</h5>
+      <div class="custom-select">
+        <form id="form">
+          <h3>{{ pastDays }}</h3>
+          <div id="container-monthBefore" class="container-month">
+            <select v-model="mth_before_response_one" class="monthBefore frm-navigation" id="mth-before-one"
+              tabindex="0">
+              <option disabled value="">Volana</option>
+              <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
+            </select>
+            <span>-</span>
+            <select v-model="mth_before_response_two" class="monthBefore frm-navigation" id="mth-before-two"
+              tabindex="1">
+              <option disabled value="">Volana</option>
+              <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
+            </select>
+          </div>
+          <h3>{{ presentDays }}</h3>
+          <div id="container-monthToday" class="container-month">
+            <select v-model="mth_today_response_one" class="monthToday frm-navigation" id="mth-today-one" tabindex="2">
+              <option disabled value="">Volana</option>
+              <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
+            </select>
+            <span> - </span>
+            <select v-model="mth_today_response_two" class="monthToday frm-navigation" id="mth-today-two" tabindex="3">
+              <option disabled value="">Volana</option>
+              <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
+            </select>
+          </div>
+          <input class="btn default frm-navigation" type="button" value="OK">
+        </form>
       </div>
-    </div>
-    <div v-else>
-      Vita le jeu, ato ny stat, tokony atao otrzao ny sasany ngamba e?
-      <h2>Isa : {{ score }}</h2>
     </div>
     <div id="myModal" class="modal">
       <div class="modal-content">
@@ -102,7 +94,7 @@ export default {
       event.stopPropagation();
       // event.preventDefault();
       const key = event.key;
-
+      
       var activeTab = document.querySelector("#opNav");
       if (activeTab.classList.contains("qOne")) {
         switch (key) {
@@ -119,7 +111,7 @@ export default {
             break;
           case "Escape":
             this.closeModalAnswer();
-            break;
+            break;  
           default:
             return;
         }
@@ -151,7 +143,7 @@ export default {
             this.isResponseFound = false;
           }
           this.displayModalAnswer(this.currentQuestion.someInformation);
-          setTimeout(this.closeModalAnswer, 3000);
+          setTimeout(this.closeModalAnswer,3000);
           this.currentQuestionIndex++;
         } else {
           alert("Safidio ny valiny ;)");
@@ -160,7 +152,7 @@ export default {
     },
     displayModalAnswer(someInformation) {
       document.getElementById("myModal").style.display = "block";
-      document.querySelector(".result").innerHTML = someInformation;
+      document.querySelector(".result").innerHTML =someInformation;
     },
     closeModalAnswer() {
       document.getElementById("myModal").style.display = "none";
@@ -235,7 +227,7 @@ export default {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.705);
+  background-color: rgba(0, 0, 0, 0.4);
   /* filter: blur(1px); */
   -webkit-animation-name: fadeIn;
   -webkit-animation-duration: 0.4s;

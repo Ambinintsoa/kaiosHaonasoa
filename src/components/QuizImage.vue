@@ -66,6 +66,7 @@ export default {
     };
   },
   mounted() {
+
     document.addEventListener("keydown", (evt) => {
       this.handleKeydown(evt);
     });
