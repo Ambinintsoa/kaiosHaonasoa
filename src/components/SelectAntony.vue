@@ -12,21 +12,22 @@
     </div>
     <div class="containerAntony ">
       <div class="antonyGame one"><TrueFalse /></div>
-      <div class="antonyGame two">test 2</div>
+      <div class="antonyGame two"><AntonyMachin/></div>
     </div>
   </div>
 </template>
 
 <script>
+import AntonyMachin from "./AntonyMachin.vue";
 import TrueFalse from "./TrueFalse.vue";
 export default {
-  components: { TrueFalse },
+  components: { TrueFalse,AntonyMachin },
   data() {
     return {
       name: "Select antony",
       listQuiz: [
         { tabindex: 0, content: "Marina sa diso" },
-        // { tabindex: 1, content: "" },
+        { tabindex: 1, content: "Antony 2" },
       ],
     };
   },

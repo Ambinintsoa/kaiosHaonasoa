@@ -1,38 +1,49 @@
 <template>
   <div id="calendar-container">
     <div id="container-question">
-      <h5>{{ currentQuestion.questionText }}</h5>
-      <div class="custom-select">
-        <form id="form">
-          <h3>{{ pastDays }}</h3>
-          <div id="container-monthBefore" class="container-month">
-            <select v-model="mth_before_response_one" class="monthBefore frm-navigation" id="mth-before-one"
-              tabindex="0">
-              <option disabled value="">Volana</option>
-              <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
-            </select>
-            <span>-</span>
-            <select v-model="mth_before_response_two" class="monthBefore frm-navigation" id="mth-before-two"
-              tabindex="1">
-              <option disabled value="">Volana</option>
-              <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
-            </select>
-          </div>
-          <h3>{{ presentDays }}</h3>
-          <div id="container-monthToday" class="container-month">
-            <select v-model="mth_today_response_one" class="monthToday frm-navigation" id="mth-today-one" tabindex="2">
-              <option disabled value="">Volana</option>
-              <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
-            </select>
-            <span> - </span>
-            <select v-model="mth_today_response_two" class="monthToday frm-navigation" id="mth-today-two" tabindex="3">
-              <option disabled value="">Volana</option>
-              <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
-            </select>
-          </div>
-          <input class="btn default frm-navigation" type="button" value="OK">
-        </form>
+      <div v-if="!allQuestionsAnswered">
+        <h5>{{ currentQuestion.questionText }}</h5>
+        <div class="custom-select">
+          <form id="form">
+            <h3>{{ pastDays }}</h3>
+            <div id="container-monthBefore" class="container-month">
+              <select v-model="mth_before_response_one" class="monthBefore frm-navigation" id="mth-before-one"
+                tabindex="0">
+                <option disabled value="">Volana</option>
+                <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
+              </select>
+              <span>-</span>
+              <select v-model="mth_before_response_two" class="monthBefore frm-navigation" id="mth-before-two"
+                tabindex="1">
+                <option disabled value="">Volana</option>
+                <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
+              </select>
+            </div>
+            <h3>{{ presentDays }}</h3>
+            <div id="container-monthToday" class="container-month">
+              <select v-model="mth_today_response_one" class="monthToday frm-navigation" id="mth-today-one"
+                tabindex="2">
+                <option disabled value="">Volana</option>
+                <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
+              </select>
+              <span> - </span>
+              <select v-model="mth_today_response_two" class="monthToday frm-navigation" id="mth-today-two"
+                tabindex="3">
+                <option disabled value="">Volana</option>
+                <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
+              </select>
+            </div>
+            <input class="btn default frm-navigation" type="button" value="OK">
+          </form>
+        </div>
       </div>
+
+      <div v-else>
+        <h2>Vita</h2>
+        <p>Isa: {{ score }}</p>
+        <input class="btn default frm-navigation" type="button" value="OK">
+      </div>
+
     </div>
     <div id="myModal" class="modal">
       <div class="modal-content">
@@ -85,6 +96,9 @@ export default {
     currentQuestion() {
       return this.questions[this.currentQuestionIndex];
     },
+    allQuestionsAnswered() {
+      return this.currentQuestionIndex >= this.questions.length;
+    }
   },
   mounted() {
     document.addEventListener("keydown", this.handleKeydown);
@@ -94,7 +108,7 @@ export default {
       event.stopPropagation();
       // event.preventDefault();
       const key = event.key;
-      
+
       var activeTab = document.querySelector("#opNav");
       if (activeTab.classList.contains("qOne")) {
         switch (key) {
@@ -111,7 +125,7 @@ export default {
             break;
           case "Escape":
             this.closeModalAnswer();
-            break;  
+            break;
           default:
             return;
         }
@@ -143,21 +157,40 @@ export default {
             this.isResponseFound = false;
           }
           this.displayModalAnswer(this.currentQuestion.someInformation);
-          setTimeout(this.closeModalAnswer,3000);
-          this.currentQuestionIndex++;
-        } else {
+          setTimeout(this.closeModalAnswer, 3000);
+          if (this.currentQuestionIndex < this.questions.length - 1) {
+            this.currentQuestionIndex += 1;
+          } 
+          else {
+            this.resetGame();
+          }
+
+        }else {
           alert("Safidio ny valiny ;)");
         }
       }
+
     },
     displayModalAnswer(someInformation) {
       document.getElementById("myModal").style.display = "block";
-      document.querySelector(".result").innerHTML =someInformation;
+      var text;
+      text = this.isResponseFound ? "Marina" : "Diso"
+      document.querySelector(".result").innerHTML = text + "<hr/>" + someInformation;
     },
     closeModalAnswer() {
       document.getElementById("myModal").style.display = "none";
+    },
+    resetGame() {
+      this.currentQuestionIndex = 0;
+      this.score = 0;
+      this.isResponseFound = false;
+      this.mth_before_response_one = "";
+      this.mth_before_response_two = "";
+      this.mth_today_response_one = "";
+      this.mth_today_response_two = "";
     }
   },
+
 };
 </script>
 
@@ -214,8 +247,6 @@ export default {
   width: 250px;
   left: -20px;
   border-color: #e7e7e7;
-
-
 }
 
 .modal {

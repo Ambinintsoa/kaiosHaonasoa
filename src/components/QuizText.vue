@@ -1,43 +1,18 @@
 <template>
-  <div class="quiz-box">
+  <div class="container_quizText">
     <p id="viewquestion" class="question">
-      Hehehe hbcjervnrihbh hfrbvbruvb hgrfuhbrhfhur byfbur
+      question
     </p>
-    <ul class="choices">
-      <div>
-        <div
-          v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices"
-          :key="index"
-          v-if="index % 2 === 0"
-        >
-          <li
-            :tabindex="index"
-            class="listChoice"
-            :class="{ selected: currentAnswer === true }"
-            @click="setCurrentAnswer(true)"
-          >
-            <img :src="'assets/PNG/' + name + '.png'" :alt="name" />
-          </li>
+    <ul class="choices_container">
 
-          <li
-            :tabindex="index + 1"
-            class="listChoice"
-            :class="{ selected: currentAnswer === true }"
-            @click="setCurrentAnswer(true)"
-          >
-            <img
-              :src="
-                'assets/PNG/' +
-                  questionsTrueFalse[currentImageIndex].choices[index + 1] +
-                  '.png'
-              "
-              :alt="questionsTrueFalse[currentImageIndex].choices[index + 1]"
-            />
-          </li>
-        </div>
+      <div v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices" :key="index">
+        <li :tabindex="index" class="listChoiceText" @click="setCurrentAnswer(name)">
+          {{ name }}
+        </li>
       </div>
+
     </ul>
-    <p class="score score_quiz">
+    <p class="score">
       Isa: <span>{{ score }}</span>
     </p>
   </div>
@@ -73,21 +48,16 @@ export default {
   methods: {
     handleKeydown(evt) {
       evt.stopPropagation();
-      // console.log(evt.key);
-      // var containerSlide = document.querySelector(".quiz-box");
       var activeTab = document.querySelector("#opNav");
       if (activeTab.classList.contains("qOne")) {
-        if (evt.key === "ArrowRight") {
-          this.nav(1);
-        } else if (evt.key === "ArrowLeft") {
+        if (evt.key === "ArrowUp") {
           this.nav(-1);
-        } else if (evt.key === "ArrowUp") {
-          this.nav(-2);
         } else if (evt.key === "ArrowDown") {
-          this.nav(2);
+          this.nav(1);
         } else if (evt.key === "Enter") {
           const focusedElement = document.activeElement;
-          if (focusedElement.classList.contains("listChoice")) {
+          if (focusedElement.classList.contains("listChoiceText")) {
+
             this.checkAnswer();
           }
         }
@@ -98,12 +68,9 @@ export default {
     },
 
     checkAnswer() {
-      const correctAnswer =
-        this.questionsTrueFalse[this.currentImageIndex].correctAnswer ===
-        "true";
+      const correctAnswer =this.questionsTrueFalse[this.currentImageIndex].correctAnswer;
       if (this.currentAnswer === correctAnswer) {
         this.score += 1;
-        this.updateScore();
         alert("Marina !");
       } else {
         alert("Diso !");
@@ -111,9 +78,8 @@ export default {
       this.moveToNextImage();
     },
     finalScore() {
-      const finalScoreMessage = `nahavoavaly fanontaniana ${
-        this.score
-      } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
+      const finalScoreMessage = `nahavoavaly fanontaniana ${this.score
+        } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
       alert(finalScoreMessage);
     },
     moveToNextImage() {
@@ -130,14 +96,11 @@ export default {
       document.querySelector(".score_quiz span").innerHTML = this.score;
     },
     nav(move) {
-      if (document.querySelector(".quizGame.one.activeQuiz")) {
+      if (document.querySelector(".quizGame.two.activeQuiz")) {
         const currentIndexThree = document.activeElement.tabIndex;
         var nextThree = currentIndexThree + move;
-        const itemsThree = document.querySelectorAll(".listChoice");
-        //mety doly reo na le if na le mod na tsy asiana ara
-        // if (nextThree >= 4) nextThree = 3;
-        // if (nextThree < 0) nextThree = 0;
-        // nextThree %= 4;
+        nextThree%=4;
+        const itemsThree = document.querySelectorAll(".listChoiceText");
         const targetElementThree = itemsThree[nextThree];
         if (targetElementThree) {
           targetElementThree.focus();
@@ -147,13 +110,34 @@ export default {
   },
 };
 </script>
-<style>
-.choices li {
+<style scoped>
+.container_quizText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.choices_container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  text-align: center;
+  margin-left: -20px;
+
+}
+
+.choices_container li {
+
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
   box-sizing: border-box;
   cursor: pointer;
-  display: inline-block;
   outline: none;
   padding: 0.3rem;
   transition: all 200ms ease-in-out;
@@ -162,43 +146,14 @@ export default {
   border-top-left-radius: 255px 15px;
   border-top-right-radius: 15px 225px;
   touch-action: manipulation;
-  width: 60px;
+  width: 180px;
   border: 0.5px solid rgba(128, 128, 128, 0.315);
-  margin-top: 10px;
+
 }
 
-.choices li:focus {
+.choices_container li:focus {
   box-shadow: 2px 8px 4px -6px rgba(0, 0, 0, 0.3);
   transform: translate3d(2px, 2px, 0);
   transform: scale(1.2, 1.2);
-}
-.choices li:hover {
-  box-shadow: 2px 8px 8px -5px rgba(0, 0, 0, 0.3);
-  transform: translate3d(0, 2px, 0);
-}
-.choices li img {
-  width: 100%;
-}
-.question {
-  font-weight: bold;
-  font-size: 12px;
-}
-
-.choices {
-  list-style: none;
-  padding: 0;
-  margin-top: -10px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  height: 130px;
-}
-.choices > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: 10px;
 }
 </style>

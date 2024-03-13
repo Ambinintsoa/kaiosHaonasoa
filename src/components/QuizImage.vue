@@ -5,34 +5,18 @@
     </p>
     <ul class="choices">
       <div>
-        <div
-          v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices"
-          :key="index"
-          v-if="index % 2 === 0"
-        >
-          <li
-            :tabindex="index"
-            class="listChoice"
-            :class="{ selected: currentAnswer === true }"
-            @click="setCurrentAnswer(true)"
-          >
+        <div v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices" :key="index" v-if="index % 2 === 0">
+          <li :tabindex="index" class="listChoice" :class="{ selected: currentAnswer === true }"
+            @click="setCurrentAnswer(true)">
             <img :src="'assets/PNG/' + name + '.png'" :alt="name" />
           </li>
 
-          <li
-            :tabindex="index + 1"
-            class="listChoice"
-            :class="{ selected: currentAnswer === true }"
-            @click="setCurrentAnswer(true)"
-          >
-            <img
-              :src="
-                'assets/PNG/' +
-                  questionsTrueFalse[currentImageIndex].choices[index + 1] +
-                  '.png'
-              "
-              :alt="questionsTrueFalse[currentImageIndex].choices[index + 1]"
-            />
+          <li :tabindex="index + 1" class="listChoice" :class="{ selected: currentAnswer === true }"
+            @click="setCurrentAnswer(true)">
+            <img :src="'assets/PNG/' +
+          questionsTrueFalse[currentImageIndex].choices[index + 1] +
+          '.png'
+          " :alt="questionsTrueFalse[currentImageIndex].choices[index + 1]" />
           </li>
         </div>
       </div>
@@ -112,9 +96,8 @@ export default {
       this.moveToNextImage();
     },
     finalScore() {
-      const finalScoreMessage = `nahavoavaly fanontaniana ${
-        this.score
-      } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
+      const finalScoreMessage = `nahavoavaly fanontaniana ${this.score
+        } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
       alert(finalScoreMessage);
     },
     moveToNextImage() {
@@ -173,13 +156,16 @@ export default {
   transform: translate3d(2px, 2px, 0);
   transform: scale(1.2, 1.2);
 }
+
 .choices li:hover {
   box-shadow: 2px 8px 8px -5px rgba(0, 0, 0, 0.3);
   transform: translate3d(0, 2px, 0);
 }
+
 .choices li img {
   width: 100%;
 }
+
 .question {
   font-weight: bold;
   font-size: 12px;
@@ -196,10 +182,17 @@ export default {
   align-items: center;
   height: 130px;
 }
-.choices > div {
+
+.choices>div {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-left: 10px;
+}
+.score {
+  margin-top: 10px;
+  margin-left: 10%;
+  font-size: 12px;
+  text-align: center;
 }
 </style>

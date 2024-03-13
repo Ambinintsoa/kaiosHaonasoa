@@ -26,7 +26,7 @@
     </div>
     <div id="qThree" class="tabcontent">
       <SelectAntony />
-      <!--<TrueFalse />-->
+     
     </div>
     <div id="qFour" class="tabcontent">
       <Actuality />
@@ -74,19 +74,159 @@ export default {
 </script>
 
 <style scoped>
-/* The Modal (background) */
+.qOne::after {
+  background-color: #8ecae6;
+}
+.qTwo::after {
+  background-color: #ff95bc;
+}
+.qThree::after {
+  background-color: #3ab795;
+}
+.qFour::after {
+  background-color: #d78af1;
+}
+
+.qOne {
+  background-color: #8ecae6;
+}
+.qTwo {
+  background-color: #ff95bc;
+}
+.qThree {
+  background-color: #3ab795;
+}
+.qFour {
+  background-color: #d78af1;
+}
+
+#kitchen {
+  display: none;
+  transition: 0s;
+  width: 240px;
+  height: 290px;
+}
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #f1f1f1;
+  overflow-x: hidden;
+  transition: 0.3s;
+  padding-top: 50px;
+  text-align: center;
+}
+
+#clNav {
+  color: red;
+  transition: 0.3s;
+  display: block;
+  margin-right: -20px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+#clNav:hover {
+  color: #009b77;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+#opNav {
+  cursor: pointer;
+  opacity: 0.9;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+#bar {
+  width: 35px;
+  padding: 5px;
+}
+#bloc1,
+#bloc2,
+#bloc3 {
+  width: 15px;
+  height: 3px;
+  background-color: black;
+  margin: 3px;
+  transition: all 0.3s;
+}
+#bloc1 {
+  transform: translate(3px, -1px);
+  background-color: white;
+}
+#bloc2 {
+  transform: translate(-3px, 1px);
+  background-color: white;
+}
+#bloc3 {
+  transform: translate(5px, 1px);
+  background-color: white;
+}
+#opNav {
+  box-shadow: 0px 0px 0px #000;
+}
+#opNav span {
+  color: black;
+  font-weight: bolder;
+}
+
+.tab {
+  overflow: hidden;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tab .tablinks {
+  background-color: none;
+  cursor: pointer;
+  padding: 10px;
+  transition: 0.2s;
+  font-size: 13px;
+  margin: 0px;
+}
+.tab .tablinks:hover {
+  background-color: #ddd;
+}
+
+.tab .active {
+  background-color: #009b77;
+}
+
+.tab .tablinks:focus {
+  background-color: #ddd;
+}
+
+.tabcontent {
+  padding: 6px 12px;
+  border-top: none;
+  height: 230px;
+  margin-top: -8px;
+}
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-  -webkit-animation-name: fadeIn; /* Fade in the background */
+  width: 100%; 
+  height: 100%; 
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  -webkit-animation-name: fadeIn;
   -webkit-animation-duration: 0.4s;
   animation-name: fadeIn;
   animation-duration: 0.4s;

@@ -16,6 +16,7 @@
     <p class="score score_true_false">
       Isa: <span>{{ score }}</span>
     </p>
+    <button class="btn_ok">OK</button>
   </div>
 </template>
 
@@ -62,7 +63,6 @@ export default {
       // console.log(evt.key);
       // var containerSlide = document.querySelector(".container");
       var activeTab = document.querySelector("#opNav");
-
       if (activeTab.classList.contains("qThree")) {
         if (evt.key === "ArrowRight") {
           this.currentAnswer = false;
@@ -221,5 +221,17 @@ body {
 }
 .truefalse img {
   width: 100%;
+}
+.btn_ok{
+    border: 2px solid black;
+  background: #e4e4e4;
+  color: black;
+  padding: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  bottom: -42px;
+  position: relative;
+  width: 250px;
+  border-color: #e7e7e7;
 }
 </style>

@@ -2,15 +2,8 @@
   <div class="card-game">
     <div class="title-question">{{ currentQuestion.weather }}</div>
     <div class="cards-container" id="cards-container">
-      <div
-        v-for="(card, i) in currentQuestion.choices"
-        :key="i"
-        :tabindex="i"
-        class="cards"
-      >
-        <input type="checkbox" /><u
-          ><img :src="'assets/PNG/' + card" :alt="card"/></u
-        ><b></b>
+      <div v-for="(card, i) in currentQuestion.choices" :key="i" :tabindex="i" class="cards" @click="setCurrentAnswer(card)">
+        <input type="checkbox" /><u><img :src="'assets/PNG/' + card" :alt="card" /></u><b></b>
       </div>
     </div>
   </div>
@@ -68,6 +61,7 @@ export default {
         },
       ],
       currentQuestionIndex: 0,
+      currentAnswer: null,
     };
   },
   computed: {
@@ -102,6 +96,9 @@ export default {
         }
       }
     },
+    setCurrentAnswer(answer) {
+      this.currentAnswer = answer;
+    },
     nav(move) {
       const currentIndex = document.activeElement.tabIndex;
       var next = currentIndex + move;
@@ -123,14 +120,13 @@ export default {
       }
     },
     clickOnCard(evt) {
-      var cardValue = evt.target.childNodes[1].firstChild.getAttribute("alt");
       var cardElement = evt.target.childNodes[0];
       cardElement.checked = true;
       setTimeout(() => {
-        if (this.currentQuestion.responses.includes(cardValue)) {
+        if (this.currentQuestion.responses.includes(this.currentAnswer)) {
           cardElement.classList.add("found");
           const remainingResponses = this.currentQuestion.responses.filter(
-            (response) => response !== cardValue
+            (response) => response !== this.currentAnswer
           );
           this.questions[
             this.currentQuestionIndex
@@ -141,7 +137,7 @@ export default {
             );
             if (this.currentQuestionIndex === this.questions.length - 1) {
               alert("Bravo ! Vous avez terminé le jeu.");
-              //tokony misy zavatra atao
+              //tokony misy zavatra atao resetgame
             } else {
               this.currentQuestionIndex++;
               this.renderCards();
@@ -168,6 +164,7 @@ export default {
   height: 50px;
   font-size: 12px;
 }
+
 #cards-container {
   display: flex;
   height: 200px;
@@ -175,29 +172,34 @@ export default {
   flex-direction: row;
   justify-content: center;
 }
+
 .cards {
   margin: auto;
   width: 60px;
   height: 60px;
 }
-.cards:focus > b {
+
+.cards:focus>b {
   box-shadow: 1px 1px 10px 1px black;
 }
-.cards > input,
-.cards > u,
-.cards > b {
+
+.cards>input,
+.cards>u,
+.cards>b {
   width: auto;
   width: 60px;
   height: 60px;
   position: absolute;
 }
-.cards > input {
+
+.cards>input {
   z-index: 999;
   cursor: pointer;
   opacity: 0;
 }
-.cards > u,
-.cards > b {
+
+.cards>u,
+.cards>b {
   display: inline-block;
   text-align: center;
   vertical-align: top;
@@ -209,63 +211,76 @@ export default {
   -ms-user-select: none;
   user-select: none;
 }
-.cards > u {
+
+.cards>u {
   background: #f8fff9;
   text-decoration: none;
   font: italic 12px Arial, Helvetica, sans-serif;
 }
-.cards > u > b {
+
+.cards>u>b {
   font: bold 14px "Comic Sans MS", cursive, sans-serif;
   color: teal;
   display: block;
 }
-.cards > b {
+
+.cards>b {
   background: linear-gradient(#fede1e, #dabb1e);
   border: 5px solid #f8fff9;
   box-sizing: border-box;
 }
+
 .cards {
   perspective: 1450px;
 }
-.cards > u,
-.cards > b {
+
+.cards>u,
+.cards>b {
   transition: all 0.8s;
   backface-visibility: hidden;
   transform-style: preserve-3d;
   z-index: 0;
 }
-.cards > input:checked + u,
-.cards > input:checked + u + b {
+
+.cards>input:checked+u,
+.cards>input:checked+u+b {
   z-index: 100;
 }
-.cards > input:focus + u,
-.cards > input:focus + u + b {
+
+.cards>input:focus+u,
+.cards>input:focus+u+b {
   transition-property: transform, filter, box-shadow;
   outline: 0;
   z-index: 900;
 }
-.cards > u {
+
+.cards>u {
   transform: translateX(160%) rotateY(-180deg);
   transform-origin: -30% center;
   box-shadow: 130px 30px 40px -20px rgba(0, 0, 0, 0);
 }
+
 .cards img {
   width: 100%;
 }
-.cards > input:checked + u {
+
+.cards>input:checked+u {
   transform: translateX(0%) rotateY(0deg);
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
-.cards > b {
+
+.cards>b {
   transform: translateX(0%) rotateY(0deg);
   transform-origin: 130% center;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
-.cards > input:checked + u + b {
+
+.cards>input:checked+u+b {
   transform: translateX(-160%) rotateY(180deg);
 }
-.cards > u,
-.cards > b {
+
+.cards>u,
+.cards>b {
   cursor: pointer;
 }
 </style>

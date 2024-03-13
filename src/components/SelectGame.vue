@@ -12,7 +12,7 @@
     </div>
     <div class="containerQuiz ">
       <div class="quizGame one"><QuizImage /></div>
-      <div class="quizGame two">Quiz 2</div>
+      <div class="quizGame two"><QuizText/></div>
       <div class="quizGame three"><Calendar /></div>
     </div>
   </div>
@@ -21,10 +21,12 @@
 <script>
 import QuizImage from "./QuizImage.vue";
 import Calendar from "./Calendar.vue";
+import QuizText from "./QuizText.vue"
 export default {
   components: {
     QuizImage,
     Calendar,
+    QuizText
   },
   data() {
     return {
