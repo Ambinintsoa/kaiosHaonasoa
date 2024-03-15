@@ -1,19 +1,20 @@
 <template>
   <div id="selectionThreeGame ">
     <div class="selectorMenuQuiz activeQuiz" v>
-      <p
-        class="selectorGame"
-        v-for="quiz in listQuiz"
-        :key="quiz.tabindex"
-        :tabindex="quiz.tabindex"
-      >
+      <p class="selectorGame" v-for="quiz in listQuiz" :key="quiz.tabindex" :tabindex="quiz.tabindex">
         {{ quiz.content }}
       </p>
     </div>
     <div class="containerQuiz ">
-      <div class="quizGame one"><QuizImage /></div>
-      <div class="quizGame two"><QuizText/></div>
-      <div class="quizGame three"><Calendar /></div>
+      <div class="quizGame one">
+        <QuizImage />
+      </div>
+      <div class="quizGame two">
+        <QuizText />
+      </div>
+      <div class="quizGame three">
+        <Calendar />
+      </div>
     </div>
   </div>
 </template>
@@ -90,13 +91,17 @@ export default {
 };
 </script>
 <style scoped>
+.selectorGame{
+  overflow: hidden;
+  width: 290px;
+  margin-left: -12px;
+  padding: 10px;
+}
 .selectorGame:focus {
-  background-color: rgba(203, 202, 202, 0.499);
+  padding-left: 40px;
+  transition: 0.2s;
+  background-color: #009b77;
 }
-.selectorGame:hover {
-  background-color: rgba(205, 202, 202, 0.499);
-}
-
 .containerQuiz,
 .quizGame,
 .selectorMenuQuiz {
@@ -107,5 +112,5 @@ export default {
 .containerQuiz.activeQuiz,
 .quizGame.activeQuiz {
   display: block;
-}</style
->./QuizImage.vue
+}
+</style>./QuizImage.vue

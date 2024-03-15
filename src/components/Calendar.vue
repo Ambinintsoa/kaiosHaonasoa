@@ -3,45 +3,56 @@
     <div id="container-question">
       <div v-if="!allQuestionsAnswered">
         <h5>{{ currentQuestion.questionText }}</h5>
-        <div class="custom-select">
-          <form id="form">
-            <h3>{{ pastDays }}</h3>
-            <div id="container-monthBefore" class="container-month">
-              <select v-model="mth_before_response_one" class="monthBefore frm-navigation" id="mth-before-one"
-                tabindex="0">
-                <option disabled value="">Volana</option>
-                <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
-              </select>
-              <span>-</span>
-              <select v-model="mth_before_response_two" class="monthBefore frm-navigation" id="mth-before-two"
-                tabindex="1">
-                <option disabled value="">Volana</option>
-                <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
-              </select>
+
+        <div id="container-monthBefore" class="container-month">
+          <h3>{{ pastDays }}</h3>
+          <div class="div-custom-select-container">
+            <div class="custom-select" tabindex="0">
+              <div class="selected-option">Volana</div>
+              <div class="options">
+                <option class="option beforeOne" v-for="(month, index) in lstMonth" :key="index" :data-value="month"
+                  :tabIndex="index">{{ month }}</option>
+              </div>
             </div>
-            <h3>{{ presentDays }}</h3>
-            <div id="container-monthToday" class="container-month">
-              <select v-model="mth_today_response_one" class="monthToday frm-navigation" id="mth-today-one"
-                tabindex="2">
-                <option disabled value="">Volana</option>
-                <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
-              </select>
-              <span> - </span>
-              <select v-model="mth_today_response_two" class="monthToday frm-navigation" id="mth-today-two"
-                tabindex="3">
-                <option disabled value="">Volana</option>
-                <option v-for="(month, index) in lstMonth" :key="index" :value="month">{{ month }}</option>
-              </select>
+
+            <div class="custom-select" tabindex="1">
+              <div class="selected-option">Volana</div>
+              <div class="options right">
+                <option class="option beforeTwo" v-for="(month, index) in lstMonth" :key="index" :data-value="month"
+                  :tabIndex="index">{{ month }}</option>
+              </div>
             </div>
-            <input class="btn default frm-navigation" type="button" value="OK">
-          </form>
+          </div>
         </div>
+
+        <div id="container-monthToday" class="container-month">
+          <h3>{{ presentDays }}</h3>
+          <div class="div-custom-select-container">
+            <div class="custom-select" tabindex="2">
+              <div class="selected-option">Volana</div>
+              <div class="options">
+                <option class="option afterOne" v-for="(month, index) in lstMonth" :key="index" :data-value="month"
+                  :tabIndex="index">{{ month }}</option>
+              </div>
+            </div>
+
+            <div class="custom-select" tabindex="3">
+              <div class="selected-option">Volana</div>
+              <div class="options right">
+                <option class="option afterTwo" v-for="(month, index) in lstMonth" :key="index" :data-value="month"
+                  :tabIndex="index">{{ month }}</option>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input class="btn default frm-navigation" @click="handleOkButtonClick" type="button" value="OK">
+
       </div>
 
       <div v-else>
         <h2>Vita</h2>
         <p>Isa: {{ score }}</p>
-        <input class="btn default frm-navigation" type="button" value="OK">
+        <button class="btn default frm-navigation">OK</button>
       </div>
 
     </div>
@@ -77,12 +88,11 @@ export default {
           before: ["Janoary", "Martsa"],
           today: ["Febroary", "Mey"],
           someInformation: "Raha toa ka ... dia ankehitriny kosa, noho ny fahasimban'ny .... dia ..."
-
         },
         {
           questionText: "Volana inona ny fahavaratra 2?",
-          before: ["Janoary", "martsa"],
-          today: ["Febroary", "mey"],
+          before: ["Janoary", "Martsa"],
+          today: ["Febroary", "Mey"],
           someInformation: "Raha toa ka ... dia ankehitriny kosa, noho ny fahasimban'ny .... dia ..."
         },
       ],
@@ -101,54 +111,82 @@ export default {
     }
   },
   mounted() {
-    document.addEventListener("keydown", this.handleKeydown);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === 'Enter' && (document.querySelector(".quizGame.three.activeQuiz")) && this.isValidated()) {
+        this.handleOkButtonClick()
+      }
+    });
+    const customSelects = document.querySelectorAll('.custom-select');
+    const self = this;
+    customSelects.forEach(customSelect => {
+      const selectedOption = customSelect.querySelector('.selected-option');
+      const optionsContainer = customSelect.querySelector('.options');
+      const options = customSelect.querySelectorAll('.option');
+
+
+      function toggleOptionsDisplay() {
+        customSelects.forEach(cs => {
+          if (cs !== customSelect) {
+            cs.querySelector('.options').style.display = 'none';
+          }
+        });
+        optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
+      }
+
+      customSelect.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+          toggleOptionsDisplay();
+        } else if (event.key === 'Tab'|| event.key ==='SoftLeft') {
+          customSelects.forEach(cs => {
+              cs.querySelector('.options').style.display = 'none';
+          });
+          const index = Array.from(customSelects).indexOf(customSelect);
+          const nextIndex = event.shiftKey ? (index - 1 + customSelects.length) % customSelects.length : (index + 1) % customSelects.length;
+          customSelects[nextIndex].focus();
+          event.preventDefault();
+        }
+      });
+
+      customSelect.addEventListener('keydown', function (event) {
+        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+          event.preventDefault();
+          const index = Array.from(options).indexOf(document.activeElement);
+          const nextIndex = event.key === 'ArrowDown' ? (index + 1) % options.length : (index - 1 + options.length) % options.length;
+          options[nextIndex].focus();
+        }
+      });
+
+      options.forEach(option => {
+        option.addEventListener('keydown', function (event) {
+          if (event.key === 'Enter') {
+            selectedOption.textContent = option.textContent;
+            optionsContainer.style.display = 'none';
+            customSelect.focus(); // Focus back on custom select after selecting an option
+            toggleOptionsDisplay();
+            var classOption = option.classList;
+            if (classOption[1] == "beforeOne") {
+              self.mth_before_response_one = option.textContent;
+            } else if (classOption[1] == "beforeTwo") {
+              self.mth_before_response_two = option.textContent;
+            }
+            else if (classOption[1] == "afterOne") {
+              self.mth_today_response_one = option.textContent;
+            }
+            else if (classOption[1] == "afterTwo") {
+              self.mth_today_response_two = option.textContent;
+            }
+
+          }
+        });
+      });
+    });
   },
   methods: {
-    handleKeydown(event) {
-      event.stopPropagation();
-      // event.preventDefault();
-      const key = event.key;
 
-      var activeTab = document.querySelector("#opNav");
-      if (activeTab.classList.contains("qOne")) {
-        switch (key) {
-          case "ArrowRight":
-            this.nav(1, event);
-            break;
-          case "ArrowLeft":
-            this.nav(-1, event);
-            break;
-          case "Enter":
-            if (document.querySelector(".quizGame.three.activeQuiz")) {
-              this.handleOkButtonClick();
-            }
-            break;
-          case "Escape":
-            this.closeModalAnswer();
-            break;
-          default:
-            return;
-        }
-      }
-
-
-    },
-    nav(move, evt) {
-      if (document.querySelector(".quizGame.three.activeQuiz")) {
-        const currentIndex = document.activeElement.tabIndex;
-        let nextIndex = currentIndex + move;
-        nextIndex %= 4;
-        const items = document.querySelectorAll(".frm-navigation");
-        const targetElement = items[nextIndex];
-        if (targetElement) {
-          targetElement.focus();
-        }
-        evt.preventDefault();
-      }
-    },
     handleOkButtonClick() {
       if (this.currentQuestionIndex < this.questions.length) {
-        if (this.mth_before_response_one != "" && this.mth_before_response_two != "" && this.mth_today_response_one != "" && this.mth_today_response_two != "") {
+
+        if (this.isValidated()) {
           if (this.mth_before_response_one == this.currentQuestion.before[0] && this.mth_before_response_two == this.currentQuestion.before[1] && this.mth_today_response_one == this.currentQuestion.today[0] && this.mth_today_response_two == this.currentQuestion.today[1]) {
             this.score++;
             this.isResponseFound = true;
@@ -156,17 +194,23 @@ export default {
           else {
             this.isResponseFound = false;
           }
+          var items = document.querySelectorAll(".selected-option");
+          items.forEach(option => {
+            option.textContent = "Volana";
+          });
+          this.mth_before_response_one = "";
+          this.mth_before_response_two = "";
+          this.mth_today_response_one = "";
+          this.mth_today_response_two = "";
           this.displayModalAnswer(this.currentQuestion.someInformation);
           setTimeout(this.closeModalAnswer, 3000);
           if (this.currentQuestionIndex < this.questions.length - 1) {
             this.currentQuestionIndex += 1;
-          } 
+          }
           else {
             this.resetGame();
           }
 
-        }else {
-          alert("Safidio ny valiny ;)");
         }
       }
 
@@ -179,6 +223,9 @@ export default {
     },
     closeModalAnswer() {
       document.getElementById("myModal").style.display = "none";
+    },
+    isValidated() {
+      return this.mth_before_response_one != "" && this.mth_before_response_two != "" && this.mth_today_response_one != "" && this.mth_today_response_two != "";
     },
     resetGame() {
       this.currentQuestionIndex = 0;
@@ -194,49 +241,74 @@ export default {
 };
 </script>
 
-
-
-
 <style scoped>
 * {
   margin: 0;
   box-sizing: border-box;
 }
 
+.container-month {
+  height: 58px;
+}
+
+h5 {}
+
+.container-month h3 {
+  font-size: 12px;
+  text-align: center;
+}
+
+.div-custom-select-container {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
 .custom-select {
   position: relative;
-  margin: 20px auto;
-}
-
-.container-month {
-  display: flex;
-  padding: 10px;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-
-}
-
-
-.custom-select select {
   display: inline-block;
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.418);
-  border-radius: 5px;
-  outline: none;
-
-  background-color: white;
+  cursor: pointer;
+  border: 1px solid #ccc;
 }
 
-.custom-select select:focus {
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.315);
+.custom-select:focus {
+  border-bottom: 1px solid black;
+}
+
+.selected-option {
+  padding: 6px;
+  width: 110px;
+}
+
+.options {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  width: 240px;
+  z-index: 1;
+  margin-top: 5px;
+  height: auto;
+  overflow: scroll;
+  left: -5px;
+}
+
+.options.right {
+  left: -7.7em;
+
+}
+
+.option {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.option:hover,
+.option:focus {
+  background-color: #198f6b;
 }
 
 .btn {
-  border: 2px solid black;
+  border: 1px solid black;
   background: #e4e4e4;
   color: black;
   padding: 5px;
@@ -246,7 +318,9 @@ export default {
   position: relative;
   width: 250px;
   left: -20px;
+  bottom: -6em;
   border-color: #e7e7e7;
+
 }
 
 .modal {

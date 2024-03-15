@@ -1,21 +1,21 @@
 <template>
   <div class="slider-container">
     <div class="nav">
-      <button class="tablink active">1</button>
-      <button class="tablink">2</button>
-      <button class="tablink">3</button>
+      <button class="tablink active">Andro</button>
+      <button class="tablink">Nahoana?</button>
+      <button class="tablink">Ny atao</button>
       <div class="tabbar"></div>
     </div>
 
     <div class="slider">
       <div class="slide">
         <div class="content ">
-          <p>Ceci est le contenu de l'onglet 1.</p>
+          <p>Akory </p>
         </div>
       </div>
       <div class="slide">
         <div class="content">
-          <p>Ceci est le contenu de l'onglet 2.</p>
+          <p>Salama va?</p>
         </div>
       </div>
       <div class="slide">
@@ -116,7 +116,7 @@ export default {
 .slider-container {
   overflow: auto;
   height: 260px;
-  scrollbar-color: #009b7735 rgba(128, 128, 128, 0);
+  scrollbar-color: #009b7707 rgba(128, 128, 128, 0);
   scrollbar-width: 5px;
 }
 
@@ -137,12 +137,12 @@ export default {
 }
 
 
-.nav {
-  text-align: center;
+.nav {  
+  overflow-x: scroll;
 }
 
 .tablink.active {
-  color: #009b77;
+  color: #085c48;
 }
 .slider-container {
   position: relative;
@@ -154,7 +154,6 @@ export default {
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 10px 20px;
   transition: color 0.3s ease;
 }
 

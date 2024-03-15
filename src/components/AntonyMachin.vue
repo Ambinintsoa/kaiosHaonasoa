@@ -1,6 +1,6 @@
 <template>
     <div id="container_antonyMachin">
-        <p>Fanontaniana</p>
+        <p>{{ questionsAntonyMachin[currentIndex].question }}</p>
         <div class="container_img">
             <div v-for="(question, index) in currentQuestion.choices" :key="index">
                 <div class="list_img" :tabindex="index"  @click="setCurrentAnswer(question)">

@@ -84,13 +84,17 @@ export default {
 };
 </script>
 <style scoped>
+.selectorAntony{
+  overflow: hidden;
+  width: 290px;
+  margin-left: -12px;
+  padding: 10px;
+}
 .selectorAntony:focus {
-  background-color: rgba(203, 202, 202, 0.499);
+  padding-left: 40px;
+  transition: 0.2s;
+  background-color: #009b77;
 }
-.selectorAntony:hover {
-  background-color: rgba(205, 202, 202, 0.499);
-}
-
 .containerAntony,
 .antonyGame,
 .selectorMenuAntony {

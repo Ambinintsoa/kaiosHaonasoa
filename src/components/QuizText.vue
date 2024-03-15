@@ -1,7 +1,7 @@
 <template>
   <div class="container_quizText">
     <p id="viewquestion" class="question">
-      question
+      {{questionsTrueFalse[currentImageIndex].question}}
     </p>
     <ul class="choices_container">
 
@@ -31,7 +31,7 @@ export default {
         {
           question: "Hehehe hbcjervnrihbh hfrbvbruvb hgrfuhbrhfhur byfbur",
           choices: ["Earth", "Forest", "Faucet", "Love"],
-          correctAnswer: "Love",
+          correctAnswer: "Forest",
           someInformation: "Tiako be",
         },
       ],
@@ -111,6 +111,9 @@ export default {
 };
 </script>
 <style scoped>
+.nav{
+  border: 1px solid red;
+}
 .container_quizText {
   display: flex;
   flex-direction: column;

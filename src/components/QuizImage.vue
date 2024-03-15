@@ -1,26 +1,27 @@
 <template>
   <div class="quiz-box">
     <p id="viewquestion" class="question">
-      Hehehe hbcjervnrihbh hfrbvbruvb hgrfuhbrhfhur byfbur
+      {{ currentQuestion.question }}
     </p>
     <ul class="choices">
       <div>
-        <div v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices" :key="index" v-if="index % 2 === 0">
+        <div v-for="(name, index) in currentQuestion.choices" :key="index" v-if="index % 2 === 0">
           <li :tabindex="index" class="listChoice" :class="{ selected: currentAnswer === true }"
-            @click="setCurrentAnswer(true)">
+            @click="setCurrentAnswer(name)">
             <img :src="'assets/PNG/' + name + '.png'" :alt="name" />
           </li>
 
-          <li :tabindex="index + 1" class="listChoice" :class="{ selected: currentAnswer === true }"
-            @click="setCurrentAnswer(true)">
+          <li :tabindex="index + 1" class="listChoice" :class="{ selected: currentAnswer === false }"
+            @click="setCurrentAnswer(currentQuestion.choices[index+1])">
             <img :src="'assets/PNG/' +
-          questionsTrueFalse[currentImageIndex].choices[index + 1] +
-          '.png'
-          " :alt="questionsTrueFalse[currentImageIndex].choices[index + 1]" />
+        currentQuestion.choices[index + 1] +
+        '.png'
+        " :alt="currentQuestion.choices[index + 1]" />
           </li>
         </div>
       </div>
     </ul>
+
     <p class="score score_quiz">
       Isa: <span>{{ score }}</span>
     </p>
@@ -49,6 +50,12 @@ export default {
       score: 0,
     };
   },
+  computed: {
+    currentQuestion() {
+      return this.questionsTrueFalse[this.currentImageIndex];
+    },
+
+  },
   mounted() {
 
     document.addEventListener("keydown", (evt) => {
@@ -58,8 +65,6 @@ export default {
   methods: {
     handleKeydown(evt) {
       evt.stopPropagation();
-      // console.log(evt.key);
-      // var containerSlide = document.querySelector(".quiz-box");
       var activeTab = document.querySelector("#opNav");
       if (activeTab.classList.contains("qOne")) {
         if (evt.key === "ArrowRight") {
@@ -83,9 +88,8 @@ export default {
     },
 
     checkAnswer() {
-      const correctAnswer =
-        this.questionsTrueFalse[this.currentImageIndex].correctAnswer ===
-        "true";
+
+      const correctAnswer = this.currentQuestion.correctAnswer;
       if (this.currentAnswer === correctAnswer) {
         this.score += 1;
         this.updateScore();
@@ -189,6 +193,7 @@ export default {
   align-items: center;
   margin-left: 10px;
 }
+
 .score {
   margin-top: 10px;
   margin-left: 10%;

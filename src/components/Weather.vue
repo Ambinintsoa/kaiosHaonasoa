@@ -2,7 +2,8 @@
   <div class="card-game">
     <div class="title-question">{{ currentQuestion.weather }}</div>
     <div class="cards-container" id="cards-container">
-      <div v-for="(card, i) in currentQuestion.choices" :key="i" :tabindex="i" class="cards" @click="setCurrentAnswer(card)">
+      <div v-for="(card, i) in currentQuestion.choices" :key="i" :tabindex="i" class="cards"
+        @click="setCurrentAnswer(card)">
         <input type="checkbox" /><u><img :src="'assets/PNG/' + card" :alt="card" /></u><b></b>
       </div>
     </div>
@@ -120,11 +121,17 @@ export default {
       }
     },
     clickOnCard(evt) {
+
       var cardElement = evt.target.childNodes[0];
       cardElement.checked = true;
+      var bLetsynety = evt.target.childNodes[2];
+      if (!bLetsynety.classList.contains("letsynety")) {
+        bLetsynety.classList.add("letsynety")
+      }
       setTimeout(() => {
         if (this.currentQuestion.responses.includes(this.currentAnswer)) {
           cardElement.classList.add("found");
+
           const remainingResponses = this.currentQuestion.responses.filter(
             (response) => response !== this.currentAnswer
           );
@@ -145,14 +152,23 @@ export default {
           }
         } else {
           cardElement.checked = false;
+          if (bLetsynety.classList.contains("letsynety")) {
+            bLetsynety.classList.remove("letsynety");
+          }
         }
       }, 800);
     },
     renderCards() {
+
+      var bAll = document.querySelectorAll(".cards b");
       var items = document.querySelectorAll(".cards input");
-      items.forEach((item) => {
-        item.checked = false;
-      });
+      for (var i = 0; i < items.length; i++) {
+        items[i].checked = false;
+        if (bAll[i].classList.contains("letsynety")) {
+          bAll[i].classList.remove("letsynety");
+        }
+
+      }
       this.shuffle(this.currentQuestion.choices);
     },
   },
@@ -179,22 +195,15 @@ export default {
   height: 60px;
 }
 
-.cards:focus>b {
-  box-shadow: 1px 1px 10px 1px black;
-}
-
-.cards>input,
-.cards>u,
-.cards>b {
-  width: auto;
+.cards input,
+.cards u,
+.cards b {
   width: 60px;
   height: 60px;
   position: absolute;
 }
 
 .cards>input {
-  z-index: 999;
-  cursor: pointer;
   opacity: 0;
 }
 
@@ -202,57 +211,41 @@ export default {
 .cards>b {
   display: inline-block;
   text-align: center;
-  vertical-align: top;
   border: 5px solid #f8fff9;
   box-sizing: border-box;
   border-radius: 8px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.cards>u {
-  background: #f8fff9;
-  text-decoration: none;
-  font: italic 12px Arial, Helvetica, sans-serif;
-}
-
-.cards>u>b {
-  font: bold 14px "Comic Sans MS", cursive, sans-serif;
-  color: teal;
-  display: block;
-}
-
-.cards>b {
-  background: linear-gradient(#fede1e, #dabb1e);
-  border: 5px solid #f8fff9;
-  box-sizing: border-box;
-}
-
-.cards {
-  perspective: 1450px;
-}
-
-.cards>u,
-.cards>b {
   transition: all 0.8s;
+}
+
+/* .cards>u {
+    background: #f8fff9;
+
+  } */
+
+.cards>b {
   backface-visibility: hidden;
-  transform-style: preserve-3d;
-  z-index: 0;
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: linear-gradient(#fede1e, #dabb1e);
 }
 
-.cards>input:checked+u,
-.cards>input:checked+u+b {
-  z-index: 100;
+.cards img {
+  width: 100%;
 }
 
-.cards>input:focus+u,
-.cards>input:focus+u+b {
-  transition-property: transform, filter, box-shadow;
-  outline: 0;
-  z-index: 900;
+.cards:focus>b {
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.493);
 }
+
+/* 
+  .cards>input:checked+u+b {
+    z-index: 100;
+  } */
+/* 
+  .cards>input:focus+u,
+  .cards>input:focus+u+b {
+    outline: 0;
+  } */
 
 .cards>u {
   transform: translateX(160%) rotateY(-180deg);
@@ -260,22 +253,17 @@ export default {
   box-shadow: 130px 30px 40px -20px rgba(0, 0, 0, 0);
 }
 
-.cards img {
-  width: 100%;
-}
-
 .cards>input:checked+u {
   transform: translateX(0%) rotateY(0deg);
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .cards>b {
   transform: translateX(0%) rotateY(0deg);
   transform-origin: 130% center;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
-.cards>input:checked+u+b {
+.cards .letsynety{
   transform: translateX(-160%) rotateY(180deg);
 }
 
