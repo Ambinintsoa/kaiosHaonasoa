@@ -41,7 +41,11 @@ export function openNav() {
   //bon l'important c'est que ca marche
   var itemsQuiz = document.querySelectorAll(".quizGame");
   for (let i = 0; i < itemsQuiz.length; i++) {
+    
     itemsQuiz[i].className = itemsQuiz[i].className.replace(" activeQuiz", "");
+    if(itemsQuiz[i].classList.contains("first")){
+      itemsQuiz[i].className = itemsQuiz[i].className.replace(" first", "");
+    }
   }
   var containerSelectorQuiz = document.querySelector(".selectorMenuQuiz");
   var containerQuiz = document.querySelector(".containerQuiz");

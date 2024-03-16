@@ -45,8 +45,7 @@
             </div>
           </div>
         </div>
-        <input class="btn default frm-navigation" @click="handleOkButtonClick" type="button" value="OK">
-
+        <input class="btn default frm-navigation" @click="handleOkButtonClick" type="button" value="OK" />
       </div>
 
       <div v-else>
@@ -54,15 +53,12 @@
         <p>Isa: {{ score }}</p>
         <button class="btn default frm-navigation">OK</button>
       </div>
-
     </div>
     <div id="myModal" class="modal">
       <div class="modal-content">
         <div class="modal-body">
           <p class="result">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit cum quibusdam nihil optio quasi
-            perspiciatis earum expedita illo autem ducimus ex, voluptates tempora exercitationem sit, quis aliquid
-            itaque eum quas.
+            {{ currentQuestion.someInformation }}
           </p>
         </div>
       </div>
@@ -75,11 +71,11 @@ export default {
   name: "Calendar",
   data() {
     return {
-      mth_before_response_one: '',
-      mth_before_response_two: '',
-      mth_today_response_one: '',
-      mth_today_response_two: '',
-      selectedAnkehitriny: '',
+      mth_before_response_one: "",
+      mth_before_response_two: "",
+      mth_today_response_one: "",
+      mth_today_response_two: "",
+      selectedAnkehitriny: "",
       presentDays: "Ankehitriny",
       pastDays: "Taloha",
       questions: [
@@ -87,19 +83,35 @@ export default {
           questionText: "Volana inona ny fahavaratra?",
           before: ["Janoary", "Martsa"],
           today: ["Febroary", "Mey"],
-          someInformation: "Raha toa ka ... dia ankehitriny kosa, noho ny fahasimban'ny .... dia ..."
+          someInformation:
+            "Raha toa ka ... dia ankehitriny kosa, noho ny fahasimban'ny .... dia ...",
         },
         {
           questionText: "Volana inona ny fahavaratra 2?",
           before: ["Janoary", "Martsa"],
           today: ["Febroary", "Mey"],
-          someInformation: "Raha toa ka ... dia ankehitriny kosa, noho ny fahasimban'ny .... dia ..."
+          someInformation:
+            "Raha toa ka ... dia ankehitriny kosa, noho ny fahasimban'ny .... dia ...",
         },
       ],
-      lstMonth: ["Janoary", "Febroary", "Martsa", "Aprily", "Mey", "Jona", "Jolay", "Aogositra", "Setpambra", "Oktobra", "Novambra", "Desambra"],
+      lstMonth: [
+        "Janoary",
+        "Febroary",
+        "Martsa",
+        "Aprily",
+        "Mey",
+        "Jona",
+        "Jolay",
+        "Aogositra",
+        "Setpambra",
+        "Oktobra",
+        "Novambra",
+        "Desambra",
+      ],
       currentQuestionIndex: 0,
       score: 0,
       isResponseFound: false,
+      firstTime: true,
     };
   },
   computed: {
@@ -108,65 +120,82 @@ export default {
     },
     allQuestionsAnswered() {
       return this.currentQuestionIndex >= this.questions.length;
-    }
+    },
   },
   mounted() {
     document.addEventListener("keydown", (e) => {
-      if (e.key === 'Enter' && (document.querySelector(".quizGame.three.activeQuiz")) && this.isValidated()) {
-        this.handleOkButtonClick()
-      } else if (e.key === 'SoftRight' && (document.querySelector(".quizGame.three.activeQuiz"))) {
-          document.getElementById("firstCst").focus();
+      if (
+        e.key === "Enter" &&
+        document.querySelector(".quizGame.three.activeQuiz") &&
+        this.isValidated()
+      ) {
+        this.handleOkButtonClick();
+      } else if (
+        e.key === "Escape" &&
+        !document.querySelector(".quizGame.three.activeQuiz").classList.contains("first") &&
+        this.firstTime
+      ) {
+        document.querySelector(".quizGame.three.activeQuiz").classList.add("first");
+        document.getElementById("firstCst").focus();
       }
     });
-    const customSelects = document.querySelectorAll('.custom-select');
+    const customSelects = document.querySelectorAll(".custom-select");
     const self = this;
     for (let i = 0; i < customSelects.length; i++) {
       const customSelect = customSelects[i];
-      const selectedOption = customSelect.querySelector('.selected-option');
-      const optionsContainer = customSelect.querySelector('.options');
-      const options = customSelect.querySelectorAll('.option');
-
+      const selectedOption = customSelect.querySelector(".selected-option");
+      const optionsContainer = customSelect.querySelector(".options");
+      const options = customSelect.querySelectorAll(".option");
 
       const toggleOptionsDisplay = () => {
         for (let j = 0; j < customSelects.length; j++) {
           let cs = customSelects[j];
           if (cs !== customSelect) {
-            cs.querySelector('.options').style.display = 'none';
+            cs.querySelector(".options").style.display = "none";
           }
         }
-        optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
-      }
+        optionsContainer.style.display =
+          optionsContainer.style.display === "block" ? "none" : "block";
+      };
 
-      customSelect.addEventListener('keydown', function (event) {
-        if (event.key === 'Enter') {
+      customSelect.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
           toggleOptionsDisplay();
-        } else if (event.key === 'SoftRight' && (document.querySelector(".quizGame.three.activeQuiz"))) {
+        } else if (
+          event.key === "Escape" &&
+          document.querySelector(".quizGame.three.activeQuiz")
+        ) {
           for (let j = 0; j < customSelects.length; j++) {
             const cs = customSelects[j];
-            cs.querySelector('.options').style.display = 'none';
+            cs.querySelector(".options").style.display = "none";
           }
           const index = Array.from(customSelects).indexOf(customSelect);
-          const nextIndex = event.shiftKey ? (index - 1 + customSelects.length) % customSelects.length : (index + 1) % customSelects.length;
+          const nextIndex = event.shiftKey
+            ? (index - 1 + customSelects.length) % customSelects.length
+            : (index + 1) % customSelects.length;
           customSelects[nextIndex].focus();
           event.preventDefault();
         }
       });
 
-      customSelect.addEventListener('keydown', function (event) {
-        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      customSelect.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowDown" || event.key === "ArrowUp") {
           event.preventDefault();
           const index = Array.from(options).indexOf(document.activeElement);
-          const nextIndex = event.key === 'ArrowDown' ? (index + 1) % options.length : (index - 1 + options.length) % options.length;
+          const nextIndex =
+            event.key === "ArrowDown"
+              ? (index + 1) % options.length
+              : (index - 1 + options.length) % options.length;
           options[nextIndex].focus();
         }
       });
 
       for (let j = 0; j < options.length; j++) {
         const option = options[j];
-        option.addEventListener('keydown', function (event) {
-          if (event.key === 'Enter') {
+        option.addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
             selectedOption.textContent = option.textContent;
-            optionsContainer.style.display = 'none';
+            optionsContainer.style.display = "none";
             customSelect.focus(); // Focus back on custom select after selecting an option
             toggleOptionsDisplay();
             var classOption = option.classList;
@@ -174,30 +203,29 @@ export default {
               self.mth_before_response_one = option.textContent;
             } else if (classOption[1] == "beforeTwo") {
               self.mth_before_response_two = option.textContent;
-            }
-            else if (classOption[1] == "afterOne") {
+            } else if (classOption[1] == "afterOne") {
               self.mth_today_response_one = option.textContent;
-            }
-            else if (classOption[1] == "afterTwo") {
+            } else if (classOption[1] == "afterTwo") {
               self.mth_today_response_two = option.textContent;
             }
-
           }
         });
       }
     }
   },
   methods: {
-
     handleOkButtonClick() {
       if (this.currentQuestionIndex < this.questions.length) {
-
         if (this.isValidated()) {
-          if (this.mth_before_response_one == this.currentQuestion.before[0] && this.mth_before_response_two == this.currentQuestion.before[1] && this.mth_today_response_one == this.currentQuestion.today[0] && this.mth_today_response_two == this.currentQuestion.today[1]) {
+          if (
+            this.mth_before_response_one == this.currentQuestion.before[0] &&
+            this.mth_before_response_two == this.currentQuestion.before[1] &&
+            this.mth_today_response_one == this.currentQuestion.today[0] &&
+            this.mth_today_response_two == this.currentQuestion.today[1]
+          ) {
             this.score++;
             this.isResponseFound = true;
-          }
-          else {
+          } else {
             this.isResponseFound = false;
           }
           var items = document.querySelectorAll(".selected-option");
@@ -213,28 +241,32 @@ export default {
           setTimeout(this.closeModalAnswer, 3000);
           if (this.currentQuestionIndex < this.questions.length - 1) {
             this.currentQuestionIndex += 1;
-          }
-          else {
+          } else {
             this.resetGame();
           }
-
         }
       }
-
     },
     displayModalAnswer(someInformation) {
       document.getElementById("myModal").style.display = "block";
       var text;
-      text = this.isResponseFound ? "Marina" : "Diso"
-      document.querySelector(".result").innerHTML = text + "<hr/>" + someInformation;
+      text = this.isResponseFound ? "Marina" : "Diso";
+      document.querySelector(".result").innerHTML =
+        text + "<hr/>" + someInformation;
     },
     closeModalAnswer() {
       document.getElementById("myModal").style.display = "none";
     },
     isValidated() {
-      return this.mth_before_response_one != "" && this.mth_before_response_two != "" && this.mth_today_response_one != "" && this.mth_today_response_two != "";
+      return (
+        this.mth_before_response_one != "" &&
+        this.mth_before_response_two != "" &&
+        this.mth_today_response_one != "" &&
+        this.mth_today_response_two != ""
+      );
     },
     resetGame() {
+      this.firstTime = true;
       this.currentQuestionIndex = 0;
       this.score = 0;
       this.isResponseFound = false;
@@ -242,9 +274,8 @@ export default {
       this.mth_before_response_two = "";
       this.mth_today_response_one = "";
       this.mth_today_response_two = "";
-    }
+    },
   },
-
 };
 </script>
 
@@ -299,7 +330,6 @@ export default {
 
 .options.right {
   left: -7.7em;
-
 }
 
 .option {
@@ -322,7 +352,6 @@ export default {
   bottom: -43px;
   position: relative;
   width: 220px;
-
 }
 
 .modal {
