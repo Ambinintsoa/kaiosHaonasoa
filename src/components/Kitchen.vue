@@ -194,11 +194,11 @@ export default {
   cursor: pointer;
   padding: 10px;
   transition: 0.2s;
-  font-size: 13px;
+  font-size: 14px;
   margin: 0px;
 }
 .tab .tablinks:hover {
-  background-color: #ddd;
+  background-color: #009b77;
 }
 
 .tab .active {
@@ -206,7 +206,7 @@ export default {
 }
 
 .tab .tablinks:focus {
-  background-color: #ddd;
+  background-color: #009b772c;
 }
 
 .tabcontent {
@@ -242,7 +242,7 @@ export default {
   -webkit-animation-duration: 0.4s;
   animation-name: slideIn;
   animation-duration: 0.4s;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .modal-body {

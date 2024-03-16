@@ -140,10 +140,10 @@ export default {
           ].responses = remainingResponses;
           if (this.currentQuestion.responses.length === 0) {
             alert(
-              "Félicitations ! Vous avez trouvé toutes les réponses pour cette question."
+              "Arahabaina. Hitanao daholo ny valiny"
             );
             if (this.currentQuestionIndex === this.questions.length - 1) {
-              alert("Bravo ! Vous avez terminé le jeu.");
+              alert("Vita ilay lalao.");
               //tokony misy zavatra atao resetgame
             } else {
               this.currentQuestionIndex++;
@@ -178,7 +178,7 @@ export default {
 <style scoped>
 .title-question {
   height: 50px;
-  font-size: 12px;
+  font-size: 15px;
 }
 
 #cards-container {
@@ -214,19 +214,19 @@ export default {
   border: 5px solid #f8fff9;
   box-sizing: border-box;
   border-radius: 8px;
-  transition: all 0.8s;
+  transition: all 0.3s;
 }
 
-/* .cards>u {
+.cards>u {
     background: #f8fff9;
 
-  } */
+  }
 
 .cards>b {
   backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  background: linear-gradient(#fede1e, #dabb1e);
+  background: linear-gradient(#009b77, #159174);
 }
 
 .cards img {
@@ -237,15 +237,15 @@ export default {
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.493);
 }
 
-/* 
+
   .cards>input:checked+u+b {
     z-index: 100;
-  } */
-/* 
+  } 
+
   .cards>input:focus+u,
   .cards>input:focus+u+b {
     outline: 0;
-  } */
+  }
 
 .cards>u {
   transform: translateX(160%) rotateY(-180deg);

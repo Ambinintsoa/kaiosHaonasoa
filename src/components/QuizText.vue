@@ -111,9 +111,6 @@ export default {
 };
 </script>
 <style scoped>
-.nav{
-  border: 1px solid red;
-}
 .container_quizText {
   display: flex;
   flex-direction: column;
@@ -143,7 +140,7 @@ export default {
   cursor: pointer;
   outline: none;
   padding: 0.3rem;
-  transition: all 200ms ease-in-out;
+  transition: all 0.2 ease-in-out;
   border-bottom-left-radius: 15px 255px;
   border-bottom-right-radius: 225px 15px;
   border-top-left-radius: 255px 15px;

@@ -138,14 +138,14 @@ export default {
 }
 
 .list_img {
-    width: 95px;
+    width: 93px;
     border-radius: 5px;
     border: 1px solid rgb(197, 197, 197);
     margin: auto;
 }
 
 .list_img:focus {
-    box-shadow: 1px 1px 1px rgba(126, 126, 126, 0.705);
+    box-shadow: 1px 1px 1px #009b77;
 
 }
 
@@ -155,14 +155,13 @@ export default {
 
 .btn_ok {
     border: 2px solid black;
-    background: #e4e4e4;
-    color: black;
+    background:black;
+    color: white;
     padding: 5px;
     font-size: 14px;
     cursor: pointer;
     bottom: -42px;
     position: relative;
-    width: 250px;
-    border-color: #e7e7e7;
+    width: 230px;
 }
 </style>

@@ -113,6 +113,9 @@ body {
 :focus {
   outline: none;
 }
+#app{
+  overflow-x:hidden;
+}
 
 
 

@@ -7,7 +7,7 @@
         <div id="container-monthBefore" class="container-month">
           <h3>{{ pastDays }}</h3>
           <div class="div-custom-select-container">
-            <div class="custom-select" tabindex="0">
+            <div class="custom-select" tabindex="0" id="firstCst">
               <div class="selected-option">Volana</div>
               <div class="options">
                 <option class="option beforeOne" v-for="(month, index) in lstMonth" :key="index" :data-value="month"
@@ -114,32 +114,37 @@ export default {
     document.addEventListener("keydown", (e) => {
       if (e.key === 'Enter' && (document.querySelector(".quizGame.three.activeQuiz")) && this.isValidated()) {
         this.handleOkButtonClick()
+      } else if (e.key === 'SoftRight' && (document.querySelector(".quizGame.three.activeQuiz"))) {
+          document.getElementById("firstCst").focus();
       }
     });
     const customSelects = document.querySelectorAll('.custom-select');
     const self = this;
-    customSelects.forEach(customSelect => {
+    for (let i = 0; i < customSelects.length; i++) {
+      const customSelect = customSelects[i];
       const selectedOption = customSelect.querySelector('.selected-option');
       const optionsContainer = customSelect.querySelector('.options');
       const options = customSelect.querySelectorAll('.option');
 
 
-      function toggleOptionsDisplay() {
-        customSelects.forEach(cs => {
+      const toggleOptionsDisplay = () => {
+        for (let j = 0; j < customSelects.length; j++) {
+          let cs = customSelects[j];
           if (cs !== customSelect) {
             cs.querySelector('.options').style.display = 'none';
           }
-        });
+        }
         optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
       }
 
       customSelect.addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
           toggleOptionsDisplay();
-        } else if (event.key === 'Tab'|| event.key ==='SoftLeft') {
-          customSelects.forEach(cs => {
-              cs.querySelector('.options').style.display = 'none';
-          });
+        } else if (event.key === 'SoftRight' && (document.querySelector(".quizGame.three.activeQuiz"))) {
+          for (let j = 0; j < customSelects.length; j++) {
+            const cs = customSelects[j];
+            cs.querySelector('.options').style.display = 'none';
+          }
           const index = Array.from(customSelects).indexOf(customSelect);
           const nextIndex = event.shiftKey ? (index - 1 + customSelects.length) % customSelects.length : (index + 1) % customSelects.length;
           customSelects[nextIndex].focus();
@@ -156,7 +161,8 @@ export default {
         }
       });
 
-      options.forEach(option => {
+      for (let j = 0; j < options.length; j++) {
+        const option = options[j];
         option.addEventListener('keydown', function (event) {
           if (event.key === 'Enter') {
             selectedOption.textContent = option.textContent;
@@ -178,8 +184,8 @@ export default {
 
           }
         });
-      });
-    });
+      }
+    }
   },
   methods: {
 
@@ -195,9 +201,10 @@ export default {
             this.isResponseFound = false;
           }
           var items = document.querySelectorAll(".selected-option");
-          items.forEach(option => {
+          for (let i = 0; i < items.length; i++) {
+            const option = items[i];
             option.textContent = "Volana";
-          });
+          }
           this.mth_before_response_one = "";
           this.mth_before_response_two = "";
           this.mth_today_response_one = "";
@@ -251,8 +258,6 @@ export default {
   height: 58px;
 }
 
-h5 {}
-
 .container-month h3 {
   font-size: 12px;
   text-align: center;
@@ -304,22 +309,19 @@ h5 {}
 
 .option:hover,
 .option:focus {
-  background-color: #198f6b;
+  background-color: #009b77;
 }
 
 .btn {
-  border: 1px solid black;
-  background: #e4e4e4;
-  color: black;
+  border: 2px solid black;
+  background: black;
+  color: white;
   padding: 5px;
   font-size: 14px;
   cursor: pointer;
-  bottom: -42px;
+  bottom: -43px;
   position: relative;
-  width: 250px;
-  left: -20px;
-  bottom: -6em;
-  border-color: #e7e7e7;
+  width: 220px;
 
 }
 
@@ -335,9 +337,9 @@ h5 {}
   background-color: rgba(0, 0, 0, 0.4);
   /* filter: blur(1px); */
   -webkit-animation-name: fadeIn;
-  -webkit-animation-duration: 0.4s;
+  -webkit-animation-duration: 0.3s;
   animation-name: fadeIn;
-  animation-duration: 0.4s;
+  animation-duration: 0.3s;
 }
 
 .modal-content {
@@ -346,9 +348,9 @@ h5 {}
   background-color: #fefefe;
   width: 100%;
   -webkit-animation-name: slideIn;
-  -webkit-animation-duration: 0.4s;
+  -webkit-animation-duration: 0.3s;
   animation-name: slideIn;
-  animation-duration: 0.4s;
+  animation-duration: 0.3s;
   font-size: 12px;
 }
 

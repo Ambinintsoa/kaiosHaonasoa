@@ -88,10 +88,10 @@ export default {
   overflow: hidden;
   width: 290px;
   margin-left: -12px;
-  padding: 10px;
+  padding: 5px;
 }
 .selectorAntony:focus {
-  padding-left: 40px;
+  padding-left: 20px;
   transition: 0.2s;
   background-color: #009b77;
 }

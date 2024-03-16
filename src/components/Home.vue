@@ -48,7 +48,7 @@ export default {
   justify-content: center;
   align-items: center;
   opacity: 1;
-  transition: 0.6s;
+  transition: 0.3s;
   height: 294px;
   margin: auto;
   overflow: hidden;

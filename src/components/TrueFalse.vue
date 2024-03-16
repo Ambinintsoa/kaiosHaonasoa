@@ -1,21 +1,18 @@
 <template>
   <div class="container">
-    <img :src="currentImageSrc" alt="Game Image" />
+    <span>{{ questionsTrueFalse[currentImageIndex].question }}</span>
+    <div id="cont-img">
+      <img :src="currentImageSrc" alt="Game Image" />
+    </div>
     <div class="buttons">
-      <button
-        v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices"
-        :key="name"
-        class="truefalse"
-        :class="{ selected: currentAnswer === name }"
-        @click="setCurrentAnswer(name)"
-        :tabindex="index"
-      >
+      <button v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices" :key="name" class="truefalse"
+        :class="{ selected: currentAnswer === name }" @click="setCurrentAnswer(name)" :tabindex="index">
         <img :src="'assets/gif/' + name + '.gif'" />
       </button>
     </div>
-    <p class="score score_true_false">
+    <!-- <p class="score score_true_false">
       Isa: <span>{{ score }}</span>
-    </p>
+    </p> -->
     <button class="btn_ok">OK</button>
   </div>
 </template>
@@ -47,9 +44,8 @@ export default {
   },
   computed: {
     currentImageSrc() {
-      return `/assets/requestImg/${
-        this.questionsTrueFalse[this.currentImageIndex].image
-      }`;
+      return `/assets/requestImg/${this.questionsTrueFalse[this.currentImageIndex].image
+        }`;
     },
   },
   mounted() {
@@ -89,16 +85,15 @@ export default {
       if (this.currentAnswer === correctAnswer) {
         this.score += 1;
         this.updateScore();
-        alert("Marina !");
+        alert("Marina ny valinteninao!");
       } else {
-        alert("Diso !");
+        alert("Diso ny valinteninao!");
       }
       this.moveToNextImage();
     },
     finalScore() {
-      const finalScoreMessage = `nahavoavaly fanontaniana ${
-        this.score
-      } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
+      const finalScoreMessage = `nahavoavaly fanontaniana ${this.score
+        } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
       alert(finalScoreMessage);
     },
     moveToNextImage() {
@@ -130,38 +125,40 @@ export default {
 };
 </script>
 <style scoped>
+.container>span {
+  display: inline-block;
+}
+
 .buttons {
+  margin-top: 10px;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
 }
 
-button {
-  padding: 5px 10px;
-  margin: 20%;
-  /* font-size: 16px; */
+#cont-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 215px;
+  margin-top: 2%;
+}
+#cont-img img{
+  width: 90%;
+}
+.buttons{
+  display: flex;
+  justify-content: space-around;
+}
+
+button.truefalse {
+  width: 30px;
   cursor: pointer;
-}
-
-img {
-  width: 80%;
-  margin-left: 10%;
-  margin-top: 10%;
-}
-button img {
-  width: 20px;
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font: inherit;
-}
-
-body {
-  color: #00031e;
-  font-family: Inter, sans-serif;
-  font-size: 12px;
 }
 /*
 .popup {
@@ -214,24 +211,26 @@ body {
   padding: 5px;
   transform: scale(1.4, 1.2);
 }
+
 .truefalse:focus {
   box-shadow: 2px 8px 4px -6px rgba(0, 0, 0, 0.3);
   transform: translate3d(2px, 2px, 0);
   transform: scale(1.6, 1.4);
 }
+
 .truefalse img {
   width: 100%;
 }
-.btn_ok{
-    border: 2px solid black;
-  background: #e4e4e4;
-  color: black;
+
+.btn_ok {
+  border: 2px solid black;
+  background: black;
+  color: white;
   padding: 5px;
   font-size: 14px;
   cursor: pointer;
   bottom: -42px;
   position: relative;
-  width: 250px;
-  border-color: #e7e7e7;
+  width: 230px;
 }
 </style>

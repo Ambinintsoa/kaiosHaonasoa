@@ -1,9 +1,9 @@
 <template>
   <div class="slider-container">
     <div class="nav">
-      <button class="tablink active">Andro</button>
-      <button class="tablink">Nahoana?</button>
-      <button class="tablink">Ny atao</button>
+      <span class="tablink active">Andro</span>
+      <span class="tablink">Nahoana?</span>
+      <span class="tablink">Ny atao</span>
       <div class="tabbar"></div>
     </div>
 
@@ -124,6 +124,7 @@ export default {
   display: flex;
   transition: transform 0.5s ease;
 }
+
 .tabbar {
   position: absolute;
   height: 2px;
@@ -137,27 +138,24 @@ export default {
 }
 
 
-.nav {  
+.nav {
   overflow-x: scroll;
 }
 
-.tablink.active {
-  color: #085c48;
-}
+
 .slider-container {
   position: relative;
   overflow-x: hidden;
 }
 
 .tablink {
-  background-color: transparent;
-  border: none;
-  outline: none;
+  font-size: 15px;
   cursor: pointer;
   transition: color 0.3s ease;
+  padding: 2px;
 }
 
 .tablink.active {
-  color: blue;
+  color: #009b77;
 }
 </style>
