@@ -26,7 +26,6 @@
     </div>
     <div id="qThree" class="tabcontent">
       <SelectAntony />
-     
     </div>
     <div id="qFour" class="tabcontent">
       <Actuality />
@@ -78,7 +77,7 @@ export default {
   background-color: #8ecae6;
 }
 .qTwo::after {
-  background-color: #ff95bc;
+  background-color: #3ab795;
 }
 .qThree::after {
   background-color: #3ab795;
@@ -91,7 +90,7 @@ export default {
   background-color: #8ecae6;
 }
 .qTwo {
-  background-color: #ff95bc;
+  background-color: #3ab795;
 }
 .qThree {
   background-color: #3ab795;
@@ -115,14 +114,14 @@ export default {
   left: 0;
   background-color: #f1f1f1;
   overflow-x: hidden;
-  transition: 0.3s;
+  transition: 0.1s;
   padding-top: 50px;
   text-align: center;
 }
 
 #clNav {
   color: red;
-  transition: 0.3s;
+  transition: 0.1s;
   display: block;
   margin-right: -20px;
   font-size: 25px;
@@ -159,7 +158,7 @@ export default {
   height: 3px;
   background-color: black;
   margin: 3px;
-  transition: all 0.3s;
+  transition: 0.1s;
 }
 #bloc1 {
   transform: translate(3px, -1px);
@@ -193,7 +192,7 @@ export default {
   background-color: none;
   cursor: pointer;
   padding: 10px;
-  transition: 0.2s;
+  transition: 0.1s;
   font-size: 14px;
   margin: 0px;
 }
@@ -216,13 +215,13 @@ export default {
   margin-top: -8px;
 }
 .modal {
-  display: none; 
-  position: fixed; 
-  z-index: 1; 
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; 
-  height: 100%; 
+  width: 100%;
+  height: 100%;
   overflow: auto;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);

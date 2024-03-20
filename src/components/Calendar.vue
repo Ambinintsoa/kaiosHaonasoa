@@ -10,16 +10,28 @@
             <div class="custom-select" tabindex="0" id="firstCst">
               <div class="selected-option">Volana</div>
               <div class="options">
-                <option class="option beforeOne" v-for="(month, index) in lstMonth" :key="index" :data-value="month"
-                  :tabIndex="index">{{ month }}</option>
+                <option
+                  class="option beforeOne"
+                  v-for="(month, index) in lstMonth"
+                  :key="index"
+                  :data-value="month"
+                  :tabIndex="index"
+                  >{{ month }}</option
+                >
               </div>
             </div>
 
             <div class="custom-select" tabindex="1">
               <div class="selected-option">Volana</div>
               <div class="options right">
-                <option class="option beforeTwo" v-for="(month, index) in lstMonth" :key="index" :data-value="month"
-                  :tabIndex="index">{{ month }}</option>
+                <option
+                  class="option beforeTwo"
+                  v-for="(month, index) in lstMonth"
+                  :key="index"
+                  :data-value="month"
+                  :tabIndex="index"
+                  >{{ month }}</option
+                >
               </div>
             </div>
           </div>
@@ -31,21 +43,38 @@
             <div class="custom-select" tabindex="2">
               <div class="selected-option">Volana</div>
               <div class="options">
-                <option class="option afterOne" v-for="(month, index) in lstMonth" :key="index" :data-value="month"
-                  :tabIndex="index">{{ month }}</option>
+                <option
+                  class="option afterOne"
+                  v-for="(month, index) in lstMonth"
+                  :key="index"
+                  :data-value="month"
+                  :tabIndex="index"
+                  >{{ month }}</option
+                >
               </div>
             </div>
 
             <div class="custom-select" tabindex="3">
               <div class="selected-option">Volana</div>
               <div class="options right">
-                <option class="option afterTwo" v-for="(month, index) in lstMonth" :key="index" :data-value="month"
-                  :tabIndex="index">{{ month }}</option>
+                <option
+                  class="option afterTwo"
+                  v-for="(month, index) in lstMonth"
+                  :key="index"
+                  :data-value="month"
+                  :tabIndex="index"
+                  >{{ month }}</option
+                >
               </div>
             </div>
           </div>
         </div>
-        <input class="btn default frm-navigation" @click="handleOkButtonClick" type="button" value="OK" />
+        <input
+          class="btn default frm-navigation"
+          @click="handleOkButtonClick"
+          type="button"
+          value="OK"
+        />
       </div>
 
       <div v-else>
@@ -130,12 +159,10 @@ export default {
         this.isValidated()
       ) {
         this.handleOkButtonClick();
-      } else if (
-        e.key === "Escape" &&
-        !document.querySelector(".quizGame.three.activeQuiz").classList.contains("first") &&
-        this.firstTime
-      ) {
-        document.querySelector(".quizGame.three.activeQuiz").classList.add("first");
+      } else if (e.key === "ArrowLeft" && this.firstTime) {
+        document
+          .querySelector(".quizGame.three.activeQuiz")
+          .classList.add("first");
         document.getElementById("firstCst").focus();
       }
     });
@@ -158,11 +185,11 @@ export default {
           optionsContainer.style.display === "block" ? "none" : "block";
       };
 
-      customSelect.addEventListener("keydown", function (event) {
+      customSelect.addEventListener("keydown", function(event) {
         if (event.key === "Enter") {
           toggleOptionsDisplay();
         } else if (
-          event.key === "Escape" &&
+          event.key === "ArrowRight" &&
           document.querySelector(".quizGame.three.activeQuiz")
         ) {
           for (let j = 0; j < customSelects.length; j++) {
@@ -178,7 +205,7 @@ export default {
         }
       });
 
-      customSelect.addEventListener("keydown", function (event) {
+      customSelect.addEventListener("keydown", function(event) {
         if (event.key === "ArrowDown" || event.key === "ArrowUp") {
           event.preventDefault();
           const index = Array.from(options).indexOf(document.activeElement);
@@ -192,7 +219,7 @@ export default {
 
       for (let j = 0; j < options.length; j++) {
         const option = options[j];
-        option.addEventListener("keydown", function (event) {
+        option.addEventListener("keydown", function(event) {
           if (event.key === "Enter") {
             selectedOption.textContent = option.textContent;
             optionsContainer.style.display = "none";
@@ -289,6 +316,9 @@ export default {
   height: 58px;
 }
 
+h5 {
+  margin-top: 5px;
+}
 .container-month h3 {
   font-size: 12px;
   text-align: center;
@@ -319,13 +349,13 @@ export default {
 .options {
   display: none;
   position: absolute;
-  background-color: #fff;
-  width: 240px;
+  background-color: #d4d4d4;
+  width: 244px;
   z-index: 1;
   margin-top: 5px;
   height: auto;
   overflow: scroll;
-  left: -5px;
+  left: -10px;
 }
 
 .options.right {
@@ -343,15 +373,14 @@ export default {
 }
 
 .btn {
-  border: 2px solid black;
-  background: black;
-  color: white;
+  border: 0px solid black;
   padding: 5px;
   font-size: 14px;
   cursor: pointer;
-  bottom: -43px;
-  position: relative;
-  width: 220px;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
 }
 
 .modal {

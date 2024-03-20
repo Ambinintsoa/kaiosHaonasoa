@@ -24,11 +24,11 @@ export default {
   name: "Home",
   data() {
     return {
-      notShowHome: () => { },
+      notShowHome: () => {},
     };
   },
 
-  mounted() { },
+  mounted() {},
   methods: {
     selectMenu(evt) {
       this.$emit("selectMenu", [evt, evt.currentTarget.innerText]);
@@ -48,18 +48,17 @@ export default {
   justify-content: center;
   align-items: center;
   opacity: 1;
-  transition: 0.3s;
+  transition: 0.2s;
   height: 294px;
   margin: auto;
   overflow: hidden;
 
   width: 240px;
   /*  background-image: url("test.jpg");*/
-
   gap: 5px;
 }
 
-#home>p {
+#home > p {
   margin-top: -10px;
 }
 
@@ -74,13 +73,12 @@ export default {
   padding: 5px;
 }
 
-
 #opKitchen .tablinks {
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 4px 10px 4px;
-  font-size: 11px;
+  font-size: 12px;
   outline: 0;
   border: 1px solid rgb(54, 53, 53);
   cursor: pointer;
@@ -100,7 +98,7 @@ export default {
   height: 100%;
   top: 7px;
   left: 7px;
-  transition: 0.2s;
+  transition: 0.1s;
 }
 
 #opKitchen .tablinks:hover::after {
@@ -124,7 +122,7 @@ export default {
 }
 
 .qTwo::after {
-  background-color: #ff95bc;
+  background-color: #3ab795;
 }
 
 .qThree::after {
@@ -140,7 +138,7 @@ export default {
 }
 
 .qTwo {
-  background-color: #ff95bc;
+  background-color: #3ab795;
 }
 
 .qThree {

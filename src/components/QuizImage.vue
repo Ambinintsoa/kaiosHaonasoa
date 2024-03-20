@@ -5,18 +5,30 @@
     </p>
     <ul class="choices">
       <div>
-        <div v-for="(name, index) in currentQuestion.choices" :key="index" v-if="index % 2 === 0">
-          <li :tabindex="index" class="listChoice" :class="{ selected: currentAnswer === true }"
-            @click="setCurrentAnswer(name)">
+        <div
+          v-for="(name, index) in currentQuestion.choices"
+          :key="index"
+          v-if="index % 2 === 0"
+        >
+          <li
+            :tabindex="index"
+            class="listChoice"
+            :class="{ selected: currentAnswer === true }"
+            @click="setCurrentAnswer(name)"
+          >
             <img :src="'assets/PNG/' + name + '.png'" :alt="name" />
           </li>
 
-          <li :tabindex="index + 1" class="listChoice" :class="{ selected: currentAnswer === false }"
-            @click="setCurrentAnswer(currentQuestion.choices[index+1])">
-            <img :src="'assets/PNG/' +
-        currentQuestion.choices[index + 1] +
-        '.png'
-        " :alt="currentQuestion.choices[index + 1]" />
+          <li
+            :tabindex="index + 1"
+            class="listChoice"
+            :class="{ selected: currentAnswer === false }"
+            @click="setCurrentAnswer(currentQuestion.choices[index + 1])"
+          >
+            <img
+              :src="'assets/PNG/' + currentQuestion.choices[index + 1] + '.png'"
+              :alt="currentQuestion.choices[index + 1]"
+            />
           </li>
         </div>
       </div>
@@ -54,10 +66,8 @@ export default {
     currentQuestion() {
       return this.questionsTrueFalse[this.currentImageIndex];
     },
-
   },
   mounted() {
-
     document.addEventListener("keydown", (evt) => {
       this.handleKeydown(evt);
     });
@@ -88,7 +98,6 @@ export default {
     },
 
     checkAnswer() {
-
       const correctAnswer = this.currentQuestion.correctAnswer;
       if (this.currentAnswer === correctAnswer) {
         this.score += 1;
@@ -100,8 +109,9 @@ export default {
       this.moveToNextImage();
     },
     finalScore() {
-      const finalScoreMessage = `nahavoavaly fanontaniana ${this.score
-        } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
+      const finalScoreMessage = `nahavoavaly fanontaniana ${
+        this.score
+      } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
       alert(finalScoreMessage);
     },
     moveToNextImage() {
@@ -137,6 +147,7 @@ export default {
 </script>
 <style>
 .choices li {
+  margin: 10px;
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
   box-sizing: border-box;
@@ -144,7 +155,7 @@ export default {
   display: inline-block;
   outline: none;
   padding: 0.3rem;
-  transition: all 200ms ease-in-out;
+  transition: 0.1s;
   border-bottom-left-radius: 15px 255px;
   border-bottom-right-radius: 225px 15px;
   border-top-left-radius: 255px 15px;
@@ -152,13 +163,12 @@ export default {
   touch-action: manipulation;
   width: 60px;
   border: 0.5px solid rgba(128, 128, 128, 0.315);
-  margin-top: 10px;
 }
 
 .choices li:focus {
   box-shadow: 2px 8px 4px -6px rgba(0, 0, 0, 0.3);
   transform: translate3d(2px, 2px, 0);
-  transform: scale(1.2, 1.2);
+  transform: scale(1.1, 1.1);
 }
 
 .choices li:hover {
@@ -178,7 +188,6 @@ export default {
 .choices {
   list-style: none;
   padding: 0;
-  margin-top: -10px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -187,7 +196,7 @@ export default {
   height: 130px;
 }
 
-.choices>div {
+.choices > div {
   display: flex;
   flex-direction: column;
   align-items: center;

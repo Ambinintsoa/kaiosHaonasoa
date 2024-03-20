@@ -10,7 +10,7 @@
     <div class="slider">
       <div class="slide">
         <div class="content ">
-          <p>Akory </p>
+          <p>Akory</p>
         </div>
       </div>
       <div class="slide">
@@ -122,14 +122,14 @@ export default {
 
 .slider {
   display: flex;
-  transition: transform 0.5s ease;
+  transition: 0.2s;
 }
 
 .tabbar {
   position: absolute;
   height: 2px;
   background-color: #009b77;
-  transition: transform 0.3s ease;
+  transition: 0.2s;
 }
 
 .slide {
@@ -137,11 +137,9 @@ export default {
   width: 100%;
 }
 
-
 .nav {
   overflow-x: scroll;
 }
-
 
 .slider-container {
   position: relative;
@@ -151,7 +149,7 @@ export default {
 .tablink {
   font-size: 15px;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: color 0.2;
   padding: 2px;
 }
 

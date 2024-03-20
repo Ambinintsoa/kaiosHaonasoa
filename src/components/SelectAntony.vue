@@ -12,7 +12,7 @@
     </div>
     <div class="containerAntony ">
       <div class="antonyGame one"><TrueFalse /></div>
-      <div class="antonyGame two"><AntonyMachin/></div>
+      <div class="antonyGame two"><AntonyMachin /></div>
     </div>
   </div>
 </template>
@@ -21,7 +21,7 @@
 import AntonyMachin from "./AntonyMachin.vue";
 import TrueFalse from "./TrueFalse.vue";
 export default {
-  components: { TrueFalse,AntonyMachin },
+  components: { TrueFalse, AntonyMachin },
   data() {
     return {
       name: "Select antony",
@@ -84,7 +84,7 @@ export default {
 };
 </script>
 <style scoped>
-.selectorAntony{
+.selectorAntony {
   overflow: hidden;
   width: 290px;
   margin-left: -12px;

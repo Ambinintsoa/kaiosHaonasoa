@@ -5,15 +5,21 @@
       <img :src="currentImageSrc" alt="Game Image" />
     </div>
     <div class="buttons">
-      <button v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices" :key="name" class="truefalse"
-        :class="{ selected: currentAnswer === name }" @click="setCurrentAnswer(name)" :tabindex="index">
+      <span
+        v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices"
+        :key="name"
+        class="truefalse"
+        :class="{ selected: currentAnswer === name }"
+        @click="setCurrentAnswer(name)"
+        :tabindex="index"
+      >
         <img :src="'assets/gif/' + name + '.gif'" />
-      </button>
+      </span>
     </div>
     <!-- <p class="score score_true_false">
       Isa: <span>{{ score }}</span>
     </p> -->
-    <button class="btn_ok">OK</button>
+    <!-- <button class="btn_ok">OK</button> -->
   </div>
 </template>
 
@@ -44,8 +50,9 @@ export default {
   },
   computed: {
     currentImageSrc() {
-      return `/assets/requestImg/${this.questionsTrueFalse[this.currentImageIndex].image
-        }`;
+      return `/assets/requestImg/${
+        this.questionsTrueFalse[this.currentImageIndex].image
+      }`;
     },
   },
   mounted() {
@@ -92,8 +99,9 @@ export default {
       this.moveToNextImage();
     },
     finalScore() {
-      const finalScoreMessage = `nahavoavaly fanontaniana ${this.score
-        } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
+      const finalScoreMessage = `nahavoavaly fanontaniana ${
+        this.score
+      } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
       alert(finalScoreMessage);
     },
     moveToNextImage() {
@@ -115,7 +123,7 @@ export default {
       var nextF = currentIndex + move;
       if (nextF >= 2) nextF = 1;
       if (nextF === -1) nextF = 0;
-      const items = document.querySelectorAll(".buttons button");
+      const items = document.querySelectorAll(".buttons span");
       const targetElement = items[nextF];
       if (targetElement) {
         targetElement.focus();
@@ -125,8 +133,9 @@ export default {
 };
 </script>
 <style scoped>
-.container>span {
+.container > span {
   display: inline-block;
+  margin-top: 5px;
 }
 
 .buttons {
@@ -142,15 +151,15 @@ export default {
   width: 215px;
   margin-top: 2%;
 }
-#cont-img img{
+#cont-img img {
   width: 90%;
 }
-.buttons{
+.buttons {
   display: flex;
   justify-content: space-around;
 }
 
-button.truefalse {
+span.truefalse {
   width: 30px;
   cursor: pointer;
 }
@@ -200,7 +209,7 @@ button.truefalse {
   display: inline-block;
   outline: none;
   padding: 0.3rem;
-  transition: all 200ms ease-in-out;
+  transition: 0.1s;
   border-bottom-left-radius: 15px 255px;
   border-bottom-right-radius: 225px 15px;
   border-top-left-radius: 255px 15px;
@@ -223,14 +232,13 @@ button.truefalse {
 }
 
 .btn_ok {
-  border: 2px solid black;
-  background: black;
-  color: white;
+  border: 0px solid black;
   padding: 5px;
   font-size: 14px;
   cursor: pointer;
-  bottom: -42px;
-  position: relative;
-  width: 230px;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
 }
 </style>

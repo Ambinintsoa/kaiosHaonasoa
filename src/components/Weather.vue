@@ -2,9 +2,16 @@
   <div class="card-game">
     <div class="title-question">{{ currentQuestion.weather }}</div>
     <div class="cards-container" id="cards-container">
-      <div v-for="(card, i) in currentQuestion.choices" :key="i" :tabindex="i" class="cards"
-        @click="setCurrentAnswer(card)">
-        <input type="checkbox" /><u><img :src="'assets/PNG/' + card" :alt="card" /></u><b></b>
+      <div
+        v-for="(card, i) in currentQuestion.choices"
+        :key="i"
+        :tabindex="i"
+        class="cards"
+        @click="setCurrentAnswer(card)"
+      >
+        <input type="checkbox" /><u
+          ><img :src="'assets/PNG/' + card" :alt="card"/></u
+        ><b></b>
       </div>
     </div>
   </div>
@@ -121,12 +128,11 @@ export default {
       }
     },
     clickOnCard(evt) {
-
       var cardElement = evt.target.childNodes[0];
       cardElement.checked = true;
       var bLetsynety = evt.target.childNodes[2];
       if (!bLetsynety.classList.contains("letsynety")) {
-        bLetsynety.classList.add("letsynety")
+        bLetsynety.classList.add("letsynety");
       }
       setTimeout(() => {
         if (this.currentQuestion.responses.includes(this.currentAnswer)) {
@@ -139,9 +145,7 @@ export default {
             this.currentQuestionIndex
           ].responses = remainingResponses;
           if (this.currentQuestion.responses.length === 0) {
-            alert(
-              "Arahabaina. Hitanao daholo ny valiny"
-            );
+            alert("Arahabaina. Hitanao daholo ny valiny");
             if (this.currentQuestionIndex === this.questions.length - 1) {
               alert("Vita ilay lalao.");
               //tokony misy zavatra atao resetgame
@@ -159,7 +163,6 @@ export default {
       }, 800);
     },
     renderCards() {
-
       var bAll = document.querySelectorAll(".cards b");
       var items = document.querySelectorAll(".cards input");
       for (var i = 0; i < items.length; i++) {
@@ -167,7 +170,6 @@ export default {
         if (bAll[i].classList.contains("letsynety")) {
           bAll[i].classList.remove("letsynety");
         }
-
       }
       this.shuffle(this.currentQuestion.choices);
     },
@@ -179,6 +181,7 @@ export default {
 .title-question {
   height: 50px;
   font-size: 15px;
+  margin-top: 5px;
 }
 
 #cards-container {
@@ -203,26 +206,25 @@ export default {
   position: absolute;
 }
 
-.cards>input {
+.cards > input {
   opacity: 0;
 }
 
-.cards>u,
-.cards>b {
+.cards > u,
+.cards > b {
   display: inline-block;
   text-align: center;
   border: 5px solid #f8fff9;
   box-sizing: border-box;
   border-radius: 8px;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
-.cards>u {
-    background: #f8fff9;
+.cards > u {
+  background: #f8fff9;
+}
 
-  }
-
-.cards>b {
+.cards > b {
   backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -233,42 +235,41 @@ export default {
   width: 100%;
 }
 
-.cards:focus>b {
+.cards:focus > b {
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.493);
 }
 
+.cards > input:checked + u + b {
+  z-index: 100;
+}
 
-  .cards>input:checked+u+b {
-    z-index: 100;
-  } 
+.cards > input:focus + u,
+.cards > input:focus + u + b {
+  outline: 0;
+}
 
-  .cards>input:focus+u,
-  .cards>input:focus+u+b {
-    outline: 0;
-  }
-
-.cards>u {
+.cards > u {
   transform: translateX(160%) rotateY(-180deg);
   transform-origin: -30% center;
   box-shadow: 130px 30px 40px -20px rgba(0, 0, 0, 0);
 }
 
-.cards>input:checked+u {
+.cards > input:checked + u {
   transform: translateX(0%) rotateY(0deg);
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.cards>b {
+.cards > b {
   transform: translateX(0%) rotateY(0deg);
   transform-origin: 130% center;
 }
 
-.cards .letsynety{
+.cards .letsynety {
   transform: translateX(-160%) rotateY(180deg);
 }
 
-.cards>u,
-.cards>b {
+.cards > u,
+.cards > b {
   cursor: pointer;
 }
 </style>

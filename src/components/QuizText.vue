@@ -1,16 +1,21 @@
 <template>
   <div class="container_quizText">
     <p id="viewquestion" class="question">
-      {{questionsTrueFalse[currentImageIndex].question}}
+      {{ questionsTrueFalse[currentImageIndex].question }}
     </p>
     <ul class="choices_container">
-
-      <div v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices" :key="index">
-        <li :tabindex="index" class="listChoiceText" @click="setCurrentAnswer(name)">
+      <div
+        v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices"
+        :key="index"
+      >
+        <li
+          :tabindex="index"
+          class="listChoiceText"
+          @click="setCurrentAnswer(name)"
+        >
           {{ name }}
         </li>
       </div>
-
     </ul>
     <p class="score">
       Isa: <span>{{ score }}</span>
@@ -57,7 +62,6 @@ export default {
         } else if (evt.key === "Enter") {
           const focusedElement = document.activeElement;
           if (focusedElement.classList.contains("listChoiceText")) {
-
             this.checkAnswer();
           }
         }
@@ -68,7 +72,8 @@ export default {
     },
 
     checkAnswer() {
-      const correctAnswer =this.questionsTrueFalse[this.currentImageIndex].correctAnswer;
+      const correctAnswer = this.questionsTrueFalse[this.currentImageIndex]
+        .correctAnswer;
       if (this.currentAnswer === correctAnswer) {
         this.score += 1;
         alert("Marina !");
@@ -78,8 +83,9 @@ export default {
       this.moveToNextImage();
     },
     finalScore() {
-      const finalScoreMessage = `nahavoavaly fanontaniana ${this.score
-        } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
+      const finalScoreMessage = `nahavoavaly fanontaniana ${
+        this.score
+      } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
       alert(finalScoreMessage);
     },
     moveToNextImage() {
@@ -99,7 +105,7 @@ export default {
       if (document.querySelector(".quizGame.two.activeQuiz")) {
         const currentIndexThree = document.activeElement.tabIndex;
         var nextThree = currentIndexThree + move;
-        nextThree%=4;
+        nextThree %= 4;
         const itemsThree = document.querySelectorAll(".listChoiceText");
         const targetElementThree = itemsThree[nextThree];
         if (targetElementThree) {
@@ -129,18 +135,16 @@ export default {
   margin: auto;
   text-align: center;
   margin-left: -20px;
-
 }
 
 .choices_container li {
-
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
   box-sizing: border-box;
   cursor: pointer;
   outline: none;
   padding: 0.3rem;
-  transition: all 0.2 ease-in-out;
+  transition: 0.1s;
   border-bottom-left-radius: 15px 255px;
   border-bottom-right-radius: 225px 15px;
   border-top-left-radius: 255px 15px;
@@ -148,7 +152,6 @@ export default {
   touch-action: manipulation;
   width: 180px;
   border: 0.5px solid rgba(128, 128, 128, 0.315);
-
 }
 
 .choices_container li:focus {

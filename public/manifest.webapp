@@ -5,10 +5,10 @@
   "type": "web",
   "launch_path": "/index.html",
    "icons": {
-    "16": "/assets/icons/feuille16.png",
-    "48": "/assets/icons/feuille48.png",
-    "60": "/assets/icons/feuille60.png",
-    "128": "/assets/icons/feuille128.png"
+    "16": "/assets/icons/anatra16.png",
+    "48": "/assets/icons/anatra48.png",
+    "60": "/assets/icons/anatra60.png",
+    "128": "/assets/icons/anatra128.png"
   },
   "developer": {
     "name": "Akoho team",
