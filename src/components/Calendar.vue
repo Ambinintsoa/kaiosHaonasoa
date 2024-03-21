@@ -217,10 +217,7 @@ export default {
         if (event.key === "ArrowDown" || event.key === "ArrowUp") {
           event.preventDefault();
           const index = Array.from(options).indexOf(document.activeElement);
-          const nextIndex =
-            event.key === "ArrowDown"
-              ? (index + 1) % options.length
-              : (index - 1 + options.length) % options.length;
+          const nextIndex = (index - 1 + options.length) % options.length;
           options[nextIndex].focus();
         }
       });

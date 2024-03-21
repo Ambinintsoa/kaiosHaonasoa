@@ -149,7 +149,6 @@ export default {
 
       setTimeout(() => {
         if (this.currentQuestion.responses.includes(this.currentAnswer)) {
-          cardElement.classList.add("found");
           const remainingResponses = this.currentQuestion.responses.filter(
             (response) => response !== this.currentAnswer
           );
@@ -182,9 +181,6 @@ export default {
       var items = document.querySelectorAll(".cards input");
       for (var i = 0; i < items.length; i++) {
         items[i].checked = false;
-        if (items[i].classList.contains("found")) {
-          items[i].classList.remove("found");
-        }
         if (bAll[i].classList.contains("letsynety")) {
           bAll[i].classList.remove("letsynety");
         }
