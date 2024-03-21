@@ -35,6 +35,7 @@ export default {
             "Waste.png",
             "Waste.png",
           ],
+          originalResponses: ["Product.png", "Ocean.png", "Forest.png"],
           responses: ["Product.png", "Ocean.png", "Forest.png"],
         },
         {
@@ -50,6 +51,7 @@ export default {
             "Waste.png",
             "Waste.png",
           ],
+          originalResponses: ["Product.png", "Ocean.png", "Forest.png"],
           responses: ["Ocean.png", "Product.png", "Forest.png"],
         },
         {
@@ -65,6 +67,7 @@ export default {
             "Waste.png",
             "Waste.png",
           ],
+          originalResponses: ["Product.png", "Ocean.png", "Forest.png"],
           responses: ["Ocean.png", "Product.png", "Forest.png"],
         },
       ],
@@ -104,6 +107,15 @@ export default {
         }
       }
     },
+    resetGame() {
+      this.currentQuestionIndex = 0;
+      // this.questions[this.currentQuestionIndex].responses = [
+      //   ...this.questions[this.currentQuestionIndex].originalResponses,
+      // ];
+      this.initializeCards();
+      this.renderCards();
+    },
+
     setCurrentAnswer(answer) {
       this.currentAnswer = answer;
     },
@@ -134,10 +146,10 @@ export default {
       if (!bLetsynety.classList.contains("letsynety")) {
         bLetsynety.classList.add("letsynety");
       }
+
       setTimeout(() => {
         if (this.currentQuestion.responses.includes(this.currentAnswer)) {
           cardElement.classList.add("found");
-
           const remainingResponses = this.currentQuestion.responses.filter(
             (response) => response !== this.currentAnswer
           );
@@ -148,8 +160,11 @@ export default {
             alert("Arahabaina. Hitanao daholo ny valiny");
             if (this.currentQuestionIndex === this.questions.length - 1) {
               alert("Vita ilay lalao.");
-              //tokony misy zavatra atao resetgame
+              this.resetGame();
             } else {
+              this.questions[this.currentQuestionIndex].responses = [
+                ...this.questions[this.currentQuestionIndex].originalResponses,
+              ];
               this.currentQuestionIndex++;
               this.renderCards();
             }
@@ -167,6 +182,9 @@ export default {
       var items = document.querySelectorAll(".cards input");
       for (var i = 0; i < items.length; i++) {
         items[i].checked = false;
+        if (items[i].classList.contains("found")) {
+          items[i].classList.remove("found");
+        }
         if (bAll[i].classList.contains("letsynety")) {
           bAll[i].classList.remove("letsynety");
         }
@@ -217,7 +235,7 @@ export default {
   border: 5px solid #f8fff9;
   box-sizing: border-box;
   border-radius: 8px;
-  transition: all 0.2s;
+  transition: 0.2s;
 }
 
 .cards > u {
