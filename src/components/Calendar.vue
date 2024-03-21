@@ -153,13 +153,21 @@ export default {
   },
   mounted() {
     document.addEventListener("keydown", (e) => {
+      var activeTab = document.querySelector("#opNav");
+      var activeSubTab = document.querySelector(".selectorMenuQuiz");
       if (
         e.key === "Enter" &&
         document.querySelector(".quizGame.three.activeQuiz") &&
-        this.isValidated()
+        this.isValidated() &&
+        activeTab.classList.contains("qOne")
       ) {
         this.handleOkButtonClick();
-      } else if (e.key === "ArrowLeft" && this.firstTime) {
+      } else if (
+        e.key === "ArrowLeft" &&
+        this.firstTime &&
+        activeTab.classList.contains("qOne") &&
+        !activeSubTab.classList.contains("activeQuiz")
+      ) {
         document
           .querySelector(".quizGame.three.activeQuiz")
           .classList.add("first");
