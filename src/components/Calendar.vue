@@ -154,19 +154,18 @@ export default {
   mounted() {
     document.addEventListener("keydown", (e) => {
       var activeTab = document.querySelector("#opNav");
-      var activeSubTab = document.querySelector(".selectorMenuQuiz");
       if (
         e.key === "Enter" &&
         document.querySelector(".quizGame.three.activeQuiz") &&
         this.isValidated() &&
-        activeTab.classList.contains("qOne")
+        activeTab.classList.contains("qTwo")
       ) {
         this.handleOkButtonClick();
       } else if (
         e.key === "ArrowLeft" &&
         this.firstTime &&
-        activeTab.classList.contains("qOne") &&
-        !activeSubTab.classList.contains("activeQuiz")
+        activeTab.classList.contains("qTwo") &&
+        document.querySelector(".quizGame.three.activeQuiz")
       ) {
         document
           .querySelector(".quizGame.three.activeQuiz")
@@ -205,9 +204,7 @@ export default {
             cs.querySelector(".options").style.display = "none";
           }
           const index = Array.from(customSelects).indexOf(customSelect);
-          const nextIndex = event.shiftKey
-            ? (index - 1 + customSelects.length) % customSelects.length
-            : (index + 1) % customSelects.length;
+          const nextIndex = (index + 1) % customSelects.length;
           customSelects[nextIndex].focus();
           event.preventDefault();
         }
@@ -217,7 +214,10 @@ export default {
         if (event.key === "ArrowDown" || event.key === "ArrowUp") {
           event.preventDefault();
           const index = Array.from(options).indexOf(document.activeElement);
-          const nextIndex = (index - 1 + options.length) % options.length;
+          const nextIndex =
+            event.key === "ArrowUp"
+              ? (index - 1 + options.length) % options.length
+              : (index + 1) % options.length;
           options[nextIndex].focus();
         }
       });

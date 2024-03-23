@@ -88,7 +88,7 @@ export default {
   methods: {
     handleKeydown(evt) {
       var activeTab = document.querySelector("#opNav");
-      if (activeTab.classList.contains("qTwo")) {
+      if (activeTab.classList.contains("qOne")) {
         switch (evt.key) {
           case "ArrowLeft":
           case "ArrowRight":
@@ -231,7 +231,7 @@ export default {
   border: 5px solid #f8fff9;
   box-sizing: border-box;
   border-radius: 8px;
-  transition: 0.2s;
+  transition: 0.5s;
 }
 
 .cards > u {

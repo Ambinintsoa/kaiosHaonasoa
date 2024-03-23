@@ -1,18 +1,10 @@
 <template>
-  <div id="container_antonyMachin">
-    <p>{{ questionsAntonyMachin[currentIndex].question }}</p>
+  <div id="container_antonyMachin" v-if="currentQuestion">
+    <p>{{ currentQuestion.question }}</p>
     <div class="container_img">
       <div v-for="(question, index) in currentQuestion.choices" :key="index">
-        <div
-          class="list_img"
-          :tabindex="index"
-          @click="setCurrentAnswer(question)"
-        >
-          <img
-            class="lst_response"
-            :src="'assets/PNG/' + question + '.png'"
-            :alt="question"
-          />
+        <div class="list_img" :tabindex="index" @click="setCurrentAnswer(question)" ref="firstElement">
+          <img class="lst_response" :src="'assets/PNG/' + question + '.png'" :alt="question" />
         </div>
         <span>{{ currentDescipt }}</span>
       </div>
@@ -41,11 +33,12 @@ export default {
       currentAnswer: null,
       currentIndex: 0,
       score: 0,
+      shuffledQuestions: [],
     };
   },
   computed: {
     currentQuestion() {
-      return this.questionsAntonyMachin[this.currentIndex];
+      return this.shuffledQuestions[this.currentIndex];
     },
     currentDescipt() {
       return this.questionsAntonyMachin[this.currentIndex].someInformation;
@@ -55,11 +48,16 @@ export default {
     document.addEventListener("keydown", (evt) => {
       this.handleKeydown(evt);
     });
+    this.startNewGame();
+    this.$nextTick(() => {
+      if (this.$refs.firstElement) {
+        this.$refs.firstElement[0].focus();
+      }
+    });
   },
   methods: {
     handleKeydown(evt) {
       evt.stopPropagation();
-
       var activeTab = document.querySelector("#opNav");
       if (activeTab.classList.contains("qThree")) {
         if (evt.key === "ArrowRight") {
@@ -69,7 +67,6 @@ export default {
         } else if (evt.key === "Enter") {
           const focusedElement = document.activeElement;
           if (focusedElement.classList.contains("list_img")) {
-            // this.setCurrentAnswer(focusedElement.firstChild.getAttribute("alt"));
             this.checkAnswer();
           }
         }
@@ -90,9 +87,8 @@ export default {
       this.moveToNextImage();
     },
     finalScore() {
-      const finalScoreMessage = `nahavoavaly fanontaniana ${
-        this.score
-      } tamin'ireo fanontaniana ${this.questionsAntonyMachin.length} ianao!`;
+      const finalScoreMessage = `nahavoavaly fanontaniana ${this.score
+        } tamin'ireo fanontaniana ${this.questionsAntonyMachin.length} ianao!`;
       alert(finalScoreMessage);
     },
     moveToNextImage() {
@@ -103,6 +99,7 @@ export default {
         this.currentIndex = 0;
         this.finalScore();
         this.score = 0;
+        this.startNewGame();
       }
     },
     nav(move) {
@@ -116,6 +113,17 @@ export default {
           targetElementThree.focus();
         }
       }
+    },
+    shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    },
+    startNewGame() {
+      this.shuffledQuestions = this.shuffleArray(this.questionsAntonyMachin);
+
     },
   },
 };
@@ -135,7 +143,7 @@ export default {
   justify-content: space-around;
 }
 
-.container_img > div {
+.container_img>div {
   width: 120px;
   font-size: 12px;
   text-align: center;

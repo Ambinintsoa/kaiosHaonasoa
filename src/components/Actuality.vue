@@ -1,7 +1,7 @@
 <template>
   <div class="slider-container">
     <div class="nav">
-      <span class="tablink active">Andro</span>
+      <span class="tablink active">Vaovao</span>
       <span class="tablink">Nahoana?</span>
       <span class="tablink">Ny atao</span>
       <div class="tabbar"></div>

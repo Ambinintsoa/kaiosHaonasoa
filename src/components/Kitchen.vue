@@ -18,11 +18,11 @@
       <span></span>
     </div>
     <div id="qOne" class="tabcontent">
-      <SelectGame />
+      <Weather />
     </div>
 
     <div id="qTwo" class="tabcontent">
-      <Weather />
+      <SelectGame />
     </div>
     <div id="qThree" class="tabcontent">
       <SelectAntony />

@@ -1,18 +1,12 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="currentQuestion">
     <span>{{ questionsTrueFalse[currentImageIndex].question }}</span>
     <div id="cont-img">
       <img :src="currentImageSrc" alt="Game Image" />
     </div>
     <div class="buttons">
-      <span
-        v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices"
-        :key="name"
-        class="truefalse"
-        :class="{ selected: currentAnswer === name }"
-        @click="setCurrentAnswer(name)"
-        :tabindex="index"
-      >
+      <span v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices" :key="name" class="truefalse"
+        :class="{ selected: currentAnswer === name }" @click="setCurrentAnswer(name)" :tabindex="index">
         <img :src="'assets/gif/' + name + '.gif'" />
       </span>
     </div>
@@ -46,16 +40,21 @@ export default {
       currentAnswer: null,
       currentImageIndex: 0,
       score: 0,
+      shuffledQuestions: [],
     };
   },
   computed: {
+    currentQuestion() {
+      return this.shuffledQuestions[this.currentImageIndex];
+    },
+
     currentImageSrc() {
-      return `/assets/requestImg/${
-        this.questionsTrueFalse[this.currentImageIndex].image
-      }`;
+      return `/assets/requestImg/${this.questionsTrueFalse[this.currentImageIndex].image
+        }`;
     },
   },
   mounted() {
+    this.startNewGame();
     document.addEventListener("keydown", (evt) => {
       this.handleKeydown(evt);
     });
@@ -63,8 +62,6 @@ export default {
   methods: {
     handleKeydown(evt) {
       evt.stopPropagation();
-      // console.log(evt.key);
-      // var containerSlide = document.querySelector(".container");
       var activeTab = document.querySelector("#opNav");
       if (activeTab.classList.contains("qThree")) {
         if (evt.key === "ArrowRight") {
@@ -91,7 +88,7 @@ export default {
         "true";
       if (this.currentAnswer === correctAnswer) {
         this.score += 1;
-        this.updateScore();
+
         alert("Marina ny valinteninao!");
       } else {
         alert("Diso ny valinteninao!");
@@ -99,9 +96,8 @@ export default {
       this.moveToNextImage();
     },
     finalScore() {
-      const finalScoreMessage = `nahavoavaly fanontaniana ${
-        this.score
-      } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
+      const finalScoreMessage = `nahavoavaly fanontaniana ${this.score
+        } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
       alert(finalScoreMessage);
     },
     moveToNextImage() {
@@ -112,11 +108,10 @@ export default {
         this.currentImageIndex = 0;
         this.finalScore();
         this.score = 0;
+        this.startNewGame();
       }
     },
-    updateScore() {
-      document.querySelector(".score_true_false span").innerHTML = this.score;
-    },
+
     nav(move) {
       const currentIndex = document.activeElement.tabIndex;
 
@@ -129,11 +124,21 @@ export default {
         targetElement.focus();
       }
     },
+    shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    },
+    startNewGame() {
+      this.shuffledQuestions = this.shuffleArray(this.questionsTrueFalse);
+    },
   },
 };
 </script>
 <style scoped>
-.container > span {
+.container>span {
   display: inline-block;
   margin-top: 5px;
 }
@@ -151,9 +156,11 @@ export default {
   width: 215px;
   margin-top: 2%;
 }
+
 #cont-img img {
   width: 90%;
 }
+
 .buttons {
   display: flex;
   justify-content: space-around;
@@ -163,12 +170,14 @@ span.truefalse {
   width: 30px;
   cursor: pointer;
 }
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font: inherit;
 }
+
 /*
 .popup {
   width: 50%;

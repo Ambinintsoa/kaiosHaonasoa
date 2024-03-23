@@ -33,9 +33,9 @@ export default {
     return {
       name: "Select game ",
       listQuiz: [
-        { tabindex: 0, content: "Sary" },
-        { tabindex: 1, content: "Soratra" },
-        { tabindex: 2, content: "Calendrier" },
+        { tabindex: 0, content: "Sarisary" },
+        { tabindex: 1, content: "Soratsoratra" },
+        { tabindex: 2, content: "Fizaran-taona" },
       ],
     };
   },
@@ -48,7 +48,7 @@ export default {
   methods: {
     handleKeydown(evt) {
       var activeTab = document.querySelector("#opNav");
-      if (activeTab.classList.contains("qOne")) {
+      if (activeTab.classList.contains("qTwo")) {
         if (evt.key === "ArrowUp") {
           this.nav(-1);
         } else if (evt.key === "ArrowDown") {

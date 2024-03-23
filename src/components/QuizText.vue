@@ -1,11 +1,11 @@
 <template>
-  <div class="container_quizText">
+  <div class="container_quizText" v-if="currentQuestion">
     <p id="viewquestion" class="question">
-      {{ questionsTrueFalse[currentImageIndex].question }}
+      {{ currentQuestion.question }}
     </p>
     <ul class="choices_container">
       <div
-        v-for="(name, index) in questionsTrueFalse[currentImageIndex].choices"
+        v-for="(name, index) in currentQuestion.choices"
         :key="index"
       >
         <li
@@ -43,18 +43,26 @@ export default {
       currentAnswer: null,
       currentImageIndex: 0,
       score: 0,
+      shuffledQuestions:[]
     };
   },
   mounted() {
+  this.startNewGame();
     document.addEventListener("keydown", (evt) => {
       this.handleKeydown(evt);
     });
+  },
+  computed: {
+    currentQuestion() {
+      return this.shuffledQuestions[this.currentImageIndex];
+    },
+
   },
   methods: {
     handleKeydown(evt) {
       evt.stopPropagation();
       var activeTab = document.querySelector("#opNav");
-      if (activeTab.classList.contains("qOne")) {
+      if (activeTab.classList.contains("qTwo")) {
         if (evt.key === "ArrowUp") {
           this.nav(-1);
         } else if (evt.key === "ArrowDown") {
@@ -96,6 +104,7 @@ export default {
         this.currentImageIndex = 0;
         this.finalScore();
         this.score = 0;
+        this.startNewGame();
       }
     },
     updateScore() {
@@ -112,6 +121,16 @@ export default {
           targetElementThree.focus();
         }
       }
+    },
+    shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    },
+    startNewGame() {
+      this.shuffledQuestions=this.shuffleArray(this.questionsTrueFalse);
     },
   },
 };

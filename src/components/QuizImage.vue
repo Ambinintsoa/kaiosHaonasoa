@@ -1,34 +1,22 @@
 <template>
-  <div class="quiz-box">
+  <div class="quiz-box" v-if="currentQuestion">
     <p id="viewquestion" class="question">
       {{ currentQuestion.question }}
     </p>
     <ul class="choices">
       <div>
-        <div
-          v-for="(name, index) in currentQuestion.choices"
-          :key="index"
-          v-if="index % 2 === 0"
-        >
-          <li
-            :tabindex="index"
-            class="listChoice"
-            :class="{ selected: currentAnswer === true }"
-            @click="setCurrentAnswer(name)"
-          >
+        <div v-for="(name, index) in currentQuestion.choices" :key="index" v-if="index % 2 === 0">
+          <li :tabindex="index" class="listChoice" :class="{ selected: currentAnswer === true }"
+            @click="setCurrentAnswer(name)">
             <img :src="'assets/PNG/' + name + '.png'" :alt="name" />
           </li>
 
-          <li
-            :tabindex="index + 1"
-            class="listChoice"
-            :class="{ selected: currentAnswer === false }"
-            @click="setCurrentAnswer(currentQuestion.choices[index + 1])"
-          >
-            <img
-              :src="'assets/PNG/' + currentQuestion.choices[index + 1] + '.png'"
-              :alt="currentQuestion.choices[index + 1]"
-            />
+          <li :tabindex="index + 1" class="listChoice" :class="{ selected: currentAnswer === false }"
+            @click="setCurrentAnswer(currentQuestion.choices[index+1])">
+            <img :src="'assets/PNG/' +
+        currentQuestion.choices[index + 1] +
+        '.png'
+        " :alt="currentQuestion.choices[index + 1]" />
           </li>
         </div>
       </div>
@@ -60,23 +48,27 @@ export default {
       currentAnswer: null,
       currentImageIndex: 0,
       score: 0,
+      shuffledQuestions: [],
     };
   },
   computed: {
     currentQuestion() {
-      return this.questionsTrueFalse[this.currentImageIndex];
+      return this.shuffledQuestions[this.currentImageIndex];
     },
+
   },
   mounted() {
+    this.startNewGame();
     document.addEventListener("keydown", (evt) => {
       this.handleKeydown(evt);
     });
+   
   },
   methods: {
     handleKeydown(evt) {
       evt.stopPropagation();
       var activeTab = document.querySelector("#opNav");
-      if (activeTab.classList.contains("qOne")) {
+      if (activeTab.classList.contains("qTwo")) {
         if (evt.key === "ArrowRight") {
           this.nav(1);
         } else if (evt.key === "ArrowLeft") {
@@ -98,10 +90,10 @@ export default {
     },
 
     checkAnswer() {
+
       const correctAnswer = this.currentQuestion.correctAnswer;
       if (this.currentAnswer === correctAnswer) {
         this.score += 1;
-        this.updateScore();
         alert("Marina !");
       } else {
         alert("Diso !");
@@ -109,45 +101,48 @@ export default {
       this.moveToNextImage();
     },
     finalScore() {
-      const finalScoreMessage = `nahavoavaly fanontaniana ${
-        this.score
-      } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
+      const finalScoreMessage = `nahavoavaly fanontaniana ${this.score
+        } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
       alert(finalScoreMessage);
     },
     moveToNextImage() {
       this.currentAnswer = null;
-      if (this.currentImageIndex < this.questionsTrueFalse.length - 1) {
+      if (this.currentImageIndex < this.shuffledQuestions.length - 1) {
         this.currentImageIndex += 1;
       } else {
         this.currentImageIndex = 0;
         this.finalScore();
         this.score = 0;
+        this.startNewGame();
       }
     },
-    updateScore() {
-      document.querySelector(".score_quiz span").innerHTML = this.score;
-    },
+ 
     nav(move) {
       if (document.querySelector(".quizGame.one.activeQuiz")) {
         const currentIndexThree = document.activeElement.tabIndex;
         var nextThree = currentIndexThree + move;
         const itemsThree = document.querySelectorAll(".listChoice");
-        //mety doly reo na le if na le mod na tsy asiana ara
-        // if (nextThree >= 4) nextThree = 3;
-        // if (nextThree < 0) nextThree = 0;
-        // nextThree %= 4;
         const targetElementThree = itemsThree[nextThree];
         if (targetElementThree) {
           targetElementThree.focus();
         }
       }
     },
+    shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    },
+    startNewGame() {
+      this.shuffledQuestions=this.shuffleArray(this.questionsTrueFalse);
+    },
   },
 };
 </script>
 <style>
 .choices li {
-  margin: 10px;
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
   box-sizing: border-box;
@@ -155,7 +150,7 @@ export default {
   display: inline-block;
   outline: none;
   padding: 0.3rem;
-  transition: 0.1s;
+  transition: all 200ms ease-in-out;
   border-bottom-left-radius: 15px 255px;
   border-bottom-right-radius: 225px 15px;
   border-top-left-radius: 255px 15px;
@@ -163,12 +158,13 @@ export default {
   touch-action: manipulation;
   width: 60px;
   border: 0.5px solid rgba(128, 128, 128, 0.315);
+  margin: 5px;
 }
 
 .choices li:focus {
   box-shadow: 2px 8px 4px -6px rgba(0, 0, 0, 0.3);
   transform: translate3d(2px, 2px, 0);
-  transform: scale(1.1, 1.1);
+  transform: scale(1.2, 1.2);
 }
 
 .choices li:hover {
@@ -196,7 +192,7 @@ export default {
   height: 130px;
 }
 
-.choices > div {
+.choices>div {
   display: flex;
   flex-direction: column;
   align-items: center;

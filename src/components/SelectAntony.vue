@@ -26,8 +26,8 @@ export default {
     return {
       name: "Select antony",
       listQuiz: [
-        { tabindex: 0, content: "Marina sa diso" },
-        { tabindex: 1, content: "Antony 2" },
+        { tabindex: 0, content: "Eny sa tsia?" },
+        { tabindex: 1, content: "Fomba andavan'andro" },
       ],
     };
   },
