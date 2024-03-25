@@ -1,6 +1,6 @@
 # ANATRA
 
-Simple example of a to-do list, for more information see [KaiOS Developer Portal](https://developer.kaiostech.com/getting-started/build-your-first-app/sample-code#vue)
+KaiOs app, for more information see [KaiOS Developer Portal](https://developer.kaiostech.com/getting-started/build-your-first-app/sample-code#vue)
 
 ![](./docs/to-do-on-input.png)
 ![](./docs/to-do.png)
