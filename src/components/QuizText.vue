@@ -4,15 +4,8 @@
       {{ currentQuestion.question }}
     </p>
     <ul class="choices_container">
-      <div
-        v-for="(name, index) in currentQuestion.choices"
-        :key="index"
-      >
-        <li
-          :tabindex="index"
-          class="listChoiceText"
-          @click="setCurrentAnswer(name)"
-        >
+      <div v-for="(name, index) in currentQuestion.choices" :key="index">
+        <li :tabindex="index" class="listChoiceText" @click="setCurrentAnswer(name)">
           {{ name }}
         </li>
       </div>
@@ -28,26 +21,66 @@ export default {
     return {
       questionsTrueFalse: [
         {
-          question: "Blablabla",
-          choices: ["Earth", "Barrel", "Battery", "Bottle"],
-          correctAnswer: "Bottle",
-          someInformation: "Aza dakadaka tsony fa avereno ampiasaina",
+          question: "Inona no atao hoe fiovan’ny toetr’andro?",
+          choices: ["Fiakaran’ny maripana", "Fikorotanan’ny vanim-potoana", "Fiovana maharitra ny toetry ny tany"],
+          correctAnswer: "Fiovana maharitra ny toetry ny tany",
+          someInformation: "Tokony misy zvtr",
         },
         {
-          question: "Hehehe hbcjervnrihbh hfrbvbruvb hgrfuhbrhfhur byfbur",
-          choices: ["Earth", "Forest", "Faucet", "Love"],
-          correctAnswer: "Forest",
-          someInformation: "Tiako be",
+          question: "Inona no fanao manimba indrindra ny tontolo iainana?",
+          choices: ["Ny fanapahana ala",
+            "Ny fampiharana ny 'Tavy'",
+            "Ny fanamboarana 'charbon'",
+          ],
+          correctAnswer: "Ny fanapahana ala",
+          someInformation: "Ny fanapahana sy ny fandoroana izany no antony voalohany eto Madagasikara.",
+        },
+        {
+          question: "Inona no tranga mifandray amin’ny fiovan’ny toetr’andro?",
+          choices: ["Fiakaran’ny rano",
+            "Fikorontanan’ny vanim-potoana mahazatra",
+            "Fitomboan’ny zavamananaina"
+          ],
+          correctAnswer: "Fikorontanan’ny vanim-potoana mahazatra",
+          someInformation: "Rehefa mafana ny tany dia manova ny toetry ny rivotra sy ny ranomasina izany (fiovaovan'ny rotsak'orana na ny maripana).",
+        },
+        {
+          question: "Nahoana no mampanahy ny famohana CO2 be loatra?",
+          choices: ["Mandray anjara amin’ny fiakaran’ny maripana",
+            "Mety hitarika amin’ny fiovan’ny toetr’andro mahery vaika",
+            "Misy fiantraikan’ny amin’ny fahasalamanan’ny olombelona sy ny tontolo iainana",
+          ],
+          correctAnswer: "Misy fiantraikan’ny amin’ny fahasalamanan’ny olombelona sy ny tontolo iainana",
+          someInformation: "Mba hiarovana antsika dia tsy maintsy ampidinina ny tahan'ny CO2 maneran-tany ho lasa ampahany 350 isaky ny tapitrisa ao amin'ny atmosfera (raha toa ka 410 ppm izany ankehitriny) ary tsy maintsy atsahatra ny hafanana mihoatra ny 1,5 degré Celsius (raha toa ka 1 degré ankehitriny).",
+        },
+        {
+          question: "Inona no tanjona amin’ny fanambeazana momban’ny fiovan’ny toetr’andro?",
+          choices: ["Fanentanana ny vahoaka amin’ny fitondran-tena ara-ekolojika",
+            "Fanentanana amin’ny hetaisika hiadivana amin’ny fiovan’ny toetr’andro",
+            "Fanamafisana ny fisihan’ny fiovan’ny toetr’andro",
+
+          ],
+          correctAnswer: "Fanentanana amin’ny hetsika hiadivana amin’ny fiovan’ny toetr’andro",
+          someInformation: "Samy tompon'andraikitra daholo ny tsirairay, ka aoka samy hifanentana hatrany ka hanova zavatra.",
+        },
+        {
+          question: "Inona no atao hoe faritra arovana?",
+          choices: ["Faritra ahitana fifampifehezana na politikam-pitantanana mba hifehezana ny fampiasana ilay faritra",
+            "Faritra tsy azo idirana na anaovana maloto", "Faritra ahitana zava-manan’aina voaro"
+
+          ],
+          correctAnswer: "Faritra ahitana zava-manan’aina voaro",
+          someInformation: "Voarara'ny lalàna malagasy ary mahavoasazy ny fanimbana ny faritra arovana izay ahitana zava-maniry sy zava-manann'aina mampihavaka an'ny Madagasikara",
         },
       ],
       currentAnswer: null,
       currentImageIndex: 0,
       score: 0,
-      shuffledQuestions:[]
+      shuffledQuestions: []
     };
   },
   mounted() {
-  this.startNewGame();
+    this.startNewGame();
     document.addEventListener("keydown", (evt) => {
       this.handleKeydown(evt);
     });
@@ -84,16 +117,15 @@ export default {
         .correctAnswer;
       if (this.currentAnswer === correctAnswer) {
         this.score += 1;
-        alert("Marina !");
+        alert("Marina !\n" +this.currentQuestion.someInformation);
       } else {
-        alert("Diso !");
+        alert("Diso !\n" +this.currentQuestion.someInformation);
       }
       this.moveToNextImage();
     },
     finalScore() {
-      const finalScoreMessage = `nahavoavaly fanontaniana ${
-        this.score
-      } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
+      const finalScoreMessage = `nahavoavaly fanontaniana ${this.score
+        } tamin'ireo fanontaniana ${this.questionsTrueFalse.length} ianao!`;
       alert(finalScoreMessage);
     },
     moveToNextImage() {
@@ -130,7 +162,7 @@ export default {
       return array;
     },
     startNewGame() {
-      this.shuffledQuestions=this.shuffleArray(this.questionsTrueFalse);
+      this.shuffledQuestions = this.shuffleArray(this.questionsTrueFalse);
     },
   },
 };

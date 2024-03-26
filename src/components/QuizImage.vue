@@ -12,11 +12,11 @@
           </li>
 
           <li :tabindex="index + 1" class="listChoice" :class="{ selected: currentAnswer === false }"
-            @click="setCurrentAnswer(currentQuestion.choices[index+1])">
+            @click="setCurrentAnswer(currentQuestion.choices[index + 1])">
             <img :src="'assets/PNG/' +
-        currentQuestion.choices[index + 1] +
-        '.png'
-        " :alt="currentQuestion.choices[index + 1]" />
+    currentQuestion.choices[index + 1] +
+    '.png'
+    " :alt="currentQuestion.choices[index + 1]" />
           </li>
         </div>
       </div>
@@ -33,16 +33,22 @@ export default {
     return {
       questionsTrueFalse: [
         {
-          question: "Blablabla",
+          question: "Inona no anarana iantsoana an'ny Madagasikara ankehitriny?",
           choices: ["Earth", "Barrel", "Battery", "Bottle"],
           correctAnswer: "Bottle",
-          someInformation: "Aza dakadaka tsony fa avereno ampiasaina",
+          someInformation: "Raha toa ka nosy maintso no anarany taloha, taty aoriana nefa de ravan'ny zanak'olombelona ny ala teto amintsika.",
         },
         {
-          question: "Hehehe hbcjervnrihbh hfrbvbruvb hgrfuhbrhfhur byfbur",
+          question: "Inona ny mahatonga ny tsirairay voakasika amin’ny fiovan’ny toetr’andro?",
           choices: ["Earth", "Forest", "Faucet", "Love"],
           correctAnswer: "Love",
-          someInformation: "Tiako be",
+          someInformation: "Samy tsisy afa-miala ny tsirairay ary samy tompon'andraikitra, manomboka @ kely izany.",
+        },
+        {
+          question: "Inona ny tranga ratsy indrindra hita taratra eny amin’ny fiaharamonina vokarin’ny fanimbana ny ala?",
+          choices: ["Earth", "Forest", "Faucet", "Love"],
+          correctAnswer: "Love",
+          someInformation: "Tsy isika olombelona ihany no voa, ny biby ihany koa dia voakasika, very trano fonenana.",
         },
       ],
       currentAnswer: null,
@@ -62,7 +68,7 @@ export default {
     document.addEventListener("keydown", (evt) => {
       this.handleKeydown(evt);
     });
-   
+
   },
   methods: {
     handleKeydown(evt) {
@@ -94,9 +100,9 @@ export default {
       const correctAnswer = this.currentQuestion.correctAnswer;
       if (this.currentAnswer === correctAnswer) {
         this.score += 1;
-        alert("Marina !");
+        alert("Marina !\n" +this.currentQuestion.someInformation);
       } else {
-        alert("Diso !");
+        alert("Diso !\n" +this.currentQuestion.someInformation);
       }
       this.moveToNextImage();
     },
@@ -116,7 +122,7 @@ export default {
         this.startNewGame();
       }
     },
- 
+
     nav(move) {
       if (document.querySelector(".quizGame.one.activeQuiz")) {
         const currentIndexThree = document.activeElement.tabIndex;
@@ -136,7 +142,7 @@ export default {
       return array;
     },
     startNewGame() {
-      this.shuffledQuestions=this.shuffleArray(this.questionsTrueFalse);
+      this.shuffledQuestions = this.shuffleArray(this.questionsTrueFalse);
     },
   },
 };

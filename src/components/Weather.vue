@@ -23,7 +23,7 @@ export default {
     return {
       questions: [
         {
-          weather: "Inona no mamaritra ny fahavaratra?",
+          weather: "Inona no manavaka ny vanim-potoana fahavaratra?",
           choices: [
             "Ocean.png",
             "Forest.png",
@@ -39,7 +39,7 @@ export default {
           responses: ["Product.png", "Ocean.png", "Forest.png"],
         },
         {
-          weather: "Inona no mamaritra ny lohataona?",
+          weather: "Inona no manavaka ny vanim-potoana lohataona?",
           choices: [
             "Ocean.png",
             "Product.png",
@@ -55,7 +55,7 @@ export default {
           responses: ["Ocean.png", "Product.png", "Forest.png"],
         },
         {
-          weather: "Inona no mamaritra ny ririnina?",
+          weather: "Inona no manavaka ny vanim-potoana ririnina?",
           choices: [
             "Ocean.png",
             "Product.png",

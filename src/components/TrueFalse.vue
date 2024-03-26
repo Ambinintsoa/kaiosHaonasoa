@@ -23,18 +23,39 @@ export default {
     return {
       questionsTrueFalse: [
         {
-          question: "Doro tanety",
+          question: "Andraikitrin’ny tsirairay ve ny fiarovan’ny tontolo iainana?",
           image: "doro_tanety.jpg",
           choices: [true, false],
-          correctAnswer: "false",
-          someInformation: "Aza dakadaka tsony fa avereno ampiasaina",
+          correctAnswer: "true",
+          someInformation: "Tompon'andraikitra ny tsirairay, ary manana adidy.",
         },
         {
-          question: "Hehehe hbcjervnrihbh hfrbvbruvb hgrfuhbrhfhur byfbur",
+          question: "Manampy amin’ny fanatsarana ny rivotra ve ny fisian’ny ala?",
           image: "reboisement.jpg",
           choices: [true, false],
           correctAnswer: "true",
-          someInformation: "Aza dakadaka tsony fa avereno ampiasaina",
+          someInformation: "Ny ankamaroan'ny karibaona dia tafavoaka ho azy avy amin'ny atmosfera noho ny zavamaniry, ny ahidrano ary ny ranomasimbe izay mitroka ny Cny ankamaroan'ny karibaona dia tafavoaka ho azy avy amin'ny atmosfera noho ny zavamaniry, ny ahidrano ary ny ranomasimbe izay nitroka azy CO2",
+        },
+        {
+          question: "Ny plastika ve dia sarotra levonina?",
+          image: "doro_tanety.jpg",
+          choices: [true, false],
+          correctAnswer: "true",
+          someInformation: "Aman-taona maro ny plastika vao levon'ny tany, ka lasa 'poizina' hoan'ny biby anaty rano; izy ireny nefa dia azo ahodina hanaovana zavatra hafa.",
+        }, 
+        {
+          question: "Manimba ny latabatra rano ve ny fampiasana 'pesticide' sy zezika tsy natioraly?",
+          image: "doro_tanety.jpg",
+          choices: [true, false],
+          correctAnswer: "true",
+          someInformation: "Mampiakatra ny 'acidité'(mamono ny trondro sy ny tany) ny fampiasana zezika simika be loatra.",
+        },
+        {
+          question: "Ny fanapahana hazo iray dia tsy miteraka olana firy, 'hazo tokana tsy mba ala' hono",
+          image: "doro_tanety.jpg",
+          choices: [true, false],
+          correctAnswer: "false",
+          someInformation: "Mba tsinjovy ihany ny zanakao, aleo mamboly hazo.",
         },
       ],
       currentAnswer: null,
@@ -89,9 +110,9 @@ export default {
       if (this.currentAnswer === correctAnswer) {
         this.score += 1;
 
-        alert("Marina ny valinteninao!");
+        alert("Marina ny valinteninao!\n" +this.currentQuestion.someInformation);
       } else {
-        alert("Diso ny valinteninao!");
+        alert("Diso ny valinteninao!\n" +this.currentQuestion.someInformation);
       }
       this.moveToNextImage();
     },
