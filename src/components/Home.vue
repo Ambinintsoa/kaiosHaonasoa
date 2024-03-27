@@ -118,7 +118,7 @@ export default {
 }
 
 .qOne::after {
-  background-color: #8ecae6;
+  background-color: #3ab795;
 }
 
 .qTwo::after {
@@ -130,11 +130,11 @@ export default {
 }
 
 .qFour::after {
-  background-color: #d78af1;
+  background-color: #3ab795;
 }
 
 .qOne {
-  background-color: #8ecae6;
+  background-color: #3ab795;
 }
 
 .qTwo {
@@ -146,6 +146,6 @@ export default {
 }
 
 .qFour {
-  background-color: #d78af1;
+  background-color: #3ab795;
 }
 </style>

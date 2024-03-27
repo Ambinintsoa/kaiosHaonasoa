@@ -73,6 +73,8 @@ export default {
       ],
       currentQuestionIndex: 0,
       currentAnswer: null,
+      count:3,
+      isGameOver:false,
     };
   },
   computed: {
@@ -145,8 +147,8 @@ export default {
       var bLetsynety = evt.target.childNodes[2];
       if (!bLetsynety.classList.contains("letsynety")) {
         bLetsynety.classList.add("letsynety");
+        this.count--;
       }
-
       setTimeout(() => {
         if (this.currentQuestion.responses.includes(this.currentAnswer)) {
           const remainingResponses = this.currentQuestion.responses.filter(
@@ -156,7 +158,7 @@ export default {
             this.currentQuestionIndex
           ].responses = remainingResponses;
           if (this.currentQuestion.responses.length === 0) {
-            alert("Arahabaina. Hitanao daholo ny valiny");
+            alert("Arahabaina. Hitanao ny valiny");
             if (this.currentQuestionIndex === this.questions.length - 1) {
               alert("Vita ilay lalao.");
               this.resetGame();
@@ -168,12 +170,13 @@ export default {
               this.renderCards();
             }
           }
-        } else {
-          cardElement.checked = false;
-          if (bLetsynety.classList.contains("letsynety")) {
-            bLetsynety.classList.remove("letsynety");
-          }
         }
+        if(this.count === 0)  {
+          this.questions[this.currentQuestionIndex].responses = [
+                ...this.questions[this.currentQuestionIndex].originalResponses,
+              ];
+          this.renderCards();
+        } 
       }, 800);
     },
     renderCards() {
@@ -185,6 +188,7 @@ export default {
           bAll[i].classList.remove("letsynety");
         }
       }
+      this.count=3;
       this.shuffle(this.currentQuestion.choices);
     },
   },
